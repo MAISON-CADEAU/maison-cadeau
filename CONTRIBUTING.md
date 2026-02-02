@@ -21,7 +21,7 @@ pnpm dev
 ## 브랜치 전략
 
 - `main` - 배포용 브랜치 (자동 배포)
-- `develop` - 개발 통합 브랜치
+- `dev` - 개발 통합 브랜치
 - `feature/*` - 기능 개발 브랜치
 - `fix/*` - 버그 수정 브랜치
 - `hotfix/*` - 긴급 수정 브랜치
@@ -33,9 +33,9 @@ pnpm dev
 
 ### 2. 브랜치 생성
 ```bash
-# develop 브랜치에서 시작
-git checkout develop
-git pull origin develop
+# dev 브랜치에서 시작
+git checkout dev
+git pull origin dev
 
 # 새 브랜치 생성
 git checkout -b feature/기능명
