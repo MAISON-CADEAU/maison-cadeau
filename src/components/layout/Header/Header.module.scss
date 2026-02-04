@@ -1,0 +1,110 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.header {
+  width: 100%;
+}
+
+// Top Banner
+.top_banner {
+  @include flex-center;
+  gap: $spacing-4;
+  padding: $spacing-2 $spacing-4;
+  background-color: $color-primary;
+  color: $color-white;
+  font-family: $font-body;
+  font-size: $font-size-body-5;
+}
+
+.banner_button {
+  @include button-reset;
+  color: rgba(255, 255, 255, 0.7);
+  @include transition;
+
+  &:hover {
+    color: $color-white;
+  }
+}
+
+.banner_icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+// Main Header
+.main_header {
+  background-color: $color-background;
+  border-bottom: 1px solid $color-light-grey;
+}
+
+.header_container {
+  @include flex-between;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: $spacing-4 $spacing-6;
+}
+
+// Logo
+.logo {
+  font-family: $font-title;
+  font-size: $font-size-title-3;
+  font-weight: $font-weight-semibold;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: $color-primary;
+  text-decoration: none;
+}
+
+// Navigation
+.nav {
+  display: none;
+  align-items: center;
+  gap: $spacing-8;
+
+  @include md {
+    display: flex;
+  }
+}
+
+.nav_link {
+  font-family: $font-body;
+  font-size: $font-size-body-4;
+  font-weight: $font-weight-medium;
+  color: $color-subtext-2;
+  text-decoration: none;
+  @include transition;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.nav_link_active {
+  color: $color-primary;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+// Right Icons
+.icon_group {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+}
+
+.icon_button {
+  @include button-reset;
+  @include flex-center;
+  padding: $spacing-2;
+  border-radius: $radius-full;
+  @include transition;
+
+  &:hover {
+    background-color: $color-background-2;
+  }
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}

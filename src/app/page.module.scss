@@ -1,0 +1,115 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.container {
+  @include flex-center;
+  min-height: 100vh;
+  background-color: $color-background-2;
+}
+
+.main {
+  @include flex-column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 48rem;
+  padding: $spacing-32 $spacing-16;
+  background-color: $color-background;
+
+  @include sm {
+    align-items: flex-start;
+  }
+}
+
+.logo {
+  // Next.js Image 기본 스타일
+}
+
+.content {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-6;
+  text-align: center;
+
+  @include sm {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.title {
+  max-width: 20rem;
+  font-family: $font-title;
+  font-size: $font-size-title-2;
+  font-weight: $font-weight-semibold;
+  font-style: italic;
+  line-height: $line-height-title;
+  letter-spacing: -0.025em;
+  color: $color-primary;
+}
+
+.description {
+  max-width: 28rem;
+  font-family: $font-body;
+  font-size: $font-size-body;
+  line-height: $line-height-body;
+  color: $color-subtext-2;
+}
+
+.link {
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+.buttons {
+  @include flex-column;
+  gap: $spacing-4;
+  font-family: $font-body;
+  font-size: $font-size-body-2;
+  font-weight: $font-weight-medium;
+
+  @include sm {
+    flex-direction: row;
+  }
+}
+
+.deploy_button {
+  @include flex-center;
+  gap: $spacing-2;
+  height: 3rem;
+  width: 100%;
+  padding: 0 $spacing-5;
+  border-radius: 9999px;
+  background-color: $color-primary;
+  color: $color-white;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+
+  @include md {
+    width: 158px;
+  }
+}
+
+.docs_button {
+  @include flex-center;
+  height: 3rem;
+  width: 100%;
+  padding: 0 $spacing-5;
+  border-radius: 9999px;
+  border: 1px solid $color-light-grey;
+  color: $color-text;
+  @include transition(all);
+
+  &:hover {
+    border-color: transparent;
+    background-color: $color-background-2;
+  }
+
+  @include md {
+    width: 158px;
+  }
+}

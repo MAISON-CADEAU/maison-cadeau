@@ -1,0 +1,116 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.footer {
+  background-color: $color-text;
+  color: $color-white;
+}
+
+.footer_container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: $spacing-12 $spacing-6;
+}
+
+.footer_grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-8;
+
+  @include md {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Left Content
+.left_content {
+  @include flex-column;
+  gap: $spacing-4;
+}
+
+.tagline {
+  font-family: $font-body;
+  font-size: $font-size-body-4;
+  font-weight: $font-weight-medium;
+}
+
+.description {
+  @include flex-column;
+  gap: $spacing-1;
+  font-family: $font-body;
+  font-size: $font-size-body-4;
+  color: $color-subtext-3;
+}
+
+// Right Links
+.right_links {
+  @include flex-column;
+  align-items: flex-start;
+  gap: $spacing-2;
+
+  @include md {
+    align-items: flex-end;
+  }
+}
+
+.footer_link {
+  font-family: $font-body;
+  font-size: $font-size-body-4;
+  color: $color-subtext-3;
+  text-decoration: none;
+  @include transition;
+
+  &:hover {
+    color: $color-white;
+  }
+}
+
+// Bottom
+.footer_bottom {
+  @include flex-column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-4;
+  margin-top: $spacing-12;
+  padding-top: $spacing-8;
+  border-top: 1px solid $color-subtext-2;
+
+  @include md {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.slogan {
+  font-family: $font-title;
+  font-size: $font-size-title-2;
+  font-style: italic;
+  line-height: $line-height-title;
+
+  @include md {
+    font-size: $font-size-title;
+  }
+}
+
+.brand_info {
+  text-align: left;
+
+  @include md {
+    text-align: right;
+  }
+}
+
+.brand_name {
+  font-family: $font-title;
+  font-size: $font-size-body;
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.copyright {
+  margin-top: $spacing-1;
+  font-family: $font-body;
+  font-size: $font-size-body-5;
+  color: $color-subtext-3;
+}

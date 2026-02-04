@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
-import { Button } from '@/components/common/Button'
-import { Input } from '@/components/common/Input'
-import { useSignup, useLogin } from '@/features/auth'
-import { signupSchema, type SignupFormData } from '@/lib/utils/validators'
-import { cn } from '@/lib/utils/cn'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { Button } from "@/components/common/Button";
+import { Input } from "@/components/common/Input";
+import { useSignup, useLogin } from "@/features/auth";
+import { signupSchema, type SignupFormData } from "@/lib/utils/validators";
+import styles from "./SignupForm.module.scss";
 
-export function SignupForm() {
-  const { signup, isLoading, error } = useSignup()
-  const { loginWithKakao, isLoading: isKakaoLoading } = useLogin()
+export const SignupForm = () => {
+  const { signup, isLoading, error } = useSignup();
+  const { loginWithKakao, isLoading: isKakaoLoading } = useLogin();
 
   const {
     register,
@@ -22,7 +22,7 @@ export function SignupForm() {
     defaultValues: {
       marketingAgreed: false,
     },
-  })
+  });
 
   const onSubmit = async (data: SignupFormData) => {
     try {
@@ -31,17 +31,17 @@ export function SignupForm() {
         password: data.password,
         name: data.name,
         marketingAgreed: data.marketingAgreed,
-      })
+      });
     } catch {
       // 에러는 useSignup에서 처리됨
     }
-  }
+  };
 
   return (
-    <div className="w-full max-w-md space-y-6">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900">회원가입</h1>
-        <p className="mt-2 text-gray-600">
+    <div className={styles.signup_container}>
+      <div className={styles.title_section}>
+        <h1 className={styles.title}>회원가입</h1>
+        <p className={styles.subtitle}>
           센스 있는 선물 큐레이터에 오신 것을 환영합니다
         </p>
       </div>
@@ -53,32 +53,28 @@ export function SignupForm() {
         onClick={loginWithKakao}
         isLoading={isKakaoLoading}
       >
-        <svg
-          className="mr-2 h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
+        <svg className={styles.kakao_icon} viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.47 1.607 4.647 4.058 5.892-.178.664-.644 2.406-.738 2.783-.116.464.17.457.356.333.146-.097 2.325-1.576 3.267-2.211.35.049.706.075 1.067.075 5.523 0 10-3.477 10-7.872C20 6.477 17.523 3 12 3z" />
         </svg>
         카카오로 시작하기
       </Button>
 
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-200" />
+      <div className={styles.divider}>
+        <div className={styles.divider_line}>
+          <div className={styles.divider_border} />
         </div>
-        <div className="relative flex justify-center text-sm">
-          <span className="bg-white px-4 text-gray-500">또는 이메일로 가입</span>
+        <div className={styles.divider_text}>
+          <span className={styles.divider_label}>또는 이메일로 가입</span>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
           type="email"
           placeholder="이메일을 입력하세요"
           error={errors.email?.message}
-          {...register('email')}
+          {...register("email")}
         />
 
         <Input
@@ -86,7 +82,7 @@ export function SignupForm() {
           type="password"
           placeholder="8자 이상, 영문+숫자"
           error={errors.password?.message}
-          {...register('password')}
+          {...register("password")}
         />
 
         <Input
@@ -94,7 +90,7 @@ export function SignupForm() {
           type="password"
           placeholder="비밀번호를 다시 입력하세요"
           error={errors.confirmPassword?.message}
-          {...register('confirmPassword')}
+          {...register("confirmPassword")}
         />
 
         <Input
@@ -102,86 +98,71 @@ export function SignupForm() {
           type="text"
           placeholder="이름을 입력하세요"
           error={errors.name?.message}
-          {...register('name')}
+          {...register("name")}
         />
 
-        <div className="space-y-3 pt-2">
-          <label className="flex items-start gap-3">
+        <div className={styles.agreements}>
+          <label className={styles.agreement_item}>
             <input
               type="checkbox"
-              className={cn(
-                'mt-0.5 h-5 w-5 rounded border-gray-300 text-black focus:ring-black',
-                errors.termsAgreed && 'border-red-500'
-              )}
-              {...register('termsAgreed')}
+              className={`${styles.checkbox} ${errors.termsAgreed ? styles.checkbox_error : ""}`}
+              {...register("termsAgreed")}
             />
-            <span className="text-sm text-gray-700">
-              <span className="text-red-500">*</span>{' '}
-              <Link href="/terms" className="underline">
+            <span className={styles.agreement_text}>
+              <span className={styles.required}>*</span>{" "}
+              <Link href="/terms" className={styles.link}>
                 이용약관
               </Link>
               에 동의합니다
             </span>
           </label>
           {errors.termsAgreed && (
-            <p className="text-sm text-red-500 ml-8">{errors.termsAgreed.message}</p>
+            <p className={styles.agreement_error}>{errors.termsAgreed.message}</p>
           )}
 
-          <label className="flex items-start gap-3">
+          <label className={styles.agreement_item}>
             <input
               type="checkbox"
-              className={cn(
-                'mt-0.5 h-5 w-5 rounded border-gray-300 text-black focus:ring-black',
-                errors.privacyAgreed && 'border-red-500'
-              )}
-              {...register('privacyAgreed')}
+              className={`${styles.checkbox} ${errors.privacyAgreed ? styles.checkbox_error : ""}`}
+              {...register("privacyAgreed")}
             />
-            <span className="text-sm text-gray-700">
-              <span className="text-red-500">*</span>{' '}
-              <Link href="/privacy" className="underline">
+            <span className={styles.agreement_text}>
+              <span className={styles.required}>*</span>{" "}
+              <Link href="/privacy" className={styles.link}>
                 개인정보 처리방침
               </Link>
               에 동의합니다
             </span>
           </label>
           {errors.privacyAgreed && (
-            <p className="text-sm text-red-500 ml-8">{errors.privacyAgreed.message}</p>
+            <p className={styles.agreement_error}>{errors.privacyAgreed.message}</p>
           )}
 
-          <label className="flex items-start gap-3">
+          <label className={styles.agreement_item}>
             <input
               type="checkbox"
-              className="mt-0.5 h-5 w-5 rounded border-gray-300 text-black focus:ring-black"
-              {...register('marketingAgreed')}
+              className={styles.checkbox}
+              {...register("marketingAgreed")}
             />
-            <span className="text-sm text-gray-700">
+            <span className={styles.agreement_text}>
               마케팅 정보 수신에 동의합니다 (선택)
             </span>
           </label>
         </div>
 
-        {error && (
-          <p className="text-sm text-red-500 text-center">{error}</p>
-        )}
+        {error && <p className={styles.error_message}>{error}</p>}
 
-        <Button
-          type="submit"
-          fullWidth
-          isLoading={isLoading}
-        >
+        <Button type="submit" fullWidth isLoading={isLoading}>
           가입하기
         </Button>
       </form>
 
-      <div className="text-center text-sm">
-        <span className="text-gray-600">이미 계정이 있으신가요? </span>
-        <Link
-          href="/login"
-          className="font-medium text-black hover:underline"
-        >
+      <div className={styles.login_section}>
+        <span className={styles.login_text}>이미 계정이 있으신가요? </span>
+        <Link href="/login" className={styles.login_link}>
           로그인
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
