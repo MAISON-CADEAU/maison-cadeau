@@ -2,13 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/common";
 import styles from "./Header.module.scss";
+import "swiper/css";
 
 const navItems = [
   { href: "/ai-recommend", label: "선물추천받기" },
   { href: "/feed", label: "피드 둘러보기" },
   { href: "/fortune", label: "오늘의 운세" },
   { href: "/contact", label: "문의하기" },
+];
+
+const bannerMessages = [
+  "New customers save 10% with code GET10",
+  "Free shipping on orders over $50",
+  "Limited time offer: Buy 2 Get 1 Free",
 ];
 
 export const Header = () => {
@@ -18,16 +28,30 @@ export const Header = () => {
     <header className={styles.header}>
       {/* Top Banner */}
       <div className={styles.top_banner}>
-        <button className={styles.banner_button}>
-          <svg className={styles.banner_icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+        <button className={`${styles.banner_button} swiper-button-prev-custom`} aria-label="Previous banner">
+          <ChevronLeftIcon size={16} color="rgba(255, 255, 255, 0.7)" />
         </button>
-        <span>New customers save 10% with code GET10</span>
-        <button className={styles.banner_button}>
-          <svg className={styles.banner_icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          navigation={{
+            prevEl: ".swiper-button-prev-custom",
+            nextEl: ".swiper-button-next-custom",
+          }}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          className={styles.banner_swiper}
+        >
+          {bannerMessages.map((message, index) => (
+            <SwiperSlide key={index}>
+              <span className={styles.banner_text}>{message}</span>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button className={`${styles.banner_button} swiper-button-next-custom`} aria-label="Next banner">
+          <ChevronRightIcon size={16} color="rgba(255, 255, 255, 0.7)" />
         </button>
       </div>
 
