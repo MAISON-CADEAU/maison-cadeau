@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 28rem;
   @include flex-column;
-  gap: $spacing-6;
+  gap: $spacing-24;
 }
 
 .title_section {
@@ -21,7 +21,7 @@
 }
 
 .subtitle {
-  margin-top: $spacing-2;
+  margin-top: $spacing-8;
   font-family: $font-body;
   font-size: $font-size-body-14;
   color: $color-subtext-2;
@@ -49,7 +49,7 @@
 }
 
 .divider_label {
-  padding: 0 $spacing-4;
+  padding: 0 $spacing-16;
   font-family: $font-body;
   font-size: $font-size-body-14;
   color: $color-subtext-3;
@@ -59,20 +59,20 @@
 // Form
 .form {
   @include flex-column;
-  gap: $spacing-4;
+  gap: $spacing-16;
 }
 
 // Agreements
 .agreements {
   @include flex-column;
-  gap: $spacing-3;
-  padding-top: $spacing-2;
+  gap: $spacing-12;
+  padding-top: $spacing-8;
 }
 
 .agreement_item {
   display: flex;
   align-items: flex-start;
-  gap: $spacing-3;
+  gap: $spacing-12;
 }
 
 .checkbox {
@@ -108,7 +108,7 @@
 }
 
 .agreement_error {
-  margin-left: $spacing-8;
+  margin-left: $spacing-32;
   font-family: $font-body;
   font-size: $font-size-body-14;
   color: $color-red-500;
@@ -144,7 +144,7 @@
 
 // Kakao button icon
 .kakao_icon {
-  margin-right: $spacing-2;
+  margin-right: $spacing-8;
   width: 1.25rem;
   height: 1.25rem;
 }
