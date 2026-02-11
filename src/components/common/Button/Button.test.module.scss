@@ -1,0 +1,55 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.container {
+  padding: 24px;
+  background: $color-background;
+  border-radius: 12px;
+  box-shadow: $shadow-md;
+}
+
+.title {
+  font-family: $font-title;
+  font-size: $font-size-title-24;
+  font-weight: $font-weight-bold;
+  font-style: italic;
+  color: $color-primary;
+  margin-bottom: 24px;
+}
+
+.section {
+  margin-bottom: 32px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.section_title {
+  font-family: $font-body;
+  font-size: $font-size-body-16;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  code {
+    font-family: monospace;
+    font-size: $font-size-body-12;
+    color: $color-subtext-3;
+    background: $color-background-2;
+    padding: 4px 8px;
+    border-radius: $radius-sm;
+  }
+}
