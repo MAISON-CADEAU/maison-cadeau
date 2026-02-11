@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header/Header";
 import * as Icons from "@/components/common/icons";
-import styles from "./page.module.scss";
+import styles from "./page.module.scss";      
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },
