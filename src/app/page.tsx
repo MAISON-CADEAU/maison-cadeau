@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/layout/header/Header";
+import { Header } from "@/components/layout/header";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";      
 
