@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/common/Button/Button";
-import { Input } from "@/components/common/Input/Input";
+import { Header } from "@/components/layout/header/Header";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
 
@@ -55,159 +54,17 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <header className={styles.header}>
-          <h1 className={styles.page_title}>Component Library</h1>
-          <p className={styles.page_description}>
-            모든 공통 컴포넌트를 확인할 수 있습니다
-          </p>
-        </header>
+    <>
+      <Header />
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <header className={styles.header}>
+            <h1 className={styles.page_title}>Component Library</h1>
+            <p className={styles.page_description}>
+              모든 공통 컴포넌트를 확인할 수 있습니다
+            </p>
+          </header>
 
-        {/* Button Component */}
-        <section className={styles.component_section}>
-          <h2 className={styles.section_title}>Button Component</h2>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>Variants</h3>
-            <div className={styles.component_grid}>
-              <div className={styles.component_item}>
-                <Button variant="primary">Primary</Button>
-                <code className={styles.code}>variant="primary"</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button variant="secondary">Secondary</Button>
-                <code className={styles.code}>variant="secondary"</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button variant="outline">Outline</Button>
-                <code className={styles.code}>variant="outline"</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button variant="ghost">Ghost</Button>
-                <code className={styles.code}>variant="ghost"</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button variant="kakao">Kakao</Button>
-                <code className={styles.code}>variant="kakao"</code>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>Sizes</h3>
-            <div className={styles.component_grid}>
-              <div className={styles.component_item}>
-                <Button size="sm">Small</Button>
-                <code className={styles.code}>size="sm"</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button size="md">Medium</Button>
-                <code className={styles.code}>size="md"</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button size="lg">Large</Button>
-                <code className={styles.code}>size="lg"</code>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>States</h3>
-            <div className={styles.component_grid}>
-              <div className={styles.component_item}>
-                <Button disabled>Disabled</Button>
-                <code className={styles.code}>disabled</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button isLoading={isLoading} onClick={handleLoadingClick}>
-                  {isLoading ? "Loading..." : "Click to Load"}
-                </Button>
-                <code className={styles.code}>isLoading</code>
-              </div>
-              <div className={styles.component_item}>
-                <Button fullWidth>Full Width</Button>
-                <code className={styles.code}>fullWidth</code>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Input Component */}
-        <section className={styles.component_section}>
-          <h2 className={styles.section_title}>Input Component</h2>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>Basic</h3>
-            <div className={styles.input_column}>
-              <div className={styles.input_item}>
-                <Input
-                  placeholder="기본 인풋"
-                  value={inputValue1}
-                  onChange={(e) => setInputValue1(e.target.value)}
-                />
-                <code className={styles.code}>{`<Input placeholder="기본 인풋" />`}</code>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>With Label</h3>
-            <div className={styles.input_column}>
-              <div className={styles.input_item}>
-                <Input
-                  label="이메일"
-                  type="email"
-                  placeholder="example@email.com"
-                  value={inputValue2}
-                  onChange={(e) => setInputValue2(e.target.value)}
-                />
-                <code className={styles.code}>{`<Input label="이메일" type="email" />`}</code>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>With Helper Text</h3>
-            <div className={styles.input_column}>
-              <div className={styles.input_item}>
-                <Input
-                  label="닉네임"
-                  placeholder="닉네임 입력"
-                  helperText="2-10자의 한글, 영문, 숫자"
-                />
-                <code className={styles.code}>{`<Input helperText="..." />`}</code>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>Error State</h3>
-            <div className={styles.input_column}>
-              <div className={styles.input_item}>
-                <Input
-                  label="이메일"
-                  type="email"
-                  placeholder="example@email.com"
-                  error="올바른 이메일 형식이 아닙니다"
-                  value={inputValue3}
-                  onChange={(e) => setInputValue3(e.target.value)}
-                />
-                <code className={styles.code}>{`<Input error="..." />`}</code>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.subsection}>
-            <h3 className={styles.subsection_title}>Disabled</h3>
-            <div className={styles.input_column}>
-              <div className={styles.input_item}>
-                <Input label="비활성화" placeholder="입력 불가" disabled />
-                <code className={styles.code}>{`<Input disabled />`}</code>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Icons Component */}
         <section className={styles.component_section}>
@@ -249,5 +106,6 @@ export default function Home() {
         </section>
       </main>
     </div>
+    </>
   );
 }
