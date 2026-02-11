@@ -9,7 +9,7 @@
   display: block;
   margin-bottom: $spacing-2;
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   font-weight: $font-weight-medium;
   color: $color-subtext-2;
 }
@@ -20,7 +20,7 @@
   height: 2.75rem;
   padding: $spacing-2 $spacing-4;
   font-family: $font-body;
-  font-size: $font-size-body-3;
+  font-size: $font-size-body-16;
   background-color: $color-background;
   border: 1px solid $color-light-grey;
   border-radius: $radius-lg;
@@ -54,12 +54,12 @@
 
 .error_message {
   margin-top: $spacing-1;
-  font-size: $font-size-body-5;
+  font-size: $font-size-body-12;
   color: $color-red-500;
 }
 
 .helper_text {
   margin-top: $spacing-1;
-  font-size: $font-size-body-5;
+  font-size: $font-size-body-12;
   color: $color-subtext-3;
 }

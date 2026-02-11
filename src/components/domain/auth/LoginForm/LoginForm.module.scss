@@ -14,7 +14,7 @@
 
 .title {
   font-family: $font-title;
-  font-size: $font-size-title-3;
+  font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
   font-style: italic;
   letter-spacing: 0.05em;
@@ -30,7 +30,7 @@
   width: 100%;
   padding: $spacing-3 $spacing-4;
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   border: 1px solid $color-light-grey;
   border-radius: $radius-md;
   @include transition;
@@ -53,13 +53,13 @@
 .error_text {
   margin-top: $spacing-1;
   font-family: $font-body;
-  font-size: $font-size-body-5;
+  font-size: $font-size-body-12;
   color: $color-red-500;
 }
 
 .error_message {
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   color: $color-red-500;
   text-align: center;
 }
@@ -68,7 +68,7 @@
   width: 100%;
   padding: $spacing-3;
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;
   color: $color-white;
   background-color: $color-primary;
@@ -93,7 +93,7 @@
   width: 100%;
   padding: $spacing-3;
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;
   color: $color-text;
   background-color: $color-kakao;
