@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 24rem;
   @include flex-column;
-  gap: $spacing-6;
+  gap: $spacing-24;
 }
 
 .title_section {
@@ -23,12 +23,12 @@
 
 .form {
   @include flex-column;
-  gap: $spacing-3;
+  gap: $spacing-12;
 }
 
 .input {
   width: 100%;
-  padding: $spacing-3 $spacing-4;
+  padding: $spacing-12 $spacing-16;
   font-family: $font-body;
   font-size: $font-size-body-14;
   border: 1px solid $color-light-grey;
@@ -51,7 +51,7 @@
 }
 
 .error_text {
-  margin-top: $spacing-1;
+  margin-top: $spacing-4;
   font-family: $font-body;
   font-size: $font-size-body-12;
   color: $color-red-500;
@@ -66,7 +66,7 @@
 
 .submit_button {
   width: 100%;
-  padding: $spacing-3;
+  padding: $spacing-12;
   font-family: $font-body;
   font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;
@@ -89,9 +89,9 @@
 
 .kakao_button {
   @include flex-center;
-  gap: $spacing-2;
+  gap: $spacing-8;
   width: 100%;
-  padding: $spacing-3;
+  padding: $spacing-12;
   font-family: $font-body;
   font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;

@@ -32,7 +32,7 @@
 .form_section {
   @include flex-center;
   width: 100%;
-  padding: $spacing-12 $spacing-6;
+  padding: $spacing-48 $spacing-24;
   background-color: $color-background;
 
   @include lg {
