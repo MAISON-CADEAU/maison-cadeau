@@ -1,18 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/common";
+import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, UserIcon } from "@/components/common";
 import styles from "./Header.module.scss";
 import "swiper/css";
 
 const navItems = [
-  { href: "/ai-recommend", label: "선물추천받기" },
+  { href: "/recommendation", label: "선물추천받기" },
   { href: "/feed", label: "피드 둘러보기" },
   { href: "/fortune", label: "오늘의 운세" },
-  { href: "/contact", label: "문의하기" },
+  { href: "/inquiry", label: "문의하기" },
 ];
 
 const bannerMessages = [
@@ -21,11 +23,19 @@ const bannerMessages = [
   "Limited time offer: Buy 2 Get 1 Free",
 ];
 
-export const Header = () => {
+interface HeaderProps {
+  theme?: "light" | "dark";
+  isLoggedIn?: boolean;
+}
+
+export const Header = ({ theme = "dark", isLoggedIn = false }: HeaderProps) => {
   const pathname = usePathname();
+  const isDarkTheme = theme === "dark";
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   return (
-    <header className={styles.header}>
+    <>
+      <header className={`${styles.header} ${isDarkTheme ? styles.dark : styles.light}`}>
       {/* Top Banner */}
       <div className={styles.top_banner}>
         <button className={`${styles.banner_button} swiper-button-prev-custom`} aria-label="Previous banner">
@@ -59,38 +69,69 @@ export const Header = () => {
       <div className={styles.main_header}>
         <div className={styles.header_container}>
           {/* Logo */}
-          <Link href="/" className={styles.logo}>
-            MAISON CADEAU
-          </Link>
-
-          {/* Navigation */}
-          <nav className={styles.nav}>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`${styles.nav_link} ${pathname === item.href ? styles.nav_link_active : ""}`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right Icons */}
-          <div className={styles.icon_group}>
-            <button className={styles.icon_button}>
-              <svg className={styles.icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-            <Link href="/login" className={styles.icon_button}>
-              <svg className={styles.icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+          <h1 className={styles.logo}>
+            <Link href="/">
+              <Image
+                src={isDarkTheme ? "/logo/logo-dark.svg" : "/logo/logo-light.svg"}
+                alt="MAISON CADEAU"
+                width={292}
+                height={25}
+                priority
+              />
             </Link>
+          </h1>
+
+          {/* Navigation & Icons */}
+          <div className={styles.nav_wrapper}>
+            {/* Navigation */}
+            <nav className={styles.nav}>
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`${styles.nav_link} ${pathname === item.href ? styles.nav_link_active : ""}`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right Icons */}
+            <div className={styles.icon_group}>
+              <button
+                className={styles.icon_button}
+                aria-label="Search"
+                onClick={() => setIsSearchModalOpen(true)}
+              >
+                <SearchIcon size={20} color={isDarkTheme ? "#ffffff" : "#1b1b1b"} />
+              </button>
+              <Link
+                href={isLoggedIn ? "/my-page" : "/login"}
+                className={styles.icon_button}
+                aria-label="User profile"
+              >
+                <UserIcon size={20} color={isDarkTheme ? "#ffffff" : "#1b1b1b"} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </header>
+
+      {/* Search Modal */}
+      {isSearchModalOpen && (
+        <div className={styles.modal_overlay} onClick={() => setIsSearchModalOpen(false)}>
+          <div className={styles.modal_content} onClick={(e) => e.stopPropagation()}>
+            <p className={styles.modal_text}>서비스 준비 중입니다.</p>
+            <button
+              className={styles.modal_button}
+              onClick={() => setIsSearchModalOpen(false)}
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };

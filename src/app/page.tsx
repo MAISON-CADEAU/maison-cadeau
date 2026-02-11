@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import * as Icons from "@/components/common/icons";
-import styles from "./page.module.scss";      
+import styles from "./page.module.scss";
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },
@@ -41,71 +42,81 @@ const iconList = [
 ];
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
   const [iconSize, setIconSize] = useState(24);
   const [iconColor, setIconColor] = useState("#17171B");
-  const [inputValue1, setInputValue1] = useState("");
-  const [inputValue2, setInputValue2] = useState("");
-  const [inputValue3, setInputValue3] = useState("");
+  const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("dark");
 
-  const handleLoadingClick = () => {
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.querySelector(`.${styles.hero_section}`);
+      if (heroSection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+        // Hero section이 화면을 벗어나면 light 테마로 변경
+        setHeaderTheme(heroBottom > 76 ? "dark" : "light");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <Header />
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <header className={styles.header}>
-            <h1 className={styles.page_title}>Component Library</h1>
+      <Header theme={headerTheme} />
+      <main className={styles.main}>
+        <section  className={styles.hero_section}>
+          <h2 className={styles.hero_title}>Find your Gift</h2>
+        </section>
+
+        <div className={styles.container}>
+          <div className={styles.title_box}>
+            <h3 className={styles.page_title}>Component Library</h3>
             <p className={styles.page_description}>
               모든 공통 컴포넌트를 확인할 수 있습니다
             </p>
-          </header>
-
-
-        {/* Icons Component */}
-        <section className={styles.component_section}>
-          <h2 className={styles.section_title}>Icons Component</h2>
-
-          <div className={styles.icon_controls}>
-            <div className={styles.icon_control}>
-              <label className={styles.control_label}>Size: {iconSize}px</label>
-              <input
-                type="range"
-                min="16"
-                max="64"
-                value={iconSize}
-                onChange={(e) => setIconSize(Number(e.target.value))}
-                className={styles.range_input}
-              />
-            </div>
-            <div className={styles.icon_control}>
-              <label className={styles.control_label}>Color: {iconColor}</label>
-              <input
-                type="color"
-                value={iconColor}
-                onChange={(e) => setIconColor(e.target.value)}
-                className={styles.color_input}
-              />
-            </div>
           </div>
 
-          <div className={styles.icon_grid}>
-            {iconList.map(({ name, Component }) => (
-              <div key={name} className={styles.icon_item}>
-                <div className={styles.icon_wrapper}>
-                  <Component size={iconSize} color={iconColor} />
-                </div>
-                <span className={styles.icon_name}>{name}</span>
+          {/* Icons Component */}
+          <section className={styles.component_section}>
+            <h2 className={styles.section_title}>Icons Component</h2>
+
+            <div className={styles.icon_controls}>
+              <div className={styles.icon_control}>
+                <label className={styles.control_label}>Size: {iconSize}px</label>
+                <input
+                  type="range"
+                  min="16"
+                  max="64"
+                  value={iconSize}
+                  onChange={(e) => setIconSize(Number(e.target.value))}
+                  className={styles.range_input}
+                />
               </div>
-            ))}
-          </div>
-        </section>
+              <div className={styles.icon_control}>
+                <label className={styles.control_label}>Color: {iconColor}</label>
+                <input
+                  type="color"
+                  value={iconColor}
+                  onChange={(e) => setIconColor(e.target.value)}
+                  className={styles.color_input}
+                />
+              </div>
+            </div>
+
+            <div className={styles.icon_grid}>
+              {iconList.map(({ name, Component }) => (
+                <div key={name} className={styles.icon_item}>
+                  <div className={styles.icon_wrapper}>
+                    <Component size={iconSize} color={iconColor} />
+                  </div>
+                  <span className={styles.icon_name}>{name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
       </main>
-    </div>
+      <Footer />
     </>
   );
 }
