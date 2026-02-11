@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: 공통 아이콘 컴포넌트 및 테스트 페이지 추가\n\n- 32개 아이콘 컴포넌트 생성 \\(Arrow, Box, Cart, Chat, Check, Chevron, Close, Data, Edit, Facebook, Filter, FolderPlus, Grid, Heart, Instagram, List, Menu, Minus, Plus, Search, Share, Trash, Truck, Twitter, User\\)\n- 동적 size, color props 지원\n- 각 공통 컴포넌트별 테스트 컴포넌트 추가 \\(Button.test.tsx, Input.test.tsx, Icons.test.tsx\\)\n- 통합 컴포넌트 테스트 페이지 추가 \\(/component-test\\)\n- variables.scss 폰트 사이즈 변수명 업데이트 반영\n- CLAUDE.md를 docs 폴더로 이동 및 skill_ko.md 추가\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(winget install:*)",
+      "Bash(where:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
