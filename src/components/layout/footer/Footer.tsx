@@ -1,19 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Footer.module.scss";
 
 const footerLinks = [
   { href: "/ai-recommend", label: "선물 추천받기" },
   { href: "/feed", label: "피드 둘러보기" },
   { href: "/fortune", label: "오늘의 운세" },
-  { href: "/brand", label: "브랜드 이야기: 메종카도" },
-  { href: "/contact", label: "문의하기" },
+  { href: "/", label: "브랜드 이야기: 메종카도" },
+  { href: "/inquiry", label: "문의하기" },
 ];
 
 export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_container}>
-        <div className={styles.footer_grid}>
+        {/* Top Section */}
+        <div className={styles.footer_top}>
           {/* Left Content */}
           <div className={styles.left_content}>
             <h3 className={styles.tagline}>Gifts, refined and personalized</h3>
@@ -27,20 +29,29 @@ export const Footer = () => {
 
           {/* Right Links */}
           <div className={styles.right_links}>
-            {footerLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={styles.footer_link}>
+            {footerLinks.map((link, index) => (
+              <Link key={index} href={link.href} className={styles.footer_link}>
                 {link.label}
               </Link>
             ))}
           </div>
         </div>
 
-        {/* Bottom */}
+        {/* Bottom Section */}
         <div className={styles.footer_bottom}>
-          <div className={styles.slogan}>Find your Gift</div>
-          <div className={styles.brand_info}>
-            <div className={styles.brand_name}>MAISON CADEAU</div>
-            <div className={styles.copyright}>© 2026 Gift Project. All Rights Reserved</div>
+          <div className={styles.slogan}>
+            <Image
+              src="/text/find-your-gift-white.svg"
+              alt="Find your Gift"
+              width={409}
+              height={108}
+            />
+          </div>
+          <div className={styles.brand_box}>
+            <div className={styles.brand_info}>
+              <div className={styles.brand_name}>MAISON CADEAU</div>
+              <div className={styles.copyright}>© 2026 Gift Project. All Rights Reserved</div>
+            </div>
           </div>
         </div>
       </div>

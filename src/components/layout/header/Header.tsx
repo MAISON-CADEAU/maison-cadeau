@@ -11,7 +11,7 @@ import styles from "./Header.module.scss";
 import "swiper/css";
 
 const navItems = [
-  { href: "/recommendation", label: "선물추천받기" },
+  { href: "/ai-recommend", label: "선물추천받기" },
   { href: "/feed", label: "피드 둘러보기" },
   { href: "/fortune", label: "오늘의 운세" },
   { href: "/inquiry", label: "문의하기" },
