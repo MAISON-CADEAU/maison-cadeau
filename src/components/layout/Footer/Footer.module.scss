@@ -30,7 +30,7 @@
 
 .tagline {
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   font-weight: $font-weight-medium;
 }
 
@@ -38,7 +38,7 @@
   @include flex-column;
   gap: $spacing-1;
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   color: $color-subtext-3;
 }
 
@@ -55,7 +55,7 @@
 
 .footer_link {
   font-family: $font-body;
-  font-size: $font-size-body-4;
+  font-size: $font-size-body-14;
   color: $color-subtext-3;
   text-decoration: none;
   @include transition;
@@ -83,12 +83,12 @@
 
 .slogan {
   font-family: $font-title;
-  font-size: $font-size-title-2;
+  font-size: $font-size-title-32;
   font-style: italic;
   line-height: $line-height-title;
 
   @include md {
-    font-size: $font-size-title;
+    font-size: $font-size-title-40;
   }
 }
 
@@ -102,7 +102,7 @@
 
 .brand_name {
   font-family: $font-title;
-  font-size: $font-size-body;
+  font-size: $font-size-body-20;
   font-weight: $font-weight-medium;
   font-style: italic;
   letter-spacing: 0.05em;
@@ -111,6 +111,6 @@
 .copyright {
   margin-top: $spacing-1;
   font-family: $font-body;
-  font-size: $font-size-body-5;
+  font-size: $font-size-body-12;
   color: $color-subtext-3;
 }
