@@ -1,15 +1,9 @@
 "use client";
 
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { forwardRef } from "react";
 import { FolderPlusIcon, ShareIcon, ArrowLeftIcon, ArrowRightIcon, KakaoIcon } from "@/components/common/icons";
+import type { IButtonProps } from "./Button.types";
 import styles from "./Button.module.scss";
-
-export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "icon-group" | "arrow-left" | "arrow-right" | "house" | "primary-filled" | "primary-outlined" | "background-gray" | "background-black-sm" |"background-black-lg" |"background-black-xl" | "kakao";
-  children?: ReactNode;
-  width?: string | number;
-  height?: string | number;
-}
 
 const Button = forwardRef<HTMLButtonElement, IButtonProps>(
   ({ className, variant, children, style, ...props }, ref) => {

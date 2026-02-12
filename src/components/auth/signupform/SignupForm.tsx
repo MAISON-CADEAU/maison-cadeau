@@ -49,13 +49,9 @@ export const SignupForm = () => {
       <Button
         type="button"
         variant="kakao"
-        fullWidth
         onClick={loginWithKakao}
-        isLoading={isKakaoLoading}
+        disabled={isKakaoLoading}
       >
-        <svg className={styles.kakao_icon} viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.47 1.607 4.647 4.058 5.892-.178.664-.644 2.406-.738 2.783-.116.464.17.457.356.333.146-.097 2.325-1.576 3.267-2.211.35.049.706.075 1.067.075 5.523 0 10-3.477 10-7.872C20 6.477 17.523 3 12 3z" />
-        </svg>
         카카오로 시작하기
       </Button>
 
@@ -152,7 +148,7 @@ export const SignupForm = () => {
 
         {error && <p className={styles.error_message}>{error}</p>}
 
-        <Button type="submit" fullWidth isLoading={isLoading}>
+        <Button type="submit" variant="primary-filled" disabled={isLoading}>
           가입하기
         </Button>
       </form>
