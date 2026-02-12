@@ -165,7 +165,7 @@ export default function Home() {
 
             <div className={styles.input_showcase}>
               <div className={styles.input_group}>
-                <h3 className={styles.input_group_title}>Email Input (유효성 검사)</h3>
+                <h3 className={styles.input_group_title}>이메일</h3>
                 <Input
                   type="email"
                   variant="default"
@@ -178,7 +178,7 @@ export default function Home() {
               </div>
 
               <div className={styles.input_group}>
-                <h3 className={styles.input_group_title}>Password Input (유효성 검사)</h3>
+                <h3 className={styles.input_group_title}>비밀번호</h3>
                 <Input
                   type="password"
                   variant="default"
@@ -191,7 +191,7 @@ export default function Home() {
               </div>
 
               <div className={styles.input_group}>
-                <h3 className={styles.input_group_title}>검색 Input</h3>
+                <h3 className={styles.input_group_title}>검색</h3>
                 <Input
                   variant="search"
                   placeholder="찾고싶은 선물을 검색해보세요"
@@ -199,17 +199,12 @@ export default function Home() {
               </div>
 
               <div className={styles.input_group}>
-                <h3 className={styles.input_group_title}>Grey Background Input</h3>
+                <h3 className={styles.input_group_title}>회색 배경</h3>
                 <Input variant="grey" placeholder="글자를 입력해주세요" />
               </div>
 
               <div className={styles.input_group}>
-                <h3 className={styles.input_group_title}>Underline Input</h3>
-                <Input variant="underline" placeholder="글자를 입력해주세요" />
-              </div>
-
-              <div className={styles.input_group}>
-                <h3 className={styles.input_group_title}>Checkbox</h3>
+                <h3 className={styles.input_group_title}>체크박스</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   <Checkbox label="체크박스 옵션 1" />
                   <Checkbox label="체크박스 옵션 2" defaultChecked />
