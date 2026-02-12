@@ -29,6 +29,7 @@ const iconList = [
   { name: "Heart", Component: Icons.HeartIcon },
   { name: "InstaBlack", Component: Icons.InstaBlackIcon },
   { name: "InstaWhite", Component: Icons.InstaWhiteIcon },
+  { name: "Kakao", Component: Icons.KakaoIcon },
   { name: "List", Component: Icons.ListIcon },
   { name: "Menu", Component: Icons.MenuIcon },
   { name: "Minus", Component: Icons.MinusIcon },

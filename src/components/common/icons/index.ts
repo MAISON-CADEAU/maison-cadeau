@@ -20,6 +20,7 @@ export { GridIcon } from "./GridIcon";
 export { HeartIcon } from "./HeartIcon";
 export { InstaBlackIcon } from "./InstaBlackIcon";
 export { InstaWhiteIcon } from "./InstaWhiteIcon";
+export { KakaoIcon } from "./KakaoIcon";
 export { ListIcon } from "./ListIcon";
 export { MenuIcon } from "./MenuIcon";
 export { MinusIcon } from "./MinusIcon";
