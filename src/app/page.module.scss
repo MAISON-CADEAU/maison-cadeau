@@ -187,3 +187,22 @@
   text-align: center;
   word-break: break-word;
 }
+
+// Input Showcase
+.input_showcase {
+  @include flex-column;
+  gap: $spacing-32;
+}
+
+.input_group {
+  @include flex-column;
+  gap: $spacing-12;
+  max-width: 600px;
+}
+
+.input_group_title {
+  font-family: $font-body;
+  font-size: $font-size-body-16;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
