@@ -1,13 +1,8 @@
 "use client";
 
-import { forwardRef, type InputHTMLAttributes } from "react";
+import { forwardRef } from "react";
+import type { IInputProps } from "./Input.types";
 import styles from "./Input.module.scss";
-
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-  helperText?: string;
-}
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
   ({ className, label, error, helperText, type = "text", id, ...props }, ref) => {
