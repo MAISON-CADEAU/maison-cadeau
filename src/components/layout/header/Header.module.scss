@@ -1,5 +1,6 @@
 @use "@/styles/variables" as *;
 @use "@/styles/mixins" as *;
+@use "sass:color";
 
 .header {
   width: 100%;
@@ -209,7 +210,7 @@
   @include transition;
 
   &:hover {
-    background-color: darken($color-primary, 10%);
+    background-color: color.adjust($color-primary, $lightness: -10%);
   }
 }
 
