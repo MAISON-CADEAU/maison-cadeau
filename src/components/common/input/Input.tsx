@@ -1,26 +1,9 @@
 "use client";
 
-import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from "react";
-import { CheckSmIcon, SearchIcon } from "@/components/common/icons";
+import { forwardRef } from "react";
+import { SearchIcon, CheckSmIcon } from "@/components/common/icons";
+import type { IInputProps, ITextareaProps, ICheckboxProps } from "./Input.types";
 import styles from "./Input.module.scss";
-
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-  helperText?: string;
-  isValid?: boolean;
-  variant?: "default" | "search" | "underline" | "grey";
-}
-
-export interface ICheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  label?: string;
-}
-
-export interface ITextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  error?: string;
-  helperText?: string;
-}
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
   ({ className, label, error, helperText, isValid, variant = "grey", type = "text", id, ...props }, ref) => {
