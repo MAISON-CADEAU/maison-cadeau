@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className={styles.auth_layout}>
-      <Header />
+      <Header theme="light" />
       <main className={styles.main}>
         {/* Left Image Section */}
         <div className={styles.image_section}>
