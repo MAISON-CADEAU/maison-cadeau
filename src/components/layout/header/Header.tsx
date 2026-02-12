@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, UserIcon } from "@/components/common";
+import type { IHeaderProps } from "./Header.types";
 import styles from "./Header.module.scss";
 import "swiper/css";
 
@@ -23,12 +24,7 @@ const bannerMessages = [
   "Limited time offer: Buy 2 Get 1 Free",
 ];
 
-interface HeaderProps {
-  theme?: "light" | "dark";
-  isLoggedIn?: boolean;
-}
-
-export const Header = ({ theme = "dark", isLoggedIn = false }: HeaderProps) => {
+export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => {
   const pathname = usePathname();
   const isDarkTheme = theme === "dark";
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
