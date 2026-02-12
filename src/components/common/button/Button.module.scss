@@ -17,7 +17,7 @@
   }
 }
 
-// 1. Icon group wrapper - holds two icon buttons together
+// Icon group wrapper 
 .icon_group_wrapper {
   display: inline-flex;
   align-items: center;
@@ -70,10 +70,11 @@
   }
 }
 
-// 2. Arrow buttons
-.button_arrow_left,
-.button_arrow_right {
-  padding: $spacing-20;
+// Arrow buttons
+.button_black_arrow_left,
+.button_black_arrow_right {
+  width: 60px;
+  height: 60px;
   background-color: $color-background-2;
   color: $color-primary;
 
@@ -83,7 +84,19 @@
   }
 }
 
-// 3. House emoji button
+.button_red_arrow_left,
+.button_red_arrow_right {
+  width: 60px;
+  height: 60px;
+  background-color: $color-background;
+  color: $color-primary;
+
+  &:hover {
+    color: $color-subtext-3;
+  }
+}
+
+// House emoji button
 .button_house {
   padding: $spacing-16 $spacing-32;
   background-color: $color-background;
@@ -105,7 +118,7 @@
   }
 }
 
-// 4. Primary buttons
+// Primary buttons
 .button_primary_filled {
   padding: $spacing-20 73px;
   background-color: $color-primary;
@@ -136,7 +149,7 @@
   }
 }
 
-// 5. Background buttons
+// Background buttons
 .button_background_gray {
   width: 276px;
   height: 62px;
@@ -183,7 +196,7 @@
   height: 62px;
 }
 
-// 6. Kakao button
+// Kakao button
 .button_kakao {
   width: 368px;
   height: 52px;

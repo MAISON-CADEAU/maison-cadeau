@@ -129,9 +129,11 @@ export default function Home() {
 
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>2. Arrow Buttons</h3>
-                <div style={{ display: "flex", gap: "16px" }}>
-                  <Button variant="arrow-left" />
-                  <Button variant="arrow-right" />
+                <div className={styles.background_button_box}>
+                  <Button variant="black-arrow-left" />
+                  <Button variant="black-arrow-right" />
+                  <Button variant="red-arrow-left" />
+                  <Button variant="red-arrow-right" />
                 </div>
               </div>
 

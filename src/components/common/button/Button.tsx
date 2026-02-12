@@ -19,7 +19,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       ...style,
     };
 
-    // Icon group buttons (1, 1-1, 1-2) - Two icons grouped together
+    // Icon group buttons
     if (variant === "icon-group") {
       return (
         <div className={styles.icon_group_wrapper}>
@@ -35,8 +35,8 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       );
     }
 
-    // Arrow buttons (2, 2-1)
-    if (variant === "arrow-left") {
+    // Arrow buttons
+    if (variant === "black-arrow-left") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           <ArrowLeftIcon size={20} color="currentColor" />
@@ -44,7 +44,23 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       );
     }
 
-    if (variant === "arrow-right") {
+    if (variant === "black-arrow-right") {
+      return (
+        <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
+          <ArrowRightIcon size={20} color="currentColor" />
+        </button>
+      );
+    }
+
+    if (variant === "red-arrow-left") {
+      return (
+        <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
+          <ArrowLeftIcon size={20} color="currentColor" />
+        </button>
+      );
+    }
+
+    if (variant === "red-arrow-right") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           <ArrowRightIcon size={20} color="currentColor" />
