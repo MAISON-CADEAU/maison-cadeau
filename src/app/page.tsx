@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { Button } from "@/components/common/button";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
 
@@ -113,6 +114,51 @@ export default function Home() {
                   <span className={styles.icon_name}>{name}</span>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Button Component */}
+          <section className={styles.component_section}>
+            <h2 className={styles.section_title}>Button Component</h2>
+
+            <div className={styles.button_showcase}>
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>1. Icon Group Buttons</h3>
+                <Button variant="icon-group" />
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>2. Arrow Buttons</h3>
+                <div style={{ display: "flex", gap: "16px" }}>
+                  <Button variant="arrow-left" />
+                  <Button variant="arrow-right" />
+                </div>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>3. House Button</h3>
+                <Button variant="house">집들이 선물</Button>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>4. Primary Buttons</h3>
+                  <Button variant="primary-filled">바로 선물하기</Button>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>5. Secondary Buttons</h3>
+                  <div className={styles.background_button_box}>
+                    <Button variant="background-gray">이 질문은 넘어갈래요</Button>
+                    <Button variant="background-black-sm">포춘쿠키 열기</Button>
+                    <Button variant="background-black-lg">로그인하기</Button>
+                    <Button variant="background-black-xl">다음</Button>
+                  </div>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>6. Kakao Button</h3>
+                <Button variant="kakao">카카오 로그인</Button>
+              </div>
             </div>
           </section>
         </div>
