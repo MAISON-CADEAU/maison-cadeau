@@ -7,31 +7,31 @@
 }
 
 .footer_container {
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 $spacing-24;
+  @include flex-column;
+  justify-content: space-between;
+  gap: 80px;
+  padding: 60px 100px 40px 100px;
+
 }
 
-.footer_grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-32;
-
-  @include md {
-    grid-template-columns: 1fr 1fr;
-  }
+// Top Section
+.footer_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 // Left Content
 .left_content {
   @include flex-column;
-  gap: $spacing-16;
+  gap: $spacing-12;
 }
 
 .tagline {
   font-family: $font-body;
   font-size: $font-size-body-14;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-semibold;
+  margin: 0;
 }
 
 .description {
@@ -39,18 +39,21 @@
   gap: $spacing-4;
   font-family: $font-body;
   font-size: $font-size-body-14;
-  color: $color-subtext-3;
+  font-weight: 100;
+
+  p {
+    margin: 0;
+  }
 }
 
 // Right Links
 .right_links {
+  width: 277px;
   @include flex-column;
   align-items: flex-start;
-  gap: $spacing-8;
-
-  @include md {
-    align-items: flex-end;
-  }
+  gap: 6px;
+  color: $color-light-grey;
+  
 }
 
 .footer_link {
@@ -65,52 +68,42 @@
   }
 }
 
-// Bottom
+// Bottom Section
 .footer_bottom {
-  @include flex-column;
-  align-items: flex-start;
+  display: flex;
   justify-content: space-between;
-  gap: $spacing-16;
-  margin-top: $spacing-48;
-  padding-top: $spacing-32;
-  border-top: 1px solid $color-subtext-2;
-
-  @include md {
-    flex-direction: row;
-    align-items: flex-end;
-  }
+  align-items: center;
+  gap: $spacing-24;
 }
 
 .slogan {
-  font-family: $font-title;
-  font-size: $font-size-title-32;
-  font-style: italic;
-  line-height: $line-height-title;
-
-  @include md {
-    font-size: $font-size-title-40;
+  img {
+    display: block;
   }
+}
+
+.brand_box {
+  width: 100%;
+  border-bottom: 1px solid $color-background;
 }
 
 .brand_info {
-  text-align: left;
-
-  @include md {
-    text-align: right;
-  }
+  @include flex-column;
+  gap: 6px;
+  text-align: right;
+  padding-bottom: 4px;
 }
 
 .brand_name {
-  font-family: $font-title;
+  font-family: $font-body;
   font-size: $font-size-body-20;
-  font-weight: $font-weight-medium;
-  font-style: italic;
-  letter-spacing: 0.05em;
+  font-weight: 100;
+  letter-spacing: 0.05rem;
 }
 
 .copyright {
   margin-top: $spacing-4;
   font-family: $font-body;
-  font-size: $font-size-body-12;
+  font-size: $font-size-body-14;
   color: $color-subtext-3;
 }
