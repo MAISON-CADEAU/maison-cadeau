@@ -168,7 +168,7 @@ export default function Home() {
                 <h3 className={styles.input_group_title}>Email Input (유효성 검사)</h3>
                 <Input
                   type="email"
-                  variant="grey"
+                  variant="default"
                   placeholder="메일주소를 입력해주세요"
                   value={email}
                   onChange={handleEmailChange}
@@ -181,7 +181,7 @@ export default function Home() {
                 <h3 className={styles.input_group_title}>Password Input (유효성 검사)</h3>
                 <Input
                   type="password"
-                  variant="grey"
+                  variant="default"
                   placeholder="비밀번호를 입력해주세요"
                   value={password}
                   onChange={handlePasswordChange}

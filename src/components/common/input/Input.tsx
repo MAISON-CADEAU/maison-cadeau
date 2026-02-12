@@ -6,11 +6,12 @@ import type { IInputProps, ITextareaProps, ICheckboxProps } from "./Input.types"
 import styles from "./Input.module.scss";
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
-  ({ className, label, error, helperText, isValid, variant = "grey", type = "text", id, ...props }, ref) => {
+  ({ className, label, error, helperText, isValid, variant = "default", type = "text", id, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s/g, "-");
 
     const inputClassNames = [
       styles.input,
+      variant === "default" && styles.input_default,
       variant === "search" && styles.input_search,
       variant === "grey" && styles.input_grey,
       error && styles.input_error,

@@ -5,7 +5,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   helperText?: string;
   isValid?: boolean;
-  variant?: "grey" | "search";
+  variant?: "default" | "search" | "grey";
 }
 
 export interface ITextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -14,6 +14,6 @@ export interface ITextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEleme
   helperText?: string;
 }
 
-export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ICheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   label?: string;
 }
