@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/common/button";
+import { Banner } from "@/components/common/banner";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
@@ -119,6 +120,23 @@ export default function Home() {
               모든 공통 컴포넌트를 확인할 수 있습니다
             </p>
           </div>
+
+        {/* Banner Component - overlay 버전 */}
+          <Banner
+            layout="overlay"
+            title="Find your Gift"
+            description="선물할 상대를 생각하며 키워드를 골라보세요"
+            image={{ src: "/imgs/banner-image-overlay.png", alt: "Banner Image" }}
+            />
+
+        {/* Banner Component - cta 버전 */}
+          <Banner
+            layout="cta"
+            title="What’s your favorite"
+            description="찾아볼 필요 없이, 취향을 온전히 담은 제품을 빠르게 드려요."
+            image={{ src: "/imgs/banner-image-cta.png", alt: "Banner Image" }}
+            cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
+          />
 
           {/* Icons Component */}
           <section className={styles.component_section}>
