@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { Button } from "@/components/common/button";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
@@ -58,13 +59,12 @@ export default function Home() {
   const [passwordError, setPasswordError] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  // Header theme change on scroll
   useEffect(() => {
     const handleScroll = () => {
       const heroSection = document.querySelector(`.${styles.hero_section}`);
       if (heroSection) {
         const heroBottom = heroSection.getBoundingClientRect().bottom;
-        setHeaderTheme(heroBottom > 0 ? "dark" : "light");
+        setHeaderTheme(heroBottom > 76 ? "dark" : "light");
       }
     };
 
@@ -108,7 +108,7 @@ export default function Home() {
     <>
       <Header theme={headerTheme} />
       <main className={styles.main}>
-        <section className={styles.hero_section}>
+        <section  className={styles.hero_section}>
           <h2 className={styles.hero_title}>Find your Gift</h2>
         </section>
 
@@ -156,6 +156,52 @@ export default function Home() {
                   <span className={styles.icon_name}>{name}</span>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Button Component */}
+          <section className={styles.component_section}>
+            <h2 className={styles.section_title}>Button Component</h2>
+
+            <div className={styles.button_showcase}>
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>1. Icon Group Buttons</h3>
+                <Button variant="icon-group" />
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>2. Arrow Buttons</h3>
+                <div style={{ display: "flex", gap: "16px" }}>
+                  <Button variant="red-arrow-left" />
+                  <Button variant="red-arrow-right" />
+                </div>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>3. House Button</h3>
+                <Button variant="house">집들이 선물</Button>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>4. Primary Buttons</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <Button variant="primary-filled">바로 선물하기</Button>
+                  <Button variant="primary-outlined">바로 선물하기</Button>
+                </div>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>5. Secondary Buttons</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <Button variant="background-gray">이 질문은 넘어갈래요</Button>
+                  <Button variant="background-black-sm">다음 질문으로</Button>
+                </div>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>6. Kakao Button</h3>
+                <Button variant="kakao">카카오 로그인</Button>
+              </div>
             </div>
           </section>
 

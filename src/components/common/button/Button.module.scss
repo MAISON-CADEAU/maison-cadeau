@@ -5,16 +5,11 @@
   @include flex-center;
   gap: $spacing-8;
   font-family: $font-body;
-  font-weight: $font-weight-semibold;
-  border-radius: $radius-lg;
+  font-weight: $font-weight-medium;
   border: none;
   cursor: pointer;
   @include transition;
-
-  &:focus-visible {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
+  position: relative;
 
   &:disabled {
     pointer-events: none;
@@ -22,118 +17,202 @@
   }
 }
 
-// Variants
-.primary {
-  background-color: $color-primary;
-  color: $color-white;
-
-  &:hover {
-    background-color: $color-secondary;
-  }
-
-  &:focus-visible {
-    outline-color: $color-primary;
-  }
-}
-
-.secondary {
+// Icon group wrapper 
+.icon_group_wrapper {
+  display: inline-flex;
+  align-items: center;
   background-color: $color-background-2;
-  color: $color-text;
+  border-radius: 40px;
+  padding: $spacing-16 $spacing-24;
+  gap: $spacing-32;
+  position: relative;
+  width: fit-content;
+  transition: width 0.3s ease 0.2s;
 
-  &:hover {
-    background-color: $color-light-grey;
-  }
-
-  &:focus-visible {
-    outline-color: $color-subtext-3;
-  }
-}
-
-.outline {
-  background-color: $color-background;
-  color: $color-text;
-  border: 1px solid $color-light-grey;
-
-  &:hover {
-    background-color: $color-background-2;
-  }
-
-  &:focus-visible {
-    outline-color: $color-subtext-3;
+  &:has(.button_icon_item:hover) {
+    transition-delay: 0s;
   }
 }
 
-.ghost {
+.button_icon_item {
+  position: relative;
+  display: flex;
+  align-items: center;
   background-color: transparent;
+  border-radius: 50%;
   color: $color-text;
+  overflow: visible;
+  transition: width 0.3s ease 0.2s, padding 0.3s ease 0.2s, border-radius 0.3s ease 0.2s;
+
+  .label {
+    position: absolute;
+    left: 40px;
+    white-space: nowrap;
+    opacity: 0;
+    font-size: $font-size-body-14;
+    transition: opacity 0.1s ease 0s;
+    pointer-events: none;
+  }
 
   &:hover {
-    background-color: $color-background-2;
-  }
+    width: auto;
+    padding-right: $spacing-16;
+    border-radius: 50px;
+    transition-delay: 0s;
 
-  &:focus-visible {
-    outline-color: $color-subtext-3;
+    .label {
+      opacity: 1;
+      position: relative;
+      left: 0;
+      pointer-events: auto;
+      transition: opacity 0.15s ease 0.15s;
+    }
   }
 }
 
-.kakao {
-  background-color: $color-kakao;
-  color: $color-text;
+// Arrow buttons
+.button_black_arrow_left,
+.button_black_arrow_right {
+  width: 60px;
+  height: 60px;
+  background-color: $color-background-2;
+  color: $color-primary;
 
   &:hover {
-    background-color: $color-kakao-hover;
-  }
-
-  &:focus-visible {
-    outline-color: $color-kakao;
+    background-color: $color-text;
+    color: $color-background;
   }
 }
 
-// Sizes
-.sm {
-  height: 2.25rem;
-  padding: 0 $spacing-12;
-  font-size: $font-size-body-14;
+.button_red_arrow_left,
+.button_red_arrow_right {
+  width: 60px;
+  height: 60px;
+  background-color: $color-background;
+  color: $color-primary;
+
+  &:hover {
+    color: $color-subtext-3;
+  }
 }
 
-.md {
-  height: 2.75rem;
-  padding: 0 $spacing-16;
+// House emoji button
+.button_house {
+  padding: $spacing-16 $spacing-32;
+  background-color: $color-background;
+  border: 1px solid $color-text;
+  border-radius: 50px;
+  color: $color-text;
+
+  .emoji {
+    font-size: $font-size-body-20;
+  }
+
+  .label {
+    font-size: $font-size-body-14;
+  }
+
+  &:hover {
+    background-color: $color-text;
+    color: $color-background;
+  }
+}
+
+// Primary buttons
+.button_primary_filled {
+  padding: $spacing-20 73px;
+  background-color: $color-primary;
+  border-radius: 0;
+  border: 1px solid transparent;
+  color: $color-background;
   font-size: $font-size-body-16;
-}
 
-.lg {
-  height: 3.25rem;
-  padding: 0 $spacing-24;
-  font-size: $font-size-body-20;
-}
-
-// Full width
-.full_width {
-  width: 100%;
-}
-
-// Loading spinner
-.spinner {
-  margin-right: $spacing-8;
-  width: 1rem;
-  height: 1rem;
-  animation: spin 1s linear infinite;
-}
-
-.spinner_circle {
-  opacity: 0.25;
-}
-
-.spinner_path {
-  opacity: 0.75;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $color-primary;
+    color: $color-primary;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+.button_primary_outlined {
+  height: 56px;
+  padding: $spacing-16 $spacing-24;
+  background-color: transparent;
+  border: 1px solid $color-primary;
+  border-radius: 0;
+  color: $color-primary;
+  font-size: $font-size-body-16;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-background;
+  }
+}
+
+// Background buttons
+.button_background_gray {
+  width: 276px;
+  height: 62px;
+  background-color: $color-background-2;
+  border: 1px solid $color-background-2;
+  border-radius: 0;
+  color: $color-text;
+  font-size: $font-size-body-16;
+
+  &:hover {
+    background-color: $color-background;
+    border: 1px solid $color-text;
+  }
+}
+
+.button_background_black_sm,
+.button_background_black_lg,
+.button_background_black_xl{ 
+  background-color: $color-text;
+  border-radius: 0;
+  border: 1px solid $color-text;
+  color: $color-background;
+  font-size: $font-size-body-16;
+
+  &:hover {
+    background-color: $color-background;
+    border: 1px solid $color-text;
+    color: $color-text;
+  }
+}
+
+.button_background_black_sm{
+  width: 276px;
+  height: 62px;
+}
+
+.button_background_black_lg{
+  width: 363px;
+  height: 52px;
+}
+
+.button_background_black_xl{
+  width: 486px;
+  height: 62px;
+}
+
+// Kakao button
+.button_kakao {
+  width: 368px;
+  height: 52px;
+  background-color: #FEE500;
+  border-radius: 0;
+  color: $color-text;
+  font-size: $font-size-body-16;
+  font-weight: $font-weight-semibold;
+  gap: $spacing-16;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    background-color: #FDD835;
   }
 }

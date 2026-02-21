@@ -156,6 +156,30 @@
   word-break: break-word;
 }
 
+// Button showcase
+.button_showcase {
+  @include flex-column;
+  gap: $spacing-32;
+}
+
+.button_group {
+  h3 {
+    margin-bottom: $spacing-16;
+  }
+}
+
+.button_group_title {
+  font-family: $font-body;
+  font-size: $font-size-body-16;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.background_button_box {
+  @include flex-column;
+  gap: $spacing-20;
+}
+
 // Input Showcase
 .input_showcase {
   @include flex-column;
