@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/common/button";
+import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
 
@@ -48,12 +49,21 @@ export default function Home() {
   const [iconColor, setIconColor] = useState("#17171B");
   const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("dark");
 
+  // Email validation state
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  // Password validation state
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const heroSection = document.querySelector(`.${styles.hero_section}`);
       if (heroSection) {
         const heroBottom = heroSection.getBoundingClientRect().bottom;
-        // Hero section이 화면을 벗어나면 light 테마로 변경
         setHeaderTheme(heroBottom > 76 ? "dark" : "light");
       }
     };
@@ -61,6 +71,38 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    if (value.length === 0) {
+      setEmailError("");
+      setIsEmailValid(false);
+    } else if (!validateEmail(value)) {
+      setEmailError("메일주소 형식으로 입력해주세요");
+      setIsEmailValid(false);
+    } else {
+      setEmailError("");
+      setIsEmailValid(true);
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    if (value.length === 0) {
+      setPasswordError("");
+      setIsPasswordValid(false);
+    } else if (!validatePassword(value)) {
+      setPasswordError("비밀번호는 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다");
+      setIsPasswordValid(false);
+    } else {
+      setPasswordError("");
+      setIsPasswordValid(true);
+    }
+  };
 
   return (
     <>
@@ -129,11 +171,9 @@ export default function Home() {
 
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>2. Arrow Buttons</h3>
-                <div className={styles.background_button_box}>
-                  <Button variant="black-arrow-left" />
-                  <Button variant="black-arrow-right" />
-                  <Button variant="red-arrow-left" />
-                  <Button variant="red-arrow-right" />
+                <div style={{ display: "flex", gap: "16px" }}>
+                  <Button variant="arrow-left" />
+                  <Button variant="arrow-right" />
                 </div>
               </div>
 
@@ -144,22 +184,83 @@ export default function Home() {
 
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>4. Primary Buttons</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                   <Button variant="primary-filled">바로 선물하기</Button>
+                  <Button variant="primary-outlined">바로 선물하기</Button>
+                </div>
               </div>
 
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>5. Secondary Buttons</h3>
-                  <div className={styles.background_button_box}>
-                    <Button variant="background-gray">이 질문은 넘어갈래요</Button>
-                    <Button variant="background-black-sm">포춘쿠키 열기</Button>
-                    <Button variant="background-black-lg">로그인하기</Button>
-                    <Button variant="background-black-xl">다음</Button>
-                  </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <Button variant="background-gray">이 질문은 넘어갈래요</Button>
+                  <Button variant="background-black-sm">다음 질문으로</Button>
+                </div>
               </div>
 
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>6. Kakao Button</h3>
                 <Button variant="kakao">카카오 로그인</Button>
+              </div>
+            </div>
+          </section>
+
+          {/* Input Component */}
+          <section className={styles.component_section}>
+            <h2 className={styles.section_title}>Input Component</h2>
+
+            <div className={styles.input_showcase}>
+              <div className={styles.input_group}>
+                <h3 className={styles.input_group_title}>이메일</h3>
+                <Input
+                  type="email"
+                  variant="default"
+                  placeholder="메일주소를 입력해주세요"
+                  value={email}
+                  onChange={handleEmailChange}
+                  error={emailError}
+                  isValid={isEmailValid}
+                />
+              </div>
+
+              <div className={styles.input_group}>
+                <h3 className={styles.input_group_title}>비밀번호</h3>
+                <Input
+                  type="password"
+                  variant="default"
+                  placeholder="비밀번호를 입력해주세요"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  error={passwordError}
+                  isValid={isPasswordValid}
+                />
+              </div>
+
+              <div className={styles.input_group}>
+                <h3 className={styles.input_group_title}>검색</h3>
+                <Input
+                  variant="search"
+                  placeholder="찾고싶은 선물을 검색해보세요"
+                />
+              </div>
+
+              <div className={styles.input_group}>
+                <h3 className={styles.input_group_title}>회색 배경</h3>
+                <Input variant="grey" placeholder="글자를 입력해주세요" />
+              </div>
+
+              <div className={styles.input_group}>
+                <h3 className={styles.input_group_title}>체크박스</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                  <Checkbox label="체크박스 옵션 1" />
+                  <Checkbox label="체크박스 옵션 2" defaultChecked />
+                  <Checkbox label="체크박스 옵션 3" />
+                </div>
+              </div>
+
+              <div className={styles.input_group}>
+                <h3 className={styles.input_group_title}>Textarea</h3>
+                <Textarea placeholder="글자를 입력해주세요" rows={6} />
               </div>
             </div>
           </section>
