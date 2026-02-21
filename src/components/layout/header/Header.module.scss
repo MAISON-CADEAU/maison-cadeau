@@ -90,6 +90,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
+  .header_container {
+    background-color: $color-background;
+  }
+
   .nav_link {
     color: $color-text;
   }
@@ -105,6 +109,8 @@
   @include flex-between;
   padding: $spacing-20 100px;
 }
+
+
 
 // Logo
 .logo {
