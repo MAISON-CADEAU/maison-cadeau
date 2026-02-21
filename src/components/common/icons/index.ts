@@ -31,5 +31,8 @@ export { TrashIcon } from "./TrashIcon";
 export { TruckIcon } from "./TruckIcon";
 export { TwitterIcon } from "./TwitterIcon";
 export { UserIcon } from "./UserIcon";
+export { FemaleIcon } from "./FemaleIcon";
+export { MaleIcon } from "./MaleIcon";
+export { EditPencelIcon } from "./EditePencelIcon";
 
 export type { IIconProps } from "./Icon.types";

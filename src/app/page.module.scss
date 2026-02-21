@@ -16,10 +16,10 @@
 
 .hero_title {
   font-family: $font-title;
-  font-size: $font-size-title-40;
+  font-size: $font-size-title;
   font-weight: $font-weight-regular;
   font-style: italic;
-  color: $color-white;
+  color: $color-background;
   text-align: center;
 }
 
@@ -36,9 +36,8 @@
   @include flex-column;
   gap: $spacing-48;
   padding: 0 100px; // Content: 좌우 100px 여백
-  background-color: $color-white;
-  border-radius: $radius-lg;
-
+  background-color: $color-background;
+  border-radius: $radius-8;
 }
 
 .title_box {
@@ -52,7 +51,7 @@
 
 .page_title {
   font-family: $font-title;
-  font-size: $font-size-title-40;
+  font-size: $font-size-title;
   font-weight: $font-weight-semibold;
   font-style: italic;
   color: $color-primary;
@@ -64,6 +63,7 @@
   color: $color-subtext-2;
 }
 
+
 // Component Section (Content section 내부이므로 padding 없음)
 .component_section {
   @include flex-column;
@@ -73,12 +73,18 @@
 
 .section_title {
   font-family: $font-title;
-  font-size: $font-size-title-32;
+  font-size: $font-size-title-2;
   font-weight: $font-weight-semibold;
   font-style: italic;
   color: $color-text;
   padding-bottom: $spacing-16;
   border-bottom: 1px solid $color-light-grey;
+}
+
+@media (max-width:768px) {
+  .container {
+    padding: 0 20px; // Content: 좌우 100px 여백
+  }
 }
 
 // Icons
@@ -87,7 +93,7 @@
   gap: $spacing-16;
   padding: $spacing-24;
   background-color: $color-background-2;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
 
   @include sm {
     flex-direction: row;
@@ -117,7 +123,7 @@
   width: 60px;
   height: 40px;
   border: 1px solid $color-light-grey;
-  border-radius: $radius-sm;
+  border-radius: $radius-4;
   cursor: pointer;
 }
 
@@ -133,7 +139,7 @@
   gap: $spacing-8;
   padding: $spacing-16;
   border: 1px solid $color-light-grey;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   background-color: $color-background;
   @include transition;
 
@@ -180,6 +186,7 @@
   gap: $spacing-20;
 }
 
+
 // Input Showcase
 .input_showcase {
   @include flex-column;
@@ -198,3 +205,9 @@
   font-weight: $font-weight-semibold;
   color: $color-text;
 }
+
+// Card Showcase
+  .card_showcase{
+    display: flex;
+    gap: $spacing-16;
+  }

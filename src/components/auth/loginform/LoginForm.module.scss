@@ -14,7 +14,7 @@
 
 .title {
   font-family: $font-title;
-  font-size: $font-size-title-24;
+  font-size: $font-size-title-3;
   font-weight: $font-weight-semibold;
   font-style: italic;
   letter-spacing: 0.05em;
@@ -32,7 +32,7 @@
   font-family: $font-body;
   font-size: $font-size-body-14;
   border: 1px solid $color-light-grey;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   @include transition;
 
   &::placeholder {
@@ -70,10 +70,10 @@
   font-family: $font-body;
   font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;
-  color: $color-white;
+  color: $color-background;
   background-color: $color-primary;
   border: none;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   cursor: pointer;
   @include transition;
 
@@ -98,7 +98,7 @@
   color: $color-text;
   background-color: $color-kakao;
   border: none;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   cursor: pointer;
   @include transition;
 

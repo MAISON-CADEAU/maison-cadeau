@@ -7,35 +7,21 @@ $color-primary: #8a0000;
 $color-secondary: #4c0000;
 $color-sub: #620000;
 
-// Background Colors
+// Colors
 $color-background: #ffffff;
 $color-background-2: #f5f5f5;
 $color-light-grey: #e8e8e8;
-
-// Text Colors
 $color-text: #1b1b1b;
 $color-subtext-2: #666666;
 $color-subtext-3: #969696;
-
-// Legacy colors (for compatibility)
-$color-black: #000000;
-$color-white: #ffffff;
-$color-gray-50: #f9fafb;
-$color-gray-100: #f3f4f6;
-$color-gray-200: #e5e7eb;
-$color-gray-300: #d1d5db;
-$color-gray-400: #9ca3af;
-$color-gray-500: #6b7280;
-$color-gray-600: #4b5563;
-$color-gray-700: #374151;
-$color-gray-800: #1f2937;
-$color-gray-900: #111827;
 
 $color-red-500: #ef4444;
 $color-red-600: #dc2626;
 
 $color-kakao: #fee500;
 $color-kakao-hover: #fdd835;
+
+
 
 // ================================
 // Typography
@@ -46,10 +32,10 @@ $font-title: "Literata", serif;
 $font-body: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
 // Font Sizes - Title
-$font-size-title-40: 2.5rem; // 40px
-$font-size-title-32: 2rem; // 32px
-$font-size-title-24: 1.5rem; // 24px
-$font-size-title-16: 1rem; // 16px
+$font-size-title: 2.5rem; // 40px
+$font-size-title-1: 1rem; // 16px
+$font-size-title-2: 2rem; // 32px
+$font-size-title-3: 1.5rem; // 24px
 
 // Font Sizes - Body
 $font-size-body-20: 1.25rem; // 20px
@@ -58,41 +44,16 @@ $font-size-body-14: 0.875rem; // 14px
 $font-size-body-12: 0.75rem; // 12px
 
 
-// Legacy font sizes (for compatibility)
-$font-size-xs: 0.75rem; // 12px
-$font-size-sm: 0.875rem; // 14px
-$font-size-base: 1rem; // 16px
-$font-size-lg: 1.125rem; // 18px
-$font-size-xl: 1.25rem; // 20px
-$font-size-2xl: 1.5rem; // 24px
-$font-size-3xl: 1.875rem; // 30px
-$font-size-4xl: 2.25rem; // 36px
-$font-size-5xl: 3rem; // 48px
-
 // Font Weights
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-// Legacy font weights (for compatibility)
-$font-weight-normal: 400;
-
 // Line Heights
 $line-height-title: 1.2; // 120%
 $line-height-body: 1.4; // 140%
 
-// Line Heights - Title (Title은 모두 120%)
-$line-height-title-40: 1.2; // 120% (40/120)
-$line-height-title-32: 1.2; // 120% (32/140)
-$line-height-title-24: 1.2; // 120% (24/140)
-$line-height-title-16: 1.2; // 120% (16/120)
-
-// Line Heights - Body (Body는 모두 140%)
-$line-height-body-20: 1.4; // 140% (20/140)
-$line-height-body-16: 1.4; // 140% (20/140)
-$line-height-body-14: 1.4; // 140% (16/140)
-$line-height-body-12: 1.4; // 140% (16/140)
 
 // ================================
 // Spacing
@@ -114,11 +75,13 @@ $spacing-128: 8rem; // 128px
 // ================================
 // Border Radius
 // ================================
-$radius-sm: 0.25rem; // 4px
-$radius-md: 0.375rem; // 6px
-$radius-lg: 0.5rem; // 8px
-$radius-xl: 0.75rem; // 12px
-$radius-2xl: 1rem; // 16px
+$radius-4: 0.25rem; // 4px
+$radius-6: 0.375rem; // 6px
+$radius-8: 0.5rem; // 8px
+$radius-12: 0.75rem; // 12px
+$radius-16: 1rem; // 16px
+$radius-20: 1.25rem; // 20px
+$radius-40: 2.5rem; // 40px
 $radius-full: 9999px;
 
 // ================================
@@ -133,11 +96,11 @@ $breakpoint-xl: 1280px;
 // Shadows
 // ================================
 $shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-md: 0 2px 6px rgba(106, 106, 106, 0.25);
 $shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
 // ================================
 // Transitions
 // ================================
-$transition-fast: 150ms ease;
-$transition-normal: 300ms ease;
+$transition-normal: 300ms ease-out;
+$transition-fast: 100ms ease-out;

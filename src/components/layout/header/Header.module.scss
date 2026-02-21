@@ -19,7 +19,7 @@
   height: 2rem;
   padding: $spacing-8 $spacing-16;
   background-color: $color-text;
-  color: $color-white;
+  color: $color-background;
   font-family: $font-body;
   font-size: $font-size-body-14;
   position: relative;
@@ -34,7 +34,7 @@
   color: rgba(255, 255, 255, 0.7);
 
   &:hover {
-    color: $color-white;
+    color: $color-background;
   }
 }
 
@@ -59,7 +59,7 @@
   font-family: $font-body;
   font-size: $font-size-body-14;
   font-weight: $font-weight-medium;
-  color: $color-white;
+  color: $color-background;
 }
 
 // Main Header
@@ -75,7 +75,7 @@
   }
 
   .nav_link {
-    color: $color-white;
+    color: $color-background;
   }
 
   .icon_button {
@@ -137,7 +137,7 @@
 .nav_link {
   font-family: $font-body;
   font-size: $font-size-body-14;
-  font-weight: $font-weight-normal;
+  font-weight: $font-weight-regular;
   text-decoration: none;
   @include transition;
 
@@ -180,9 +180,9 @@
 }
 
 .modal_content {
-  background-color: $color-white;
+  background-color: $color-background;
   padding: $spacing-40 $spacing-48;
-  border-radius: $radius-lg;
+  border-radius: $radius-8;
   @include flex-column;
   align-items: center;
   gap: $spacing-24;
@@ -202,11 +202,11 @@
   @include button-reset;
   padding: $spacing-12 $spacing-32;
   background-color: $color-primary;
-  color: $color-white;
+  color: $color-background;
   font-family: $font-body;
   font-size: $font-size-body-14;
   font-weight: $font-weight-medium;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   @include transition;
 
   &:hover {

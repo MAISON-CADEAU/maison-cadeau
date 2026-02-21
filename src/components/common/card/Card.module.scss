@@ -1,0 +1,28 @@
+@use "@/styles/variables" as *;
+
+.card {
+  display: block;
+  border-radius: $radius-12;
+  border: 1px solid transparent;
+  background-color: $color-background;
+  color: $color-text;
+  text-decoration: none;
+  transition: all $transition-fast;
+  outline: none;
+}
+
+.card:focus-visible {
+  border-color: $color-light-grey;
+}
+
+.card_disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.card_variant_select {
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+}
