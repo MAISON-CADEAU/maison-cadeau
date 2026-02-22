@@ -7,6 +7,7 @@ import { Button } from "@/components/common/button";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
+import { Modal } from "@/components/common/modal";
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },
@@ -58,6 +59,10 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  // Modal state
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -265,9 +270,50 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          {/* Modal Component */}
+          <section className={styles.component_section}>
+            <h2 className={styles.section_title}>Modal Component</h2>
+
+            <div className={styles.button_showcase}>
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>1. Sheet Modal</h3>
+                <Button variant="background-black-sm" onClick={() => setIsSheetOpen(true)}>
+                  Sheet 모달 열기
+                </Button>
+              </div>
+
+              <div className={styles.button_group}>
+                <h3 className={styles.button_group_title}>2. Dialog Modal</h3>
+                <Button variant="background-black-sm" onClick={() => setIsDialogOpen(true)}>
+                  Dialog 모달 열기
+                </Button>
+              </div>
+            </div>
+          </section>
+
         </div>
       </main>
       <Footer />
+
+      <Modal
+        variant="sheet"
+        isOpen={isSheetOpen}
+        title="피드 추가하기"
+        onClose={() => setIsSheetOpen(false)}
+        onComplete={() => setIsSheetOpen(false)}
+      >
+        <p>Sheet 모달 콘텐츠 영역입니다.</p>
+      </Modal>
+
+      <Modal
+        variant="dialog"
+        isOpen={isDialogOpen}
+        title="새 컬렉션"
+        onClose={() => setIsDialogOpen(false)}
+      >
+        <p>Dialog 모달 콘텐츠 영역입니다.</p>
+      </Modal>
     </>
   );
 }
