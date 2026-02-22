@@ -4,7 +4,7 @@
 .button {
   @include flex-center;
   gap: $spacing-8;
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-weight: $font-weight-medium;
   border: none;
   cursor: pointer;
@@ -71,10 +71,9 @@
 }
 
 // Arrow buttons
-.button_black_arrow_left,
-.button_black_arrow_right {
-  width: 60px;
-  height: 60px;
+.button_arrow_left_bg,
+.button_arrow_right_bg {
+  padding: $spacing-20;
   background-color: $color-background-2;
   color: $color-primary;
 
@@ -84,10 +83,9 @@
   }
 }
 
-.button_red_arrow_left,
-.button_red_arrow_right {
-  width: 60px;
-  height: 60px;
+.button_arrow_left,
+.button_arrow_right{
+  padding: $spacing-20;
   background-color: $color-background;
   color: $color-primary;
 

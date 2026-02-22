@@ -13,7 +13,7 @@
 }
 
 .title {
-  font-family: $font-title;
+  font-family: $font-Literata;
   font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
   font-style: italic;
@@ -22,7 +22,7 @@
 
 .subtitle {
   margin-top: $spacing-8;
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-subtext-2;
 }
@@ -50,7 +50,7 @@
 
 .divider_label {
   padding: 0 $spacing-16;
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-subtext-3;
   background-color: $color-background;
@@ -94,7 +94,7 @@
 }
 
 .agreement_text {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-subtext-2;
 }
@@ -109,14 +109,14 @@
 
 .agreement_error {
   margin-left: $spacing-32;
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-red-500;
 }
 
 // Error
 .error_message {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-red-500;
   text-align: center;
@@ -124,7 +124,7 @@
 
 // Login link
 .login_section {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   text-align: center;
 }
