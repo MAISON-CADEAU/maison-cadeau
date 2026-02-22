@@ -148,7 +148,7 @@ export const SignupForm = () => {
 
         {error && <p className={styles.error_message}>{error}</p>}
 
-        <Button type="submit" variant="primary-filled" disabled={isLoading}>
+        <Button type="submit" variant="primary" disabled={isLoading}>
           가입하기
         </Button>
       </form>
