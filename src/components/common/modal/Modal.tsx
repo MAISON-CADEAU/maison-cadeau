@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeftIcon, CloseIcon } from "@/components/common/icons";
@@ -28,6 +28,12 @@ export const Modal = ({
   completeLabel = "완료",
   children,
 }: IModalProps) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -38,6 +44,8 @@ export const Modal = ({
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  if (!mounted) return null;
 
   return createPortal(
     <AnimatePresence>
