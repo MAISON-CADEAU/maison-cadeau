@@ -28,7 +28,7 @@
 }
 
 .tagline {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;
   margin: 0;
@@ -37,7 +37,7 @@
 .description {
   @include flex-column;
   gap: $spacing-4;
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   font-weight: 100;
 
@@ -57,7 +57,7 @@
 }
 
 .footer_link {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-subtext-3;
   text-decoration: none;
@@ -95,7 +95,7 @@
 }
 
 .brand_name {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-20;
   font-weight: 100;
   letter-spacing: 0.05rem;
@@ -103,7 +103,7 @@
 
 .copyright {
   margin-top: $spacing-4;
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: $color-subtext-3;
 }

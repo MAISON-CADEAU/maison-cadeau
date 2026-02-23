@@ -36,7 +36,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     }
 
     // Arrow buttons
-    if (variant === "black-arrow-left") {
+    if (variant === "arrow-left_bg") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           <ArrowLeftIcon size={20} color="currentColor" />
@@ -44,7 +44,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       );
     }
 
-    if (variant === "black-arrow-right") {
+    if (variant === "arrow-right_bg") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           <ArrowRightIcon size={20} color="currentColor" />
@@ -52,7 +52,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       );
     }
 
-    if (variant === "red-arrow-left") {
+    if (variant === "arrow-left") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           <ArrowLeftIcon size={20} color="currentColor" />
@@ -60,7 +60,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       );
     }
 
-    if (variant === "red-arrow-right") {
+    if (variant === "arrow-right") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           <ArrowRightIcon size={20} color="currentColor" />
@@ -79,7 +79,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     }
 
     // Primary buttons (4, 4-1)
-    if (variant === "primary-filled" || variant === "primary-outlined") {
+    if (variant === "primary") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           {children}
