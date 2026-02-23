@@ -11,7 +11,7 @@ MAISON CADEAU는 AI 기반 선물 추천, 트렌디한 선물 피드, 스크랩 
 ### Frontend
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
+- **Styling**: SCSS
 - **UI Components**: shadcn/ui
 - **State Management**: Zustand
 - **Form**: React Hook Form + Zod
