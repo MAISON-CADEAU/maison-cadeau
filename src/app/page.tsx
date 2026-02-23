@@ -5,10 +5,10 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/common/button";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
-import { ActionCard, MiniActionCard, ProductCard, SelectCard } from "@/components/common/card";
-
+import { Card } from "@/components/common/card";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
+
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },
@@ -47,6 +47,9 @@ const iconList = [
 ];
 
 export default function Home() {
+  // gender card
+  const [activeGender, setActiveGender] = useState<"female" | "male" | null>(null);
+
   const [iconSize, setIconSize] = useState(24);
   const [iconColor, setIconColor] = useState("#17171B");
   const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("dark");
@@ -270,22 +273,61 @@ export default function Home() {
           {/* Card Component */}
           <section className={styles.component_section}>
             <h2 className={styles.section_title}>Card Component</h2>
-            <div className={styles.card_showcase}>
-              <SelectCard icon={<Icons.MaleIcon size={100} />} title="남성" onClick={() => {}} />
-              <SelectCard icon={<Icons.FemaleIcon size={100} />} title="여성" onClick={() => {}} />
-            </div>
-              <ProductCard
-                href="/product/1"
-                imgSrc="/imgs/product_image.png"
-                imgAlt="상품 이미지"
-                title="아주 고고한 도자기 컵"
-                price="18,000원"
-                badge="recommend"
-            />
-            <ActionCard style={{ width: 349, height: 160 }} title="문의하기" description="선물 입점 | 선물 관련 문의함입니다" href="/contact" />
-            <ActionCard style={{ width: 418, height: 144 }} title="문의하기" description="선물 입점 | 선물 관련 문의함입니다" href="/contact" />
-            <MiniActionCard title="내 정보 수정하기" description="내 정보 관리" href="/mypage/edit" imgSrc="/imgs/mini_image.png" />
-
+            {/* grnder card */}
+              <div className={styles.card_gender_group}>
+              <Card
+                  variant="gender"
+                  as="button"
+                  isActive={activeGender === "female"}
+                  onClick={() => setActiveGender("female")}
+                  title="여성"
+                  icon={<Icons.FemaleIcon width={100} height={100}/>}
+                />
+              <Card
+                  variant="gender"
+                  as="button"
+                  isActive={activeGender === "male"}
+                  onClick={() => setActiveGender("male")}
+                  title="남성"
+                  icon={<Icons.MaleIcon width={100} height={100}/>}
+                />
+              </div>
+              {/* product card */}
+                <Card
+                  variant="product"
+                  as="button"
+                  onClick={() => {}}
+                  badge="NEW"
+                  imageSrc="/imgs/product_image.png"
+                  imageAlt="아누 고블렛 도자기 잔"
+                  title="아누 고블렛 도자기 잔"
+                  price="29,000원"
+                />
+              {/* cta card - text */}
+                <Card
+                  variant="cta"
+                  ctaType="text"
+                  as="a"
+                  link={{ href: "/about" }}
+                  title="문의하기"
+                  description="선물 입점 | 선물 관련 문의함입니다"
+                  width={349}
+                  height={160}
+                />
+              {/* cta */}
+                <Card
+                  variant="cta"
+                  ctaType="icon"
+                  as="a"
+                  link={{ href: "/", target: "_blank" }}
+                  imageSrc="/imgs/profile.png"
+                  imageAlt="profile"
+                  title="맛있는당근님"
+                  icon={<Icons.EditPencelIcon />}
+                  description="내 정보 수정하기"
+                  width={349}
+                  height={144}
+                />
           </section>
         </div>
       </main>
