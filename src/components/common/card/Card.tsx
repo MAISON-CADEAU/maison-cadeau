@@ -1,5 +1,7 @@
 import type { ICardProps } from "./Card.types";
+import Image from "next/image";
 import styles from "./Card.module.scss";
+
 
 export function Card(props: ICardProps) {
   const { as, variant, className, style, ariaLabel, hover } = props;
@@ -45,9 +47,11 @@ export function Card(props: ICardProps) {
                 </span>
 
               <div className={styles.product_image}>
-                <img
+              <Image
                   src={props.imageSrc}
                   alt={props.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 320px"
                   className={styles.product_image_inner}
                 />
               </div>
@@ -73,11 +77,13 @@ export function Card(props: ICardProps) {
         return (
           <div className={styles.cta_inner}>
             <div className={styles.cta_image}>
-              <img
-                src={props.imageSrc}
-                alt={props.imageAlt}
-                className={styles.cta_image_inner}
-              />
+              <Image
+                    src={props.imageSrc}
+                    alt={props.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    className={styles.product_image_inner}
+                  />
             </div>
             <div className={styles.cta_body} >
               <span className={styles.cta_title}>{props.title}</span>

@@ -134,6 +134,7 @@
   overflow: hidden;
 }
 .product_image_inner  {
+
   transition: all $transition-normal;
 }
   
@@ -172,8 +173,10 @@
   background-color: $color-background;
 }
 .cta_image{
+  position: relative;
   width: 80px;
   height: 80px;
+  overflow: hidden;
 }
 .cta_body {
   display: flex;

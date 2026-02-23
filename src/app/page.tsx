@@ -302,6 +302,7 @@ export default function Home() {
                   imageAlt="아누 고블렛 도자기 잔"
                   title="아누 고블렛 도자기 잔"
                   price="29,000원"
+                  
                 />
               {/* cta card - text */}
                 <Card
