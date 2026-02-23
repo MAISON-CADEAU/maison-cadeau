@@ -129,14 +129,23 @@ export default function Home() {
             image={{ src: "/imgs/banner-image-overlay.png", alt: "Banner Image" }}
             />
 
-        {/* Banner Component - cta 버전 */}
-          <Banner
+        {/* Banner Component - cta ver.1 */}
+        <Banner
             layout="cta"
-            title="What’s your favorite"
-            description="찾아볼 필요 없이, 취향을 온전히 담은 제품을 빠르게 드려요."
+            title="What's your favorite"
+            description="찾아볼 필요 없어요"
             image={{ src: "/imgs/banner-image-cta.png", alt: "Banner Image" }}
             cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
           />
+        {/* Banner Component - cta ver.2 */}
+          <Banner
+            layout="cta"
+            title="What's your favorite"
+            description="취향을 온전히 담아 드려요"
+            align="left"
+            cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
+          />
+
 
           {/* Icons Component */}
           <section className={styles.component_section}>

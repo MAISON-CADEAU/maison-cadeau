@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Image from "next/image";
 import type { IBannerProps } from "./Banner.types";
 import styles from "./Banner.module.scss";
+import { Button } from "../button";
 
 export const Banner = ({
   className,
@@ -48,14 +48,15 @@ export const Banner = ({
           )}
 
           {shouldRenderCta && cta && (
-            <Link
-              href={cta.href}
-              target={cta.target}
-              rel={rel}
-              className={styles.cta_button}
-            >
-              {cta.label}
-            </Link>
+            <Button
+            variant="primary"
+            as="link"
+            href={cta.href}
+            target={cta.target}
+            rel={rel}
+          >
+            {cta.label}
+          </Button>
           )}
         </div>
       </div>

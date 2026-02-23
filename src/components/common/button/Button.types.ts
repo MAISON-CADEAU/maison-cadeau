@@ -5,4 +5,8 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   width?: string | number;
   height?: string | number;
+  as?: "button" | "link";
+  href?: string;
+  target?: "_self" | "_blank";
+  rel?: string;
 }
