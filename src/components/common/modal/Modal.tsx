@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeftIcon, CloseIcon } from "@/components/common/icons";
 import styles from "./Modal.module.scss";
 import type { IModalProps } from "./Modal.types";
+
+const subscribe = () => () => {};
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -28,11 +30,11 @@ export const Modal = ({
   completeLabel = "완료",
   children,
 }: IModalProps) => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false
+  );
 
   useEffect(() => {
     if (isOpen) {
