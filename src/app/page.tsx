@@ -61,8 +61,8 @@ export default function Home() {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   // Modal state
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [islargeOpen, setIslargeOpen] = useState(false);
+  const [issmallOpen, setIssmallOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -277,16 +277,16 @@ export default function Home() {
 
             <div className={styles.button_showcase}>
               <div className={styles.button_group}>
-                <h3 className={styles.button_group_title}>1. Sheet Modal</h3>
-                <Button variant="background-black-sm" onClick={() => setIsSheetOpen(true)}>
-                  Sheet 모달 열기
+                <h3 className={styles.button_group_title}>1. large Modal</h3>
+                <Button variant="background-black-sm" onClick={() => setIslargeOpen(true)}>
+                  large 모달 열기
                 </Button>
               </div>
 
               <div className={styles.button_group}>
-                <h3 className={styles.button_group_title}>2. Dialog Modal</h3>
-                <Button variant="background-black-sm" onClick={() => setIsDialogOpen(true)}>
-                  Dialog 모달 열기
+                <h3 className={styles.button_group_title}>2. small Modal</h3>
+                <Button variant="background-black-sm" onClick={() => setIssmallOpen(true)}>
+                  small 모달 열기
                 </Button>
               </div>
             </div>
@@ -297,22 +297,22 @@ export default function Home() {
       <Footer />
 
       <Modal
-        variant="sheet"
-        isOpen={isSheetOpen}
+        variant="large"
+        isOpen={islargeOpen}
         title="피드 추가하기"
-        onClose={() => setIsSheetOpen(false)}
-        onComplete={() => setIsSheetOpen(false)}
+        onClose={() => setIslargeOpen(false)}
+        onComplete={() => setIslargeOpen(false)}
       >
-        <p>Sheet 모달 콘텐츠 영역입니다.</p>
+        <p>large 모달 콘텐츠 영역입니다.</p>
       </Modal>
 
       <Modal
-        variant="dialog"
-        isOpen={isDialogOpen}
+        variant="small"
+        isOpen={issmallOpen}
         title="새 컬렉션"
-        onClose={() => setIsDialogOpen(false)}
+        onClose={() => setIssmallOpen(false)}
       >
-        <p>Dialog 모달 콘텐츠 영역입니다.</p>
+        <p>small 모달 콘텐츠 영역입니다.</p>
       </Modal>
     </>
   );

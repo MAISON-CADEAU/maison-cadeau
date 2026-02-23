@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export interface IModalProps {
   isOpen: boolean;
-  variant?: "sheet" | "dialog";
+  variant?: "large" | "small";
   title: string;
   onClose: () => void;
   onComplete?: () => void;

@@ -18,18 +18,26 @@
   overflow: hidden;
 }
 
-// Sheet variant — 풀스크린
-.sheet {
+// large variant — 풀스크린
+.large {
   max-width: 1432px;
   padding: 60px 240px;
   border-radius: $radius-xl;
+
+  .header {
+    margin-bottom: 60px;
+  }
 }
 
-// Dialog variant — 중앙 팝업
-.dialog {
+// small variant — 중앙 팝업
+.small {
   max-width: 480px;
   padding: $spacing-40;
   border-radius: $radius-xl;
+
+  .header {
+    margin-bottom: 40px;
+  }
 }
 
 // Header

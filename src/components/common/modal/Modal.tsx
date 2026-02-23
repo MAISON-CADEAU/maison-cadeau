@@ -21,7 +21,7 @@ const containerVariants = {
 
 export const Modal = ({
   isOpen,
-  variant = "dialog",
+  variant = "small",
   title,
   onClose,
   onComplete,
@@ -68,7 +68,7 @@ export const Modal = ({
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
           >
-            {variant === "sheet" ? (
+            {variant === "large" ? (
               <div className={styles.header}>
                 <button
                   type="button"
