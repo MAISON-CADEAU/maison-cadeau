@@ -15,12 +15,17 @@
 }
 
 .hero_title {
-  font-family: $font-title;
-  font-size: $font-size-title;
+  font-family: $font-literata;
+  font-size: $font-size-title-40;
   font-weight: $font-weight-regular;
   font-style: italic;
   color: $color-background;
   text-align: center;
+
+  span {
+    font-family: $font-luxurious;
+    font-size: 320px;
+  }
 }
 
 .main {
@@ -50,15 +55,15 @@
 }
 
 .page_title {
-  font-family: $font-title;
-  font-size: $font-size-title;
+  font-family: $font-literata;
+  font-size: $font-size-title-40;
   font-weight: $font-weight-semibold;
   font-style: italic;
   color: $color-primary;
 }
 
 .page_description {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-20;
   color: $color-subtext-2;
 }
@@ -72,8 +77,8 @@
 }
 
 .section_title {
-  font-family: $font-title;
-  font-size: $font-size-title-2;
+  font-family: $font-literata;
+  font-size: $font-size-title-32;
   font-weight: $font-weight-semibold;
   font-style: italic;
   color: $color-text;
@@ -108,7 +113,7 @@
 }
 
 .control_label {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-14;
   font-weight: $font-weight-medium;
   color: $color-text;
@@ -155,7 +160,7 @@
 }
 
 .icon_name {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-12;
   color: $color-subtext-2;
   text-align: center;
@@ -175,7 +180,7 @@
 }
 
 .button_group_title {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-16;
   font-weight: $font-weight-semibold;
   color: $color-text;
@@ -200,7 +205,7 @@
 }
 
 .input_group_title {
-  font-family: $font-body;
+  font-family: $font-pretendard;
   font-size: $font-size-body-16;
   font-weight: $font-weight-semibold;
   color: $color-text;

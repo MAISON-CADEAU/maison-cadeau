@@ -114,7 +114,7 @@ export default function Home() {
       <Header theme={headerTheme} />
       <main className={styles.main}>
         <section  className={styles.hero_section}>
-          <h2 className={styles.hero_title}>Find your Gift</h2>
+          <h2 className={styles.hero_title}><span>F</span>ind your Gift</h2>
         </section>
 
         <div className={styles.container}>
@@ -177,8 +177,10 @@ export default function Home() {
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>2. Arrow Buttons</h3>
                 <div style={{ display: "flex", gap: "16px" }}>
-                  <Button variant="red-arrow-left" />
-                  <Button variant="red-arrow-right" />
+                  <Button variant="arrow-left_bg" />
+                  <Button variant="arrow-right_bg" />
+                  <Button variant="arrow-left" />
+                  <Button variant="arrow-right"/>
                 </div>
               </div>
 
@@ -190,8 +192,7 @@ export default function Home() {
               <div className={styles.button_group}>
                 <h3 className={styles.button_group_title}>4. Primary Buttons</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                  <Button variant="primary-filled">바로 선물하기</Button>
-                  <Button variant="primary-outlined">바로 선물하기</Button>
+                  <Button variant="primary">바로 선물하기</Button>
                 </div>
               </div>
 
