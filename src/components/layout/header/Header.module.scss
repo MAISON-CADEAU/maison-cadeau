@@ -19,7 +19,7 @@
   height: 2rem;
   padding: $spacing-8 $spacing-16;
   background-color: $color-text;
-  color: $color-white;
+  color: $color-background;
   font-family: $font-pretendard;
   font-size: $font-size-body-14;
   position: relative;
@@ -208,7 +208,7 @@
   @include button-reset;
   padding: $spacing-12 $spacing-32;
   background-color: $color-primary;
-  color: $color-white;
+  color: $color-background;
   font-family: $font-pretendard;
   font-size: $font-size-body-14;
   font-weight: $font-weight-medium;
