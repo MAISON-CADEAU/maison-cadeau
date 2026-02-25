@@ -34,19 +34,19 @@
 }
 
 .banner_overlay .title {
-    font-family: $font-literata;
-    font-style: italic;
-    font-size: $font-size-title-60;
-    font-weight: $font-weight-regular;
-    color: $color-white;
-    line-height: $line-height-title;
-    padding-bottom:$spacing-16;
+  font-family: $font-literata;
+  font-style: italic;
+  font-size: $font-size-title-60;
+  font-weight: $font-weight-regular;
+  color: $color-white;
+  line-height: $line-height-title;
+  padding-bottom:$spacing-16;
 }
 
 .banner_overlay .description {
-    font-size: $font-size-body-16;
-    color: $color-white;
-    line-height: $line-height-body;
+  font-size: $font-size-body-16;
+  color: $color-white;
+  line-height: $line-height-body;
 }
 
 /* cta  */
@@ -55,10 +55,11 @@
 }
 
 .banner_cta .title {
-    font-size: $font-size-title-40;
-    font-style: italic;
-    padding-bottom:$spacing-40;
-    color: $color-text;
+  font-family: $font-literata;
+  font-size: $font-size-title-40;
+  font-style: italic;
+  padding-bottom:$spacing-40;
+  color: $color-text;
 }
 
 .banner_cta .description {
