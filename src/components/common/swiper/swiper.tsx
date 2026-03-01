@@ -12,6 +12,7 @@ import type { ISwiperSectionProps } from "./swiper.types";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import Image from "next/image";
 import { Button } from "../button";
 
 
@@ -45,31 +46,41 @@ export function SwiperSection({
       <div className={styles.slider_wrapper}>
         <Swiper
           modules={[Navigation, Thumbs]}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
+          navigation
           onBeforeInit={(swiper) => {
             if (typeof swiper.params.navigation !== "boolean" && swiper.params.navigation) {
               swiper.params.navigation.prevEl = prevRef.current;
               swiper.params.navigation.nextEl = nextRef.current;
             }
           }}
-          thumbs={{ swiper: thumbsSwiper, multipleActiveThumbs: false }}
+          thumbs={{ swiper: thumbsSwiper, multipleActiveThumbs: true }}
           className={styles.main_swiper}
           slidesPerView={2}
-          centeredSlides
-          centeredSlidesBounds          
+          // centeredSlides
+          // centeredSlidesBounds  
+          // initialSlide={0}        
           spaceBetween={12}
-          watchSlidesProgress
-          
+          // watchSlidesProgress
+          onSwiper={(swiper) => {
+            setTimeout(() => {
+              if (!swiper.params.navigation || typeof swiper.params.navigation === "boolean") return;
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            });
+          }}              
         >
           {images.map((src, index) => (
             <SwiperSlide key={index}>
               <div className={styles.image_box}>
-                <img
+                <Image
                   src={src}
                   alt={`gift_image_${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                  priority={index === 0}
                 />
               </div>
             </SwiperSlide>
@@ -115,9 +126,12 @@ export function SwiperSection({
           {images.map((src, index) => (
             <SwiperSlide key={index} className={styles.thumb_wrapper}>
               <div className={styles.thumb_box}>
-                <img
+                <Image
                   src={src}
                   alt=""
+                  fill
+                  sizes="48px"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
             </SwiperSlide>

@@ -26,6 +26,7 @@
 }
 
 .image_box {
+  position: relative;
   aspect-ratio: 565 / 753;
   overflow: hidden;
 }
@@ -76,6 +77,7 @@
 }
 
 .thumb_box {
+  position: relative;
   width: 48px;
   aspect-ratio: 565 / 753;
   overflow: hidden;
@@ -97,7 +99,7 @@
   margin-right: 0 !important;
 }
 .thumb_swiper :global(.swiper-slide-thumb-active) .thumb_box {
-  border-color: #000;
+  border-color:$color-primary;
 }
 
 .actions {
