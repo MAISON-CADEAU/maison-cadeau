@@ -46,24 +46,22 @@
 
   .label {
     position: absolute;
-    left: 40px;
+    left: $spacing-8;
     white-space: nowrap;
     opacity: 0;
     font-size: $font-size-body-14;
-    transition: opacity 0.1s ease 0s;
     pointer-events: none;
   }
 
   &:hover {
     width: auto;
-    padding-right: $spacing-16;
+    padding-right: $spacing-8;
     border-radius: 50px;
     transition-delay: 0s;
 
     .label {
       opacity: 1;
       position: relative;
-      left: 0;
       pointer-events: auto;
       transition: opacity 0.15s ease 0.15s;
     }
