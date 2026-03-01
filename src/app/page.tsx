@@ -8,6 +8,7 @@ import { Banner } from "@/components/common/banner";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
+import { SwiperSection } from "@/components/common/swiper/swiper";
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },
@@ -146,8 +147,21 @@ export default function Home() {
             cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
           />
 
+        {/* swiper Component */}
+                  <SwiperSection
+                    text="선물하기"
+                    title="지금 딱 보내기 좋은 |카카오톡 선물하기 5"
+                    images={[
+                      "/imgs/swiper_1.png",
+                      "/imgs/swiper_2.png",
+                      "/imgs/swiper_3.png",
+                      "/imgs/swiper_4.png",
+                    ]}
+                    date="2024.01.01"
+                    brand="Maison Cadeau"
+                  />
 
-          {/* Icons Component */}
+{/* Icons Component */}
           <section className={styles.component_section}>
             <h2 className={styles.section_title}>Icons Component</h2>
 
