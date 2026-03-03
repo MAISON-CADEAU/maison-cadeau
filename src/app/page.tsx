@@ -8,7 +8,7 @@ import { Banner } from "@/components/common/banner";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
-import { SwiperSection } from "@/components/common/swiper/swiper";
+import { SwiperSection } from "@/components/common/swiper/Swiper";
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },

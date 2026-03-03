@@ -1,2 +1,2 @@
-export { SwiperSection } from "./swiper";
-export type { ISwiperSectionProps } from "./swiper.types";
+export { SwiperSection } from "./Swiper";
+export type { ISwiperSectionProps } from "./Swiper.types";

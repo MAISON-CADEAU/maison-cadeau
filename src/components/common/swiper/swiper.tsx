@@ -4,14 +4,13 @@ import { useRef, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 
-import styles from "./swiper.module.scss";
-import type { ISwiperSectionProps } from "./swiper.types";
+import styles from "./Swiper.module.scss";
+import type { ISwiperSectionProps } from "./Swiper.types";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/thumbs";
 import Image from "next/image";
 import { Button } from "../button";
 
@@ -23,7 +22,9 @@ export function SwiperSection({
   date,
   brand,
 }: ISwiperSectionProps) {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const mainSwiperRef = useRef<SwiperType | null>(null);
+  const thumbSwiperRef = useRef<SwiperType | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
@@ -45,7 +46,7 @@ export function SwiperSection({
       {/* center */}
       <div className={styles.slider_wrapper}>
         <Swiper
-          modules={[Navigation, Thumbs]}
+          modules={[Navigation]}
           navigation
           onBeforeInit={(swiper) => {
             if (typeof swiper.params.navigation !== "boolean" && swiper.params.navigation) {
@@ -53,16 +54,11 @@ export function SwiperSection({
               swiper.params.navigation.nextEl = nextRef.current;
             }
           }}
-          // thumbs={{ swiper: thumbsSwiper, multipleActiveThumbs: false }}
-          thumbs={{ swiper: thumbsSwiper}}
           className={styles.main_swiper}
           slidesPerView={2}
-          // centeredSlides
-          // centeredSlidesBounds  
-          // initialSlide={0}        
           spaceBetween={12}
-          watchSlidesProgress
           onSwiper={(swiper) => {
+            mainSwiperRef.current = swiper;
             setTimeout(() => {
               if (!swiper.params.navigation || typeof swiper.params.navigation === "boolean") return;
               swiper.params.navigation.prevEl = prevRef.current;
@@ -70,7 +66,11 @@ export function SwiperSection({
               swiper.navigation.init();
               swiper.navigation.update();
             });
-          }}              
+          }}
+          onSlideChange={(swiper) => {
+            setActiveIndex(swiper.realIndex);
+            thumbSwiperRef.current?.slideTo(swiper.realIndex);
+          }}
         >
           {images.map((src, index) => (
             <SwiperSlide key={index}>
@@ -86,6 +86,9 @@ export function SwiperSection({
               </div>
             </SwiperSlide>
           ))}
+          <SwiperSlide key="dummy" aria-hidden="true">
+            <div className={styles.image_box_dummy} />
+          </SwiperSlide>
         </Swiper>
 
 
@@ -116,17 +119,22 @@ export function SwiperSection({
 
         {/* center - thumbnail */}
         <Swiper
-          modules={[Thumbs]}
-          onSwiper={setThumbsSwiper}
+          modules={[]}
+          onSwiper={(swiper) => { thumbSwiperRef.current = swiper; }}
           slidesPerView="auto"
           spaceBetween={4}
-          watchSlidesProgress
-          slideToClickedSlide
           className={styles.thumb_swiper}
         >
           {images.map((src, index) => (
-            <SwiperSlide key={index} className={styles.thumb_wrapper}>
-              <div className={styles.thumb_box}>
+            <SwiperSlide
+              key={index}
+              className={styles.thumb_wrapper}
+              onClick={() => {
+                mainSwiperRef.current?.slideTo(index);
+                setActiveIndex(index);
+              }}
+            >
+              <div className={`${styles.thumb_box} ${index === activeIndex ? styles.thumb_active : ""}`}>
                 <Image
                   src={src}
                   alt=""

@@ -39,6 +39,12 @@
   height: 100%;
   object-fit: cover;
 }
+
+.image_box_dummy {
+  position: relative;
+  aspect-ratio: 565 / 753;
+  background-color: #f5f5f5;
+}
 .slider_prev{
     position: absolute;
     top: 50%;
@@ -103,8 +109,8 @@
 .thumb_swiper :global(.swiper-slide:last-child) {
   margin-right: 0 !important;
 }
-.thumb_swiper :global(.swiper-slide-thumb-active) .thumb_box {
-  border-color:$color-primary;
+.thumb_active {
+  border-color: $color-primary;
 }
 
 .actions {
