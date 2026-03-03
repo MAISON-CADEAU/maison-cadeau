@@ -149,7 +149,7 @@ export default function Home() {
 
         {/* swiper Component */}
                   <SwiperSection
-                    text="선물하기"
+                    text="gift"
                     title="지금 딱 보내기 좋은 |카카오톡 선물하기 5"
                     images={[
                       "/imgs/swiper_1.png",

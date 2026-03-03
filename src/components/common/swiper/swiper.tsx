@@ -53,14 +53,15 @@ export function SwiperSection({
               swiper.params.navigation.nextEl = nextRef.current;
             }
           }}
-          thumbs={{ swiper: thumbsSwiper, multipleActiveThumbs: true }}
+          // thumbs={{ swiper: thumbsSwiper, multipleActiveThumbs: false }}
+          thumbs={{ swiper: thumbsSwiper}}
           className={styles.main_swiper}
           slidesPerView={2}
           // centeredSlides
           // centeredSlidesBounds  
           // initialSlide={0}        
           spaceBetween={12}
-          // watchSlidesProgress
+          watchSlidesProgress
           onSwiper={(swiper) => {
             setTimeout(() => {
               if (!swiper.params.navigation || typeof swiper.params.navigation === "boolean") return;
