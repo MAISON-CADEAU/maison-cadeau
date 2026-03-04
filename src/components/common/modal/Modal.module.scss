@@ -24,7 +24,7 @@
   min-width: 1432px;
   max-height: 800px;
   padding: 60px 240px;
-  border-radius: $radius-xl;
+  border-radius: $radius-12;
 
   .header {
     flex-shrink: 0;
@@ -35,7 +35,7 @@
 // default variant — 중앙 팝업
 .default {
   padding: $spacing-40;
-  border-radius: $radius-xl;
+  border-radius: $radius-12;
 
   .header {
     margin-bottom: 40px;
@@ -45,7 +45,7 @@
 // alert variant — 알림창 (default와 동일 스타일)
 .alert {
   padding: $spacing-40;
-  border-radius: $radius-xl;
+  border-radius: $radius-12;
 
   .header {
     margin-bottom: 40px;
