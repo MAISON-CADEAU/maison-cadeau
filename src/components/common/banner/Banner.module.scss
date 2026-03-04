@@ -1,0 +1,106 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.banner {
+  width: 100%;
+}
+
+.image_wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: $color-background;
+}
+
+.background_image {
+  object-fit: cover;
+}
+
+.overlay_content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+
+
+/* overlay */
+.banner_overlay .image_wrapper {
+  min-height: 346px;
+}
+
+.banner_overlay .title {
+  font-family: $font-literata;
+  font-style: italic;
+  font-size: $font-size-title-60;
+  font-weight: $font-weight-regular;
+  color: $color-background;
+  line-height: $line-height-title;
+  padding-bottom:$spacing-16;
+}
+
+.banner_overlay .description {
+  font-size: $font-size-body-16;
+  color: $color-background;
+  line-height: $line-height-body;
+}
+
+/* cta  */
+.banner_cta .image_wrapper {
+    min-height: 494px;
+}
+
+.banner_cta .title {
+  font-family: $font-literata;
+  font-size: $font-size-title-40;
+  font-style: italic;
+  font-weight: 400;
+  padding-bottom:$spacing-40;
+  color: $color-text;
+}
+
+.banner_cta .description {
+    font-size: $font-size-body-16;
+    color: $color-text;
+    padding-bottom:$spacing-60;
+    line-height: $line-height-body;
+}
+
+
+/* cta button */
+.cta_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 274px;
+    height: 62px;
+    padding: 0 20px;
+    color: $color-background;
+    font-size: $font-size-body-16;
+    background-color: $color-primary; 
+}
+
+/* align */
+.banner_align_left .overlay_content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.banner_align_center .overlay_content {
+  align-items: center;
+  text-align: center;
+}
+
+.banner_align_right .overlay_content {
+  align-items: flex-end;
+  text-align: right;
+}
+
+
+@media (max-width: 768px) {
+
+}

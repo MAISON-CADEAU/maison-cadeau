@@ -32,7 +32,7 @@
   font-family: $font-pretendard;
   font-size: $font-size-body-14;
   border: 1px solid $color-light-grey;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   @include transition;
 
   &::placeholder {
@@ -70,10 +70,10 @@
   font-family: $font-pretendard;
   font-size: $font-size-body-14;
   font-weight: $font-weight-semibold;
-  color: $color-white;
+  color: $color-background;
   background-color: $color-primary;
   border: none;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   cursor: pointer;
   @include transition;
 
@@ -98,7 +98,7 @@
   color: $color-text;
   background-color: $color-kakao;
   border: none;
-  border-radius: $radius-md;
+  border-radius: $radius-6;
   cursor: pointer;
   @include transition;
 

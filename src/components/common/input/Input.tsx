@@ -102,7 +102,6 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           ref={ref}
           type="checkbox"
           id={checkboxId}
-          className={styles.checkbox_input}
           {...props}
         />
         <label htmlFor={checkboxId} className={styles.checkbox_label}>

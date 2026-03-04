@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/common/button";
+import { Banner } from "@/components/common/banner";
 import { Input, Textarea, Checkbox, validateEmail, validatePassword } from "@/components/common/input";
+import { Card } from "@/components/common/card";
 import * as Icons from "@/components/common/icons";
 import styles from "./page.module.scss";
 import { Modal } from "@/components/common/modal";
+import { SwiperSection } from "@/components/common/swiper/Swiper";
 
 const iconList = [
   { name: "ArrowDownLeft", Component: Icons.ArrowDownLeftIcon },
@@ -46,6 +49,9 @@ const iconList = [
 ];
 
 export default function Home() {
+  // gender card
+  const [activeGender, setActiveGender] = useState<"female" | "male" | null>(null);
+
   const [iconSize, setIconSize] = useState(24);
   const [iconColor, setIconColor] = useState("#17171B");
   const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("dark");
@@ -133,7 +139,46 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Icons Component */}
+        {/* Banner Component - overlay 버전 */}
+          <Banner
+            layout="overlay"
+            title="Find your Gift"
+            description="선물할 상대를 생각하며 키워드를 골라보세요"
+            image={{ src: "/imgs/banner-image-overlay.png", alt: "Banner Image" }}
+            />
+
+        {/* Banner Component - cta ver.1 */}
+        <Banner
+            layout="cta"
+            title="What's your favorite"
+            description="찾아볼 필요 없어요"
+            image={{ src: "/imgs/banner-image-cta.png", alt: "Banner Image" }}
+            cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
+          />
+        {/* Banner Component - cta ver.2 */}
+          <Banner
+            layout="cta"
+            title="What's your favorite"
+            description="취향을 온전히 담아 드려요"
+            align="left"
+            cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
+          />
+
+        {/* swiper Component */}
+                  <SwiperSection
+                    text="gift"
+                    title="지금 딱 보내기 좋은 |카카오톡 선물하기 5"
+                    images={[
+                      "/imgs/swiper_1.png",
+                      "/imgs/swiper_2.png",
+                      "/imgs/swiper_3.png",
+                      "/imgs/swiper_4.png",
+                    ]}
+                    date="2024.01.01"
+                    brand="Maison Cadeau"
+                  />
+
+{/* Icons Component */}
           <section className={styles.component_section}>
             <h2 className={styles.section_title}>Icons Component</h2>
 
@@ -307,6 +352,65 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Card Component */}
+          <section className={styles.component_section}>
+            <h2 className={styles.section_title}>Card Component</h2>
+            {/* gender card */}
+            <div className={styles.card_gender_group}>
+              <Card
+                variant="gender"
+                as="button"
+                isActive={activeGender === "female"}
+                onClick={() => setActiveGender("female")}
+                title="여성"
+                icon={<Icons.FemaleIcon width={100} height={100}/>}
+              />
+              <Card
+                variant="gender"
+                as="button"
+                isActive={activeGender === "male"}
+                onClick={() => setActiveGender("male")}
+                title="남성"
+                icon={<Icons.MaleIcon width={100} height={100}/>}
+              />
+            </div>
+            {/* product card */}
+            <Card
+              variant="product"
+              as="button"
+              onClick={() => {}}
+              badge="NEW"
+              imageSrc="/imgs/product_image.png"
+              imageAlt="아누 고블렛 도자기 잔"
+              title="아누 고블렛 도자기 잔"
+              price="29,000원"
+            />
+            {/* cta card - text */}
+            <Card
+              variant="cta"
+              ctaType="text"
+              as="a"
+              link={{ href: "/about" }}
+              title="문의하기"
+              description="선물 입점 | 선물 관련 문의함입니다"
+              width={349}
+              height={160}
+            />
+            {/* cta */}
+            <Card
+              variant="cta"
+              ctaType="icon"
+              as="a"
+              link={{ href: "/", target: "_blank" }}
+              imageSrc="/imgs/profile.png"
+              imageAlt="profile"
+              title="맛있는당근님"
+              icon={<Icons.EditPencilIcon />}
+              description="내 정보 수정하기"
+              width={349}
+              height={144}
+            />
+          </section>
         </div>
       </main>
       <Footer />
