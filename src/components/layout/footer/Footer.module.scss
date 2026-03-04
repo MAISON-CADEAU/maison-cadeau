@@ -3,7 +3,7 @@
 
 .footer {
   background-color: $color-text;
-  color: $color-white;
+  color: $color-background;
 }
 
 .footer_container {
@@ -64,7 +64,7 @@
   @include transition;
 
   &:hover {
-    color: $color-white;
+    color: $color-background;
   }
 }
 

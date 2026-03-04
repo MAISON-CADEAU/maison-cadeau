@@ -1,0 +1,249 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.card {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+
+  display: grid;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.card_hover {
+  cursor: pointer;
+}
+
+.card_active {
+  background-color: #000;
+  color: #fff;
+}
+
+/* =========================
+   gender
+========================= */
+
+.card_gender {
+  width: 277px;
+  height: 277px;
+  background-color: #f5f5f5;
+  color:$color-text;
+}
+
+.gender_inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card_gender.card_hover:hover,
+.card_gender.card_active{
+  background-color: $color-secondary;
+  color: $color-background;
+}
+
+
+/* =========================
+   product
+========================= */
+
+
+.product_shell {
+  position: relative;
+  width: 353px;
+  height: 441px;
+}
+
+.product_shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: $radius-40;
+  background-color: $color-light-grey;
+  transform: translateX(14px) translateY(-2px) rotate(2deg);
+  z-index: 0;
+}
+
+.product_shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: $radius-40;
+  background-color: $color-light-grey;
+  transform: translateX(14px)translateY(7px)rotate(10deg);
+  z-index: 1;
+}
+
+
+.product_shell:hover .product_badge_text,
+.product_shell:hover .product_image_inner {
+  transform: scale(1.05);
+}
+
+.product_shell:hover .product_card {
+  transition: all $transition-normal;
+}
+
+.product_card {
+  position: relative;
+  z-index: 2;
+
+  align-content: center;
+  justify-items: center;  
+  width: 100%;
+  height: 100%;
+
+  background-color: $color-background;
+  box-shadow: $shadow-md;
+  border-radius: $radius-40;
+  text-align: center;
+}
+
+.product_badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  height: 30px;
+  padding: 4px 12px;
+  border-radius: $radius-full;
+  background-color: $color-primary;
+  margin-bottom: $spacing-8;
+  transition: all $transition-normal;
+  color: $color-background;
+}
+.product_badge_text {
+  font-size: $font-size-body-16;
+  line-height: $line-height-body;
+  transition: all $transition-normal;
+}
+
+.product_image {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.product_image_inner  {
+
+  transition: all $transition-normal;
+}
+  
+.product_info {
+  display: grid;
+  gap: 4px;
+}
+
+.product_title {
+  margin: 0;
+  font-size: $font-size-body-16;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-body;
+  color: $color-text;
+}
+
+.product_description,
+.product_price  {
+  margin: 0;
+  font-size: $font-size-body-14;
+  line-height: $line-height-body;
+  color: $color-text;
+}
+
+/* =========================
+   cta 
+========================= */
+
+.cta_inner {
+  display: flex;
+  align-items: center;
+  padding: 32px;
+  gap:$spacing-24;
+  border: 1px solid $color-light-grey;
+  border-radius: $spacing-12;
+  background-color: $color-background;
+}
+.cta_image{
+  position: relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+.cta_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $spacing-12;
+}
+
+.cta_meta{
+  display: flex;
+  align-items: center;
+  gap: $spacing-12;
+}
+.cta_title {
+  margin: 0;
+  font-size: $font-size-body-20;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-body;
+}
+.cta_icon{
+  color: $color-subtext-2;
+}
+.cta_desc {
+  font-size: $font-size-body-14;
+  line-height: $line-height-body;
+  color: $color-subtext-2;
+}
+
+.cta_inner:hover .cta_icon,
+.cta_inner:hover .cta_desc{
+  color: $color-text;
+  cursor: pointer;
+}
+
+/* =========================
+   cta - text
+========================= */
+.cta_text_inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: $spacing-32;
+  align-content: flex-end;
+  background-color: $color-background-2;
+  transition: all $transition-fast;
+  border-radius: $radius-12;
+}
+
+.cta_text_inner:hover {
+  background-color: $color-text;
+  color:$color-background;
+  cursor: pointer;
+}
+.cta_text_inner:hover .cta_text_desc{
+  color:$color-light-grey;
+}
+
+.cta_text_title {
+  margin: 0 0 6px;
+  font-size: $font-size-body-20;
+  font-weight: $font-weight-semibold;
+}
+
+.cta_text_desc {
+  margin: 0;
+  font-size: $font-size-body-14;
+  font-weight: $font-weight-regular;
+  color: $color-subtext-2;
+}
+
