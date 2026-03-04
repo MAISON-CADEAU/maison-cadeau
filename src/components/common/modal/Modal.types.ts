@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export interface IModalProps {
   isOpen: boolean;
-  variant?: "large" | "small";
+  variant?: "feed" | "default" | "alert";
   title: string;
   onClose: () => void;
   onComplete?: () => void;

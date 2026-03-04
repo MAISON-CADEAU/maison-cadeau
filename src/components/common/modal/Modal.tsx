@@ -23,7 +23,7 @@ const containerVariants = {
 
 export const Modal = ({
   isOpen,
-  variant = "small",
+  variant = "default",
   title,
   onClose,
   onComplete,
@@ -70,7 +70,7 @@ export const Modal = ({
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
           >
-            {variant === "large" ? (
+            {variant === "feed" ? (
               <div className={styles.header}>
                 <button
                   type="button"
@@ -89,12 +89,16 @@ export const Modal = ({
                   {completeLabel}
                 </button>
               </div>
+            ) : variant === "alert" ? (
+              <div className={styles.header}>
+                <h2 className={styles.title}>{title}</h2>
+              </div>
             ) : (
               <div className={styles.header}>
                 <h2 className={styles.title}>{title}</h2>
                 <button
                   type="button"
-                  className={styles.icon_button}
+                  className={styles.close_button}
                   onClick={onClose}
                   aria-label="닫기"
                 >
