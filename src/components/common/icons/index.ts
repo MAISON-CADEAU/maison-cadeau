@@ -33,6 +33,6 @@ export { TwitterIcon } from "./TwitterIcon";
 export { UserIcon } from "./UserIcon";
 export { FemaleIcon } from "./FemaleIcon";
 export { MaleIcon } from "./MaleIcon";
-export { EditPencelIcon } from "./EditePencelIcon";
+export { EditPencilIcon } from "./EditPencilIcon";
 
 export type { IIconProps } from "./Icon.types";

@@ -9,7 +9,7 @@ export interface ICardLink {
 
 type CardBase = {
   className?: string;
-  children?: ReactNode;
+  // children?: ReactNode;
   ariaLabel?: string;
   style?: CSSProperties;
   hover?: boolean;

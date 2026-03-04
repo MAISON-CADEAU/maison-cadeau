@@ -42,9 +42,9 @@ export function Card(props: ICardProps) {
         return (
           <div className={styles.product_shell}>
             <div className={styles.product_card}>
-              <span className={styles.product_badge}>
-                  <p className={styles.product_badge_text}>{props.badge}</p>
-                </span>
+              <div className={styles.product_badge}>
+                  <span className={styles.product_badge_text}>{props.badge}</span>
+                </div>
 
               <div className={styles.product_image}>
               <Image

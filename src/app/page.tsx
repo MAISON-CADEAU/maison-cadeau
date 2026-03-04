@@ -366,7 +366,7 @@ export default function Home() {
                   imageSrc="/imgs/profile.png"
                   imageAlt="profile"
                   title="맛있는당근님"
-                  icon={<Icons.EditPencelIcon />}
+                  icon={<Icons.EditPencilIcon />}
                   description="내 정보 수정하기"
                   width={349}
                   height={144}

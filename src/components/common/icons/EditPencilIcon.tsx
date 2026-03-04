@@ -1,15 +1,15 @@
 import type { SVGProps } from "react";
 
-interface IEditPencelIconProps extends SVGProps<SVGSVGElement> {
+interface IEditPencilIconProps extends SVGProps<SVGSVGElement> {
   size?: number;
   color?: string;
 }
 
-export const EditPencelIcon = ({
+export const EditPencilIcon = ({
   size = 12,
   color = "currentColor",
   ...props
-}: IEditPencelIconProps) => {
+}: IEditPencilIconProps) => {
   const clipId = "edit_clip";
 
   return (

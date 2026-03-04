@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: #fff;
+  background-color: $color-background;
 }
 
 .background_image {
@@ -38,14 +38,14 @@
   font-style: italic;
   font-size: $font-size-title-60;
   font-weight: $font-weight-regular;
-  color: $color-white;
+  color: $color-background;
   line-height: $line-height-title;
   padding-bottom:$spacing-16;
 }
 
 .banner_overlay .description {
   font-size: $font-size-body-16;
-  color: $color-white;
+  color: $color-background;
   line-height: $line-height-body;
 }
 
@@ -79,7 +79,7 @@
     width: 274px;
     height: 62px;
     padding: 0 20px;
-    color: $color-white;
+    color: $color-background;
     font-size: $font-size-body-16;
     background-color: $color-primary; 
 }
