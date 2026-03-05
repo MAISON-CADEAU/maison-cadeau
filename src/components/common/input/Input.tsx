@@ -93,7 +93,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, ITextareaProps>(
 Textarea.displayName = "Textarea";
 
 const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
-  ({  label, id, ...props }, ref) => {
+  ({ label, id, ...props }, ref) => {
     const checkboxId = id || label?.toLowerCase().replace(/\s/g, "-");
 
     return (
