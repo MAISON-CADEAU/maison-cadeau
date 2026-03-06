@@ -1,0 +1,52 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.page_title {
+  font-family: $font-literata;
+  font-size: $font-size-title-32;
+  font-weight: $font-weight-semibold;
+  font-style: italic;
+  color: $color-text;
+  padding-bottom: $spacing-16;
+  margin-bottom: $spacing-32;
+  border-bottom: 1px solid $color-light-grey;
+}
+
+.section {
+  @include flex-column;
+  gap: $spacing-32;
+  margin-bottom: $spacing-48;
+}
+
+.section_title {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  font-weight: $font-weight-semibold;
+  color: $color-subtext-2;
+  padding-bottom: $spacing-12;
+  border-bottom: 1px solid $color-light-grey;
+}
+
+.group {
+  @include flex-column;
+  gap: $spacing-16;
+}
+
+.group_label {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  font-weight: $font-weight-medium;
+  color: $color-subtext-3;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-16;
+  align-items: center;
+}
+
+.col {
+  @include flex-column;
+  gap: $spacing-16;
+}

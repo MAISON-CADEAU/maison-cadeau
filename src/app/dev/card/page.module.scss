@@ -1,0 +1,6 @@
+@use "@/styles/variables" as *;
+
+.gender_group {
+  display: flex;
+  gap: $spacing-16;
+}

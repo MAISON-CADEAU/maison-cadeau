@@ -118,6 +118,7 @@
   height: 62px;
   background-color: $color-background-2;
   border-color: $color-background-2;
+  border-radius: $radius-8;
 
   &:focus {
     border-color: $color-background-2;
@@ -138,7 +139,7 @@
   line-height: $line-height-body;
   background-color: $color-background-2;
   border: 1px solid $color-background-2;
-  border-radius: 0;
+  border-radius: $radius-8;
   resize: none;
   @include transition;
 
@@ -170,9 +171,12 @@
   width: 0;
   height: 0;
 
+
   &:checked + .checkbox_label .checkbox_box {
     background-color: $color-text;
     border-color: $color-text;
+    border-radius: $radius-4;
+    overflow: hidden;
 
     svg {
       opacity: 1;

@@ -1,0 +1,72 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.controls {
+  display: flex;
+  gap: $spacing-32;
+  padding: $spacing-24;
+  background-color: $color-background-2;
+  border-radius: $radius-6;
+  margin-bottom: $spacing-32;
+}
+
+.control {
+  @include flex-column;
+  gap: $spacing-8;
+  min-width: 200px;
+}
+
+.control_label {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+.range_input {
+  width: 100%;
+  cursor: pointer;
+}
+
+.color_input {
+  width: 60px;
+  height: 40px;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-4;
+  cursor: pointer;
+}
+
+.icon_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: $spacing-16;
+}
+
+.icon_item {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-8;
+  padding: $spacing-16;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-6;
+  background-color: $color-background;
+  @include transition;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.icon_wrapper {
+  @include flex-center;
+  min-height: 48px;
+}
+
+.icon_name {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-subtext-2;
+  text-align: center;
+  word-break: break-word;
+}

@@ -1,0 +1,37 @@
+@use "@/styles/variables" as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-8;
+  text-decoration: none;
+  transition: $transition-normal;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.card_label {
+  font-family: $font-literata;
+  font-size: $font-size-body-20;
+  font-style: italic;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.card_desc {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-subtext-3;
+}

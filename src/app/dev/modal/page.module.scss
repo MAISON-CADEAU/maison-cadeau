@@ -1,0 +1,51 @@
+@use "@/styles/variables" as *;
+
+.feed_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 12px;
+  row-gap: 20px;
+}
+
+.feed_item {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.feed_item_selected {
+  border: 2px solid $color-primary;
+}
+
+.feed_overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+.feed_check_badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_input_group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.modal_input_title {
+  font-size: $font-size-body-14;
+}
