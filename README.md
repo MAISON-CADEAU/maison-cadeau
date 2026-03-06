@@ -58,6 +58,31 @@ pnpm dev
 
 http://localhost:3000 에서 확인할 수 있습니다.
 
+## 공통 컴포넌트 확인하기
+
+개발 서버를 실행한 뒤 `/dev` 경로에서 구현된 공통 컴포넌트를 브라우저로 확인할 수 있습니다.
+
+### 실행 방법
+
+```bash
+pnpm dev
+```
+
+### 컴포넌트 목록
+
+| URL | 컴포넌트 | 설명 |
+|-----|---------|------|
+| [/dev](http://localhost:3000/dev) | 전체 목록 | 컴포넌트 라이브러리 인덱스 |
+| [/dev/button](http://localhost:3000/dev/button) | Button | icon-group, arrow, house, primary, secondary, kakao |
+| [/dev/input](http://localhost:3000/dev/input) | Input | default, grey, search, textarea, checkbox + 유효성 검사 |
+| [/dev/modal](http://localhost:3000/dev/modal) | Modal | feed, default, alert variant |
+| [/dev/card](http://localhost:3000/dev/card) | Card | gender, product, cta variant |
+| [/dev/banner](http://localhost:3000/dev/banner) | Banner | overlay, cta variant |
+| [/dev/swiper](http://localhost:3000/dev/swiper) | Swiper | 이미지 슬라이더 + 썸네일 |
+| [/dev/icons](http://localhost:3000/dev/icons) | Icons | 전체 아이콘 목록 (size/color 조절) |
+
+> `/dev` 경로는 개발 확인용이며 프로덕션 빌드에는 포함되지 않도록 관리합니다.
+
 ## 프로젝트 구조
 
 ```
@@ -65,6 +90,7 @@ src/
 ├── app/                    # Next.js App Router
 │   ├── (auth)/            # 인증 페이지 (로그인, 회원가입)
 │   ├── (main)/            # 메인 페이지들
+│   ├── dev/               # 공통 컴포넌트 테스트 페이지 (개발용)
 │   │   ├── feed/          # 선물 피드
 │   │   ├── ai-recommend/  # AI 추천
 │   │   ├── scraps/        # 스크랩
