@@ -28,6 +28,21 @@ const FEED_ITEMS = [
   { src: "/imgs/feed-12.png", alt: "feed_12" },
 ];
 
+const BUTTON_ITEMS = [
+  "집들이 선물",
+  "생일 선물",
+  "2025 연말 선물",
+  "연인과의 기념일",
+  "부모님 선물",
+  "스승의 날",
+  "직장 동료 퇴사선물",
+  "입사 축하선물",
+  "부담없이 가벼운 선물",
+  "나를 위한 선물",
+  "부모님 선물",
+]
+
+
 export default function Home() {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -143,7 +158,7 @@ export default function Home() {
         </section>
 
         <section className={styles.banner_bottom_section}>
-         <div className={styles.banner_bottom_wrapper}>
+          <div className={styles.banner_bottom_wrapper}>
             <Banner
               layout="cta"
               textColor="white"
@@ -152,7 +167,26 @@ export default function Home() {
               align="left"
               cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
             />
-         </div>
+          </div>
+        </section>
+
+        <section className={styles.selection_section}>
+          <div className={styles.selection_text}>
+            <h3 className={styles.selection_title}>What’s your Category</h3>
+            <p className={styles.selection_description}>어떠한 상황에서 선물하실 예정인가요?</p>
+          </div>
+          <div className={styles.selection_buttons}>
+            <div className={styles.selection_row}>
+              {BUTTON_ITEMS.slice(0, 6).map((item) => (
+                <Button key={item} variant="house">{item}</Button>
+              ))}
+            </div>
+            <div className={styles.selection_row}>
+              {BUTTON_ITEMS.slice(6).map((item) => (
+                <Button key={item} variant="house">{item}</Button>
+              ))}
+            </div>
+          </div>
         </section>
 
       </main>
