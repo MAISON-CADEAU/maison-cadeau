@@ -86,9 +86,26 @@
 }
 
 /* text color override */
-.text_white .title,
-.text_white .description {
-  color: $color-background;
+.text_white {
+  .image_wrapper {
+    background-color: transparent;
+  }
+
+  .overlay_content {
+    width: fit-content;
+    right: auto;
+    background-color: transparent;
+  }
+
+  .title {
+    color: $color-background;
+    padding-bottom: $spacing-24;
+  }
+
+  .description {
+    color: $color-background;
+    padding-bottom: $spacing-40;
+  }
 }
 
 /* align */
@@ -108,6 +125,4 @@
 }
 
 
-@media (max-width: 768px) {
 
-}
