@@ -23,6 +23,7 @@ export interface IBannerProps {
   cta?: IBannerCta;
   image?: IBannerImage;
 
-  layout?: BannerLayout; 
+  layout?: BannerLayout;
   align?: BannerAlign;
+  textColor?: "white";
 }

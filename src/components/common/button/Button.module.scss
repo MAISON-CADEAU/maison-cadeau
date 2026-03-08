@@ -94,6 +94,7 @@
 
 // House emoji button
 .button_house {
+  width: fit-content;
   padding: $spacing-16 $spacing-32;
   background-color: $color-background;
   border: 1px solid $color-text;
@@ -114,15 +115,19 @@
   }
 }
 
-// Primary buttons
-.button_primary {
+// Primary, white buttons
+.button_primary,
+.button_white {
   width: fit-content;
   padding: $spacing-20 73px;
-  background-color: $color-primary;
   border-radius: 0;
-  border: 1px solid transparent;
   color: $color-background;
   font-size: $font-size-body-16;
+}
+
+.button_primary {
+  border: 1px solid transparent;
+  background-color: $color-secondary;
 
   &:hover {
     background-color: transparent;
@@ -131,6 +136,15 @@
   }
 }
 
+.button_white {
+  background-color: $color-background;
+  border: 1px solid $color-background;
+
+  &:hover {
+    background-color: $color-secondary;
+    border: 1px solid transparent;
+  }
+}
 // Background buttons
 .button_background_gray {
   width: 276px;

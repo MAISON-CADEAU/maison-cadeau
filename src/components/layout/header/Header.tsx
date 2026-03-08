@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -26,8 +26,22 @@ const bannerMessages = [
 
 export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => {
   const pathname = usePathname();
-  const isDarkTheme = theme === "dark";
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (theme !== "dark") return;
+
+    const handleScroll = () => {
+      setScrolledPastHero(window.scrollY > window.innerHeight);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [theme]);
+
+  const effectiveTheme = theme === "dark" && scrolledPastHero ? "light" : theme;
+  const isDarkTheme = effectiveTheme === "dark";
 
   return (
     <>
