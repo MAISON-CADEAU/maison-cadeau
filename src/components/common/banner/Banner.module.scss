@@ -89,11 +89,13 @@
 .text_white {
   .image_wrapper {
     background-color: transparent;
+    min-height: 0;
   }
 
   .overlay_content {
+    position: relative;
+    inset: auto;
     width: fit-content;
-    right: auto;
     background-color: transparent;
   }
 
