@@ -11,11 +11,13 @@ export const Banner = ({
   image,
   layout = "overlay",
   align = "center",
+  textColor,
 }: IBannerProps) => {
   const rootClassName = [
     styles.banner,
     styles[`banner_${layout}`],
     styles[`banner_align_${align}`],
+    textColor === "white" ? styles.text_white : "",
     className,
   ]
     .filter(Boolean)
@@ -49,7 +51,7 @@ export const Banner = ({
 
           {shouldRenderCta && cta && (
             <Button
-            variant="primary"
+            variant={textColor === "white" ? "white" : "primary"}
             as="link"
             href={cta.href}
             target={cta.target}

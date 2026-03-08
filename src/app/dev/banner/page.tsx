@@ -37,6 +37,19 @@ export default function BannerDevPage() {
           cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
         />
       </div>
+
+      
+      <div className={styles.section}>
+        <h2 className={styles.section_title}>cta (align: left, textColor: white)</h2>
+        <Banner
+          layout="cta"
+          textColor="white"
+          title="What's your favorite"
+          description={`취향을 온전히 담아드려요\n 정성을 다해 추천드려요`}
+          align="left"
+          cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
+        />
+      </div>
     </>
   );
 }

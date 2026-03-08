@@ -79,7 +79,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     }
 
     // Primary buttons (4, 4-1)
-    if (variant === "primary") {
+    if (variant === "primary" || "white") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           {children}

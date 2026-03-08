@@ -27,8 +27,11 @@ export default function ButtonDevPage() {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.section_title}>4. Primary</h2>
+        <h2 className={styles.section_title}>4. Primary and White</h2>
         <Button variant="primary">바로 선물하기</Button>
+        <div>
+          <Button variant="white">바로 선물하기</Button>
+        </div>
       </div>
 
       <div className={styles.section}>
