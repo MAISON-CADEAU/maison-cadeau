@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -26,6 +26,7 @@ const bannerMessages = [
 
 export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
@@ -33,7 +34,8 @@ export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => 
     if (theme !== "dark") return;
 
     const handleScroll = () => {
-      setScrolledPastHero(window.scrollY > window.innerHeight);
+      const headerHeight = headerRef.current?.offsetHeight ?? 0;
+      setScrolledPastHero(window.scrollY >= window.innerHeight - headerHeight);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -45,7 +47,7 @@ export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => 
 
   return (
     <>
-      <header className={`${styles.header} ${isDarkTheme ? styles.dark : styles.light}`}>
+      <header ref={headerRef} className={`${styles.header} ${isDarkTheme ? styles.dark : styles.light}`}>
       {/* Top Banner */}
       <div className={styles.top_banner}>
         <button className={`${styles.banner_button} swiper-button-prev-custom`} aria-label="Previous banner">
