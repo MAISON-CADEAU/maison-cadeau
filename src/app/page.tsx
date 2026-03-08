@@ -55,7 +55,7 @@ export default function Home() {
           <Banner
             layout="cta"
             title="What's your favorite"
-            description="찾아볼 필요 없어요"
+            description={`찾아볼 필요 없이,\n취향을 온전히 담은 제품을 빠르게 드려요`}
             image={{ src: "/imgs/banner-image-cta.png", alt: "Banner Image" }}
             cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
           />
@@ -135,7 +135,7 @@ export default function Home() {
             <Banner
             layout="cta"
             title="What's your favorite"
-            description="찾아볼 필요 없이, 취향을 온전히 담은 리스트가 궁금하다면"
+            description={`찾아볼 필요 없이,\n취향을 온전히 담은 리스트가 궁금하다면`}
             align="left"
             cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
             />
@@ -146,8 +146,9 @@ export default function Home() {
          <div className={styles.banner_bottom_wrapper}>
             <Banner
               layout="cta"
+              textColor="white"
               title="What's your favorite"
-              description="찾아볼 필요 없이, 취향을 온전히 담은 리스트가 궁금하다면"
+              description={`찾아볼 필요 없이,\n취향을 온전히 담은 리스트가 궁금하다면`}
               align="left"
               cta={{ label: "바로 선물하기", href: "/", target: "_blank" }}
             />
