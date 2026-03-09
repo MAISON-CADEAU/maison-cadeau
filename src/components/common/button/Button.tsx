@@ -88,7 +88,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     }
 
     // Secondary buttons (5, 5-1)
-    if (variant === "background-gray" || variant === "background-black-sm" || variant === "background-black-lg" || variant === "background-black-xl") {
+    if (variant === "background-gray" || variant === "background-black-sm" || variant === "background-black-lg" || variant === "background-black-xl" || variant === "background-black-2xl") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
           {children}
@@ -96,7 +96,16 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       );
     }
 
-    // Kakao button (6)
+    //
+    if (variant === "border-sm" || variant === "border-lg") {
+      return (
+        <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
+          {children}
+        </button>
+      );
+    }
+
+    // Kakao button (7)
     if (variant === "kakao") {
       return (
         <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
