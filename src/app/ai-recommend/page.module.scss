@@ -1,0 +1,147 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.main {
+  min-height: 100vh;
+  padding-top: 108px;
+}
+
+/* Hero */
+.hero_section {
+  margin-bottom: 80px;
+}
+
+/* Step Section */
+.step_section {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-60;
+  margin-bottom: 120px;
+}
+
+.step_header {
+  @include flex-center;
+  gap: $spacing-20;
+}
+
+.step_indicator {
+  font-family: $font-pretendard;
+  font-size: $font-size-title-24;
+  color: $color-primary;
+  font-weight: $font-weight-bold;
+
+}
+
+.step_question {
+  font-family: $font-pretendard;
+  font-size: $font-size-title-24;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+  margin: 0;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-20;
+}
+
+.option_row {
+  display: flex;
+  gap: $spacing-20;
+}
+
+.selected {
+  background-color: $color-text !important;
+  color: $color-background !important;
+}
+
+.option_button {
+  @include button-reset;
+  padding: $spacing-16 $spacing-32;
+  border: 1px solid $color-text;
+  border-radius: 50px;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-text;
+  cursor: pointer;
+  @include transition;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &.selected {
+    background-color: $color-text;
+    color: $color-background;
+  }
+}
+
+/* Gender Step */
+.gender_options {
+  display: flex;
+  gap: 28px;
+}
+
+.gender_card {
+  @include button-reset;
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-16;
+  width: 180px;
+  height: 160px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-8;
+  cursor: pointer;
+  background-color: $color-background;
+  @include transition;
+
+  &:hover {
+    border-color: $color-text;
+  }
+
+  &.selected {
+    border: 2px solid $color-text;
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+.gender_icon {
+  font-family: $font-literata;
+  font-size: 32px;
+  font-weight: $font-weight-bold;
+  font-style: italic;
+  color: $color-text;
+}
+
+.gender_label {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-text;
+}
+
+/* Extra Button */
+.extra_button {
+  @include button-reset;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: rgba(0, 0, 0, 0.4);
+  text-decoration: underline;
+  cursor: pointer;
+  @include transition;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+/* Actions */
+.step_actions {
+  display: flex;
+  gap: $spacing-16;
+  width: 100%;
+  max-width: 540px;
+}
