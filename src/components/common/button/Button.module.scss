@@ -147,15 +147,16 @@
 }
 // Background buttons
 .button_background_gray {
-  width: 276px;
+  width: 421px;
   height: 62px;
   background-color: $color-background-2;
   border: 1px solid $color-background-2;
   border-radius: 0;
-  color: $color-text;
+  color: $color-subtext-3;
   font-size: $font-size-body-16;
 
   &:hover {
+    color: $color-text;
     background-color: $color-background;
     border: 1px solid $color-text;
   }
@@ -163,7 +164,8 @@
 
 .button_background_black_sm,
 .button_background_black_lg,
-.button_background_black_xl{ 
+.button_background_black_xl,
+.button_background_black_2xl { 
   background-color: $color-text;
   border-radius: 0;
   border: 1px solid $color-text;
@@ -188,10 +190,39 @@
 }
 
 .button_background_black_xl{
+  width: 421px;
+  height: 62px;
+}
+
+.button_background_black_2xl{
   width: 486px;
   height: 62px;
 }
 
+//Boder button
+.button_border_sm, 
+.button_border_lg {
+  background-color: $color-background;
+  border-radius: 0;
+  border: 1px solid $color-text;
+  color: $color-text;
+  font-size: $font-size-body-16;
+
+  &:hover {
+    background-color: $color-text;
+    color: $color-background;
+  }
+}
+
+.button_border_sm {
+  width: 276px;
+  height: 62px;
+}
+
+.button_border_lg {
+  width: 421px;
+  height: 62px;
+}
 // Kakao button
 .button_kakao {
   width: 368px;
