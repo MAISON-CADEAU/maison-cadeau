@@ -40,11 +40,20 @@ export default function ButtonDevPage() {
           <Button variant="background-gray">이 질문은 넘어갈래요</Button>
           <Button variant="background-black-sm">다음 질문으로</Button>
           <Button variant="background-black-xl">다음</Button>
+          <Button variant="background-black-2xl">다음</Button>
         </div>
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.section_title}>6. Kakao</h2>
+        <h2 className={styles.section_title}>6. Border</h2>
+        <div className={styles.col}>
+          <Button variant="border-sm">더 많은 선물보기</Button>
+          <Button variant="border-lg">목록으로 돌아가기기</Button>
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2 className={styles.section_title}>7. Kakao</h2>
         <Button variant="kakao">카카오 로그인</Button>
       </div>
     </>
