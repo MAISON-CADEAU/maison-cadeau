@@ -34,5 +34,6 @@ export { UserIcon } from "./UserIcon";
 export { FemaleIcon } from "./FemaleIcon";
 export { MaleIcon } from "./MaleIcon";
 export { EditPencilIcon } from "./EditPencilIcon";
+export { ReplyIcon } from "./ReplyIcon";
 
 export type { IIconProps } from "./Icon.types";
