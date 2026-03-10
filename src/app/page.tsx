@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -14,18 +15,18 @@ import "swiper/css/grid";
 import "swiper/css/navigation";
 
 const FEED_ITEMS = [
-  { src: "/imgs/feed-1.png", alt: "feed_1" },
-  { src: "/imgs/feed-2.png", alt: "feed_2" },
-  { src: "/imgs/feed-3.png", alt: "feed_3" },
-  { src: "/imgs/feed-4.png", alt: "feed_4" },
-  { src: "/imgs/feed-5.png", alt: "feed_5" },
-  { src: "/imgs/feed-6.png", alt: "feed_6" },
-  { src: "/imgs/feed-7.png", alt: "feed_7" },
-  { src: "/imgs/feed-8.png", alt: "feed_8" },
-  { src: "/imgs/feed-9.png", alt: "feed_9" },
-  { src: "/imgs/feed-10.png", alt: "feed_10" },
-  { src: "/imgs/feed-11.png", alt: "feed_11" },
-  { src: "/imgs/feed-12.png", alt: "feed_12" },
+  { id: "1", src: "/imgs/feed-1.png", alt: "feed_1" },
+  { id: "2", src: "/imgs/feed-2.png", alt: "feed_2" },
+  { id: "3", src: "/imgs/feed-3.png", alt: "feed_3" },
+  { id: "4", src: "/imgs/feed-4.png", alt: "feed_4" },
+  { id: "5", src: "/imgs/feed-5.png", alt: "feed_5" },
+  { id: "6", src: "/imgs/feed-6.png", alt: "feed_6" },
+  { id: "7", src: "/imgs/feed-7.png", alt: "feed_7" },
+  { id: "8", src: "/imgs/feed-8.png", alt: "feed_8" },
+  { id: "9", src: "/imgs/feed-9.png", alt: "feed_9" },
+  { id: "10", src: "/imgs/feed-10.png", alt: "feed_10" },
+  { id: "11", src: "/imgs/feed-11.png", alt: "feed_11" },
+  { id: "12", src: "/imgs/feed-12.png", alt: "feed_12" },
 ];
 
 const BUTTON_ITEMS = [
@@ -44,6 +45,7 @@ const BUTTON_ITEMS = [
 
 
 export default function Home() {
+  const router = useRouter();
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
@@ -128,7 +130,7 @@ export default function Home() {
             className={styles.feed_swiper}
           >
             {FEED_ITEMS.map((item, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} onClick={() => router.push(`/feed/${item.id}`)}>
                 <div className={styles.feed_card}>
                   <Image
                     src={item.src}

@@ -1,0 +1,15 @@
+@use "@/styles/variables" as *;
+
+.main {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px $spacing-40;
+}
+
+.title {
+  font-size: $font-title-md;
+}
