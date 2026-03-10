@@ -125,11 +125,12 @@
 
 /* Extra Button */
 .extra_button {
+  @include flex-center;
+  gap: $spacing-12;
   @include button-reset;
   font-family: $font-pretendard;
   font-size: $font-size-body-14;
   color: rgba(0, 0, 0, 0.4);
-  text-decoration: underline;
   cursor: pointer;
   @include transition;
 

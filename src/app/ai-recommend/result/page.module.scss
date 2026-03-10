@@ -2,9 +2,54 @@
 @use "@/styles/mixins" as *;
 
 .main {
+  margin-top: 108px;
+  @include flex-center;
   min-height: 100vh;
   background-image: url('/imgs/result-bg.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.result_section {
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  width: 854px;
+  height: 877px;
+  border-radius: $radius-40;
+  background-color: $color-background;
+}
+
+.result_title_box {
+  @include flex-column;
+  gap: $spacing-16;
+  margin-bottom: 46px;
+}
+
+.result_title {
+  font-family: $font-literata;
+  font-size: $font-size-title-16;
+  font-weight: $font-weight-regular;
+  font-style: italic;
+  color: $color-primary;
+  text-align: center;
+}
+
+.result_description{
+  font-size: $font-size-title-24;
+  font-weight:$font-weight-semibold;
+  color: $color-text;
+  text-align: center;
+}
+
+.result_contents {
+  @include flex-column;
+  gap: 62px;
+}
+
+.result_button_box {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-12;
 }

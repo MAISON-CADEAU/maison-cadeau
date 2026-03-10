@@ -12,12 +12,12 @@ export default function AiRecommendResultPage() {
       <Header theme="light" />
       <main className={styles.main}>
         <section className={styles.result_section}>
-          <div>
-            <h3>Find your Gift</h3>
-            <p>메종카도가 추천하는 제품이에요</p>
+          <div className={styles.result_title_box}>
+            <h3 className={styles.result_title}>Find your Gift</h3>
+            <p className={styles.result_description}>메종카도가 추천하는 제품이에요</p>
           </div>
 
-          <div>
+          <div className={styles.result_contents}>
             <Card
             variant="product"
             as="button"
@@ -28,7 +28,11 @@ export default function AiRecommendResultPage() {
             title="아누 고블렛 도자기 잔"
             price="29,000원"
             />
-            <Button variant="background-black-sm">선물 자세히보기</Button>
+
+            <div className={styles.result_button_box}>
+              <Button variant="background-black-sm">선물 자세히보기</Button>
+              <Button variant="icon-group" />
+            </div>
           </div>
         </section>
       </main>

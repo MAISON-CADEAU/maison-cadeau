@@ -66,7 +66,7 @@ const STEPS: {
       "반려동물 집사",
       "테크기기 덕후",
     ],
-    extra: "다른 취향이에요",
+    extra: "다른 상황이에요",
   },
   {
     step: 3,
@@ -184,7 +184,7 @@ function RecommendContent() {
           )}
 
           {currentStep.extra && (
-            <button className={styles.extra_button}>{currentStep.extra}</button>
+            <button className={styles.extra_button}><Icons.ReplyIcon/>{currentStep.extra}</button>
           )}
 
           <div className={styles.step_actions}>
