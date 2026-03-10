@@ -1,12 +1,15 @@
 "use client";
 
 import { forwardRef } from "react";
+import { useRouter } from "next/navigation";
 import { FolderPlusIcon, ShareIcon, ArrowLeftIcon, ArrowRightIcon, KakaoIcon } from "@/components/common/icons";
 import type { IButtonProps } from "./Button.types";
 import styles from "./Button.module.scss";
 
 const Button = forwardRef<HTMLButtonElement, IButtonProps>(
   ({ className, variant, children, style, ...props }, ref) => {
+    const router = useRouter();
+
     const buttonClassNames = [
       styles.button,
       styles[`button_${variant.replace(/-/g, "_")}`],
@@ -79,9 +82,13 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     }
 
     // Primary buttons (4, 4-1)
-    if (variant === "primary" || "white") {
+    if (variant === "primary" || variant === "white") {
+      const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        props.onClick?.(e);
+        router.push("/ai-recommend");
+      };
       return (
-        <button ref={ref} className={buttonClassNames} style={customStyle} {...props}>
+        <button ref={ref} className={buttonClassNames} style={customStyle} {...props} onClick={handleClick}>
           {children}
         </button>
       );
