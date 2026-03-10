@@ -140,8 +140,7 @@
 
 /* Actions */
 .step_actions {
-  display: flex;
-  gap: $spacing-16;
+  @include flex-center;
+  gap: $spacing-12;
   width: 100%;
-  max-width: 540px;
 }

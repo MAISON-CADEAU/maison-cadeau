@@ -3,5 +3,8 @@
 
 .main {
   min-height: 100vh;
-  background-color: $color-background;
+  background-image: url('/imgs/result-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

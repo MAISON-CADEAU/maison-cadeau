@@ -191,7 +191,7 @@ function RecommendContent() {
             <Button variant="background-gray" onClick={handleSkip}>
               이 질문은 넘어갈래요
             </Button>
-            <Button variant="background-black-lg" onClick={handleNext} disabled={!selectedValue}>
+            <Button variant="background-black-xl" onClick={handleNext} disabled={!selectedValue}>
               다음 질문으로
             </Button>
           </div>
