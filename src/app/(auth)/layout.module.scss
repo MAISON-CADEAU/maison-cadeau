@@ -3,35 +3,25 @@
 
 .auth_layout {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.main {
-  display: flex;
-  flex: 1;
+  height: 100vh;
 }
 
 .image_section {
   display: none;
-  position: relative;
   width: 50%;
+  background-image: url('/imgs/login-bg.png');
+  background-size: cover;
+  background-position: center;
 
   @include lg {
     display: block;
   }
 }
 
-.background_image {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-}
-
 .form_section {
   @include flex-center;
   width: 100%;
+  overflow-y: auto;
   padding: $spacing-48 $spacing-24;
   background-color: $color-background;
 

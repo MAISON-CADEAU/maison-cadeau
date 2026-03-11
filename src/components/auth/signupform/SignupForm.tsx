@@ -2,16 +2,14 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+import { Input, Checkbox } from "@/components/common/input";
 import { Button } from "@/components/common/button";
-import { Input } from "@/components/common/input";
-import { useSignup, useLogin } from "@/features/auth";
+import { useSignup } from "@/features/auth";
 import { signupSchema, type SignupFormData } from "@/lib/utils/validators";
 import styles from "./SignupForm.module.scss";
 
 export const SignupForm = () => {
   const { signup, isLoading, error } = useSignup();
-  const { loginWithKakao, isLoading: isKakaoLoading } = useLogin();
 
   const {
     register,
@@ -39,126 +37,54 @@ export const SignupForm = () => {
 
   return (
     <div className={styles.signup_container}>
-      <div className={styles.title_section}>
-        <h1 className={styles.title}>회원가입</h1>
-        <p className={styles.subtitle}>
-          센스 있는 선물 큐레이터에 오신 것을 환영합니다
-        </p>
-      </div>
-
-      <Button
-        type="button"
-        variant="kakao"
-        onClick={loginWithKakao}
-        disabled={isKakaoLoading}
-      >
-        카카오로 시작하기
-      </Button>
-
-      <div className={styles.divider}>
-        <div className={styles.divider_line}>
-          <div className={styles.divider_border} />
-        </div>
-        <div className={styles.divider_text}>
-          <span className={styles.divider_label}>또는 이메일로 가입</span>
-        </div>
-      </div>
+      <h1 className={styles.title}>JOIN US</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
-          label="이메일"
+          variant="default"
+          type="text"
+          placeholder="이름"
+          error={errors.name?.message}
+          {...register("name")}
+        />
+
+        <Input
+          variant="default"
           type="email"
-          placeholder="이메일을 입력하세요"
+          placeholder="메일"
           error={errors.email?.message}
           {...register("email")}
         />
 
         <Input
-          label="비밀번호"
+          variant="default"
           type="password"
-          placeholder="8자 이상, 영문+숫자"
+          placeholder="비밀번호"
           error={errors.password?.message}
           {...register("password")}
         />
 
-        <Input
-          label="비밀번호 확인"
-          type="password"
-          placeholder="비밀번호를 다시 입력하세요"
-          error={errors.confirmPassword?.message}
-          {...register("confirmPassword")}
-        />
-
-        <Input
-          label="이름"
-          type="text"
-          placeholder="이름을 입력하세요"
-          error={errors.name?.message}
-          {...register("name")}
-        />
-
-        <div className={styles.agreements}>
-          <label className={styles.agreement_item}>
-            <input
-              type="checkbox"
-              className={`${styles.checkbox} ${errors.termsAgreed ? styles.checkbox_error : ""}`}
-              {...register("termsAgreed")}
-            />
-            <span className={styles.agreement_text}>
-              <span className={styles.required}>*</span>{" "}
-              <Link href="/terms" className={styles.link}>
-                이용약관
-              </Link>
-              에 동의합니다
-            </span>
-          </label>
-          {errors.termsAgreed && (
-            <p className={styles.agreement_error}>{errors.termsAgreed.message}</p>
-          )}
-
-          <label className={styles.agreement_item}>
-            <input
-              type="checkbox"
-              className={`${styles.checkbox} ${errors.privacyAgreed ? styles.checkbox_error : ""}`}
-              {...register("privacyAgreed")}
-            />
-            <span className={styles.agreement_text}>
-              <span className={styles.required}>*</span>{" "}
-              <Link href="/privacy" className={styles.link}>
-                개인정보 처리방침
-              </Link>
-              에 동의합니다
-            </span>
-          </label>
+        <div className={styles.checkbox_wrapper}>
+          <Checkbox
+            label="개인정보 약관에 동의합니다"
+            {...register("privacyAgreed")}
+          />
           {errors.privacyAgreed && (
-            <p className={styles.agreement_error}>{errors.privacyAgreed.message}</p>
+            <p className={styles.error_text}>{errors.privacyAgreed.message}</p>
           )}
-
-          <label className={styles.agreement_item}>
-            <input
-              type="checkbox"
-              className={styles.checkbox}
-              {...register("marketingAgreed")}
-            />
-            <span className={styles.agreement_text}>
-              마케팅 정보 수신에 동의합니다 (선택)
-            </span>
-          </label>
         </div>
 
         {error && <p className={styles.error_message}>{error}</p>}
 
-        <Button type="submit" variant="primary" disabled={isLoading}>
-          가입하기
+        <Button
+          type="submit"
+          variant="background-black-lg"
+          disabled={isLoading}
+          style={{ width: "100%" }}
+        >
+          {isLoading ? "가입 중..." : "회원가입하기"}
         </Button>
       </form>
-
-      <div className={styles.login_section}>
-        <span className={styles.login_text}>이미 계정이 있으신가요? </span>
-        <Link href="/login" className={styles.login_link}>
-          로그인
-        </Link>
-      </div>
     </div>
   );
 };
