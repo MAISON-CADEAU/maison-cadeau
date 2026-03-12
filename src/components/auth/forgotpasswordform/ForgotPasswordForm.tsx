@@ -35,7 +35,7 @@ export const ForgotPasswordForm = () => {
       await authApi.resetPassword(data.email);
       setIsSuccess(true);
     } catch {
-      setError("이메일 전송에 실패했습니다. 다시 시도해주세요.");
+      setError("*이메일 형식이 올바르지 않습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
@@ -58,15 +58,17 @@ export const ForgotPasswordForm = () => {
       <p className={styles.subtitle}>메일로 비밀번호 재설정 링크를 보내드립니다</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Input
-          variant="default"
-          type="email"
-          placeholder="메일"
-          error={errors.email?.message}
-          {...register("email")}
-        />
+        <div className={styles.forgot_input_box}>
+          <Input
+            variant="default"
+            type="email"
+            placeholder="메일"
+            error={errors.email?.message}
+            {...register("email")}
+          />
 
-        {error && <p className={styles.error_message}>{error}</p>}
+          {error && <p className={styles.error_message}>{error}</p>}
+        </div>
 
         <Button
           type="submit"

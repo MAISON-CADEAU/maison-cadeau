@@ -5,28 +5,53 @@
   width: 100%;
   max-width: 400px;
   @include flex-column;
-  gap: $spacing-12;
 }
 
 .title {
-  font-family: $font-literata;
   font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
-  font-style: italic;
-  letter-spacing: 0.05em;
-  color: $color-primary;
   text-align: center;
-  margin-bottom: $spacing-12;
+  margin-bottom: $spacing-40;
 }
 
 .form {
   @include flex-column;
+  gap: $spacing-40;
+  margin-bottom: $spacing-12;
+}
+
+.form_input_box {
+  @include flex-column;
   gap: $spacing-12;
 }
+
 
 .error_message {
   font-family: $font-pretendard;
   font-size: $font-size-body-12;
   color: $color-red-500;
   text-align: center;
+}
+
+.link_buttons {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-24;
+  margin-top: $spacing-16;
+}
+
+.link_button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-subtext-3;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: $color-subtext-3;
+  }
 }

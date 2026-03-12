@@ -5,38 +5,46 @@
   width: 100%;
   max-width: 400px;
   @include flex-column;
-  gap: $spacing-12;
 }
 
 .title {
-  font-family: $font-literata;
   font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
-  font-style: italic;
-  letter-spacing: 0.05em;
-  color: $color-primary;
+  color: $color-text;
   text-align: center;
-  margin-bottom: $spacing-12;
+  margin-bottom: $spacing-40;
 }
 
 .form {
   @include flex-column;
+  gap: $spacing-40;
+}
+
+.signup_input_box {
+  position: relative;
+  @include flex-column;
   gap: $spacing-12;
 }
 
+
 .checkbox_wrapper {
-  @include flex-column;
-  gap: $spacing-4;
+  position: relative;
 }
 
 .error_text {
+  position: absolute;
+  bottom: -$spacing-20;
+  left: 0;
   font-family: $font-pretendard;
   font-size: $font-size-body-12;
   color: $color-red-500;
-  padding-left: $spacing-4;
 }
 
 .error_message {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
   font-family: $font-pretendard;
   font-size: $font-size-body-12;
   color: $color-red-500;

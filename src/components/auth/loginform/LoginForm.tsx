@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "@/features/auth";
@@ -9,6 +10,7 @@ import { Button } from "@/components/common/button";
 import styles from "./LoginForm.module.scss";
 
 export const LoginForm = () => {
+  const router = useRouter();
   const { login, loginWithKakao, isLoading, error } = useLogin();
 
   const {
@@ -32,23 +34,26 @@ export const LoginForm = () => {
       <h1 className={styles.title}>LOGIN</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Input
-          variant="default"
-          type="email"
-          placeholder="메일"
-          error={errors.email?.message}
-          {...register("email")}
-        />
+        <div className={styles.form_input_box}>
+          <Input
+            variant="default"
+            type="email"
+            placeholder="메일"
+            error={errors.email?.message}
+            {...register("email")}
+          />
 
-        <Input
-          variant="default"
-          type="password"
-          placeholder="비밀번호"
-          error={errors.password?.message}
-          {...register("password")}
-        />
+          <Input
+            variant="default"
+            type="password"
+            placeholder="비밀번호"
+            error={errors.password?.message}
+            {...register("password")}
+          />
 
-        {error && <p className={styles.error_message}>{error}</p>}
+          {error && <p className={styles.error_message}>{error}</p>}
+        </div>
+
 
         <Button
           type="submit"
@@ -69,6 +74,23 @@ export const LoginForm = () => {
       >
         카카오 로그인
       </Button>
+
+      <div className={styles.link_buttons}>
+        <button
+          type="button"
+          className={styles.link_button}
+          onClick={() => router.push("/signup")}
+        >
+          회원가입
+        </button>
+        <button
+          type="button"
+          className={styles.link_button}
+          onClick={() => router.push("/forgot-password")}
+        >
+          비밀번호 찾기
+        </button>
+      </div>
     </div>
   );
 };

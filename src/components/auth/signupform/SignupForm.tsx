@@ -40,41 +40,51 @@ export const SignupForm = () => {
       <h1 className={styles.title}>JOIN US</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Input
-          variant="default"
-          type="text"
-          placeholder="이름"
-          error={errors.name?.message}
-          {...register("name")}
-        />
-
-        <Input
-          variant="default"
-          type="email"
-          placeholder="메일"
-          error={errors.email?.message}
-          {...register("email")}
-        />
-
-        <Input
-          variant="default"
-          type="password"
-          placeholder="비밀번호"
-          error={errors.password?.message}
-          {...register("password")}
-        />
-
-        <div className={styles.checkbox_wrapper}>
-          <Checkbox
-            label="개인정보 약관에 동의합니다"
-            {...register("privacyAgreed")}
+        <div className={styles.signup_input_box}>
+          <Input
+            variant="default"
+            type="text"
+            placeholder="이름"
+            error={errors.name?.message}
+            {...register("name")}
           />
-          {errors.privacyAgreed && (
-            <p className={styles.error_text}>{errors.privacyAgreed.message}</p>
-          )}
-        </div>
 
-        {error && <p className={styles.error_message}>{error}</p>}
+          <Input
+            variant="default"
+            type="email"
+            placeholder="메일"
+            error={errors.email?.message}
+            {...register("email")}
+          />
+
+          <Input
+            variant="default"
+            type="password"
+            placeholder="비밀번호"
+            error={errors.password?.message}
+            {...register("password")}
+          />
+
+          <Input
+            variant="default"
+            type="password"
+            placeholder="비밀번호 확인"
+            error={errors.confirmPassword?.message}
+            {...register("confirmPassword")}
+          />
+
+          <div className={styles.checkbox_wrapper}>
+            <Checkbox
+              label="개인정보 약관에 동의합니다"
+              {...register("privacyAgreed")}
+            />
+            {errors.privacyAgreed && (
+              <p className={styles.error_text}>{errors.privacyAgreed.message}</p>
+            )}
+          </div>
+  
+          {error && <p className={styles.error_message}>{error}</p>}
+        </div>
 
         <Button
           type="submit"
