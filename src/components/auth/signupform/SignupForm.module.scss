@@ -2,8 +2,6 @@
 @use "@/styles/mixins" as *;
 
 .signup_container {
-  width: 100%;
-  max-width: 400px;
   @include flex-column;
 }
 
