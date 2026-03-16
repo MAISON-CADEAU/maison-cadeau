@@ -2,14 +2,15 @@
 @use "@/styles/mixins" as *;
 
 .inquiry_form {
-  width: 100%;
-  max-width: 37.5rem;
   @include flex-column;
-  gap: $spacing-24;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-40;
 }
 
 .header {
   @include flex-center;
+  gap: $spacing-8;
   position: relative;
 }
 
@@ -31,7 +32,7 @@
 
 .title {
   font-family: $font-pretendard;
-  font-size: $font-size-body-20;
+  font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
   color: $color-text;
   text-align: center;
@@ -39,17 +40,22 @@
 
 .description {
   font-family: $font-pretendard;
-  font-size: $font-size-body-14;
-  color: $color-subtext-2;
+  font-size: $font-size-body-16;
+  color: $color-text;
   text-align: center;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .form {
   @include flex-column;
-  gap: $spacing-16;
-  background-color: $color-white;
+  background-color: $color-background;
   border: 1px solid $color-light-grey;
   border-radius: $radius-12;
-  padding: $spacing-32;
+  padding: $spacing-40;
+  gap: $spacing-40;
+}
+
+.input_container {
+  @include flex-column;
+  gap: $spacing-20;
 }

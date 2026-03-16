@@ -3,18 +3,11 @@
 
 .main {
   min-height: 100vh;
-  padding-top: 76px;
+  padding-top: 108px;
   background-color: $color-background;
 }
 
 .container {
   width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 $spacing-24;
   @include flex-center;
-
-  @include lg {
-    padding: $spacing-48 100px;
-  }
 }
