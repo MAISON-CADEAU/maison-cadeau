@@ -1,0 +1,55 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.inquiry_form {
+  width: 100%;
+  max-width: 37.5rem;
+  @include flex-column;
+  gap: $spacing-24;
+}
+
+.header {
+  @include flex-center;
+  position: relative;
+}
+
+.back_button {
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+  font-size: $font-size-body-16;
+  color: $color-text;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+
+  &:hover {
+    color: $color-subtext-2;
+  }
+}
+
+.title {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-20;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  text-align: center;
+}
+
+.description {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-subtext-2;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.form {
+  @include flex-column;
+  gap: $spacing-16;
+  background-color: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-12;
+  padding: $spacing-32;
+}
