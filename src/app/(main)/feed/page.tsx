@@ -47,7 +47,7 @@ export default function FeedPage() {
           </div>
           <div className={styles.feed_toolbar}>
             <div className={styles.feed_controls}>
-              <div className={styles.feed_count}>12 Posts</div>
+              <div className={styles.feed_count}>{FEED_ITEMS.length} Posts</div>
               <div className={styles.feed_sort}>
                 <select className={styles.sort_select}>
                   <option value="newest">최신순</option>
