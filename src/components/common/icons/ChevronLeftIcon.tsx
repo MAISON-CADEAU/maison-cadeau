@@ -17,7 +17,7 @@ export const ChevronLeftIcon = ({
       <path
         d="M15 18L9 12L15 6"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="1"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
