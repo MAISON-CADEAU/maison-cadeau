@@ -1,17 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Input, Textarea } from "@/components/common/input";
+import { Input, Textarea, FileInput } from "@/components/common/input";
 import { Button } from "@/components/common/button";
 import styles from "./InquiryForm.module.scss";
 import { ChevronLeftIcon } from "../common";
 
 const inquirySchema = z.object({
   title: z.string().min(1, "제목을 입력해주세요"),
-  file: z.string().optional(),
   email: z.string().email("메일 형식으로 입력해주세요"),
   content: z.string().min(1, "내용을 입력해주세요"),
 });
@@ -20,6 +20,7 @@ type InquiryFormData = z.infer<typeof inquirySchema>;
 
 export const InquiryForm = () => {
   const router = useRouter();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const {
     register,
@@ -31,15 +32,16 @@ export const InquiryForm = () => {
   });
 
   const onSubmit = async (data: InquiryFormData) => {
-    console.log(data);
+    console.log(data, selectedFile);
     // TODO: API 연동
   };
 
   return (
     <div className={styles.inquiry_form}>
       <div className={styles.header}>
-        <ChevronLeftIcon width="28px" height="28px"/>
-        <h1 className={styles.title}>문의하기</h1>
+        <h1 className={styles.title}>
+          <div className={styles.title_icon}><ChevronLeftIcon width="28px" height="28px"/></div>
+          문의하기</h1>
       </div>
 
       <p className={styles.description}>
@@ -58,12 +60,10 @@ export const InquiryForm = () => {
             {...register("title")}
           />
         
-          <Input
+          <FileInput
             label="파일첨부"
-            variant="grey"
-            placeholder="게시물 올리고 싶어요"
-            error={errors.file?.message}
-            {...register("file")}
+            placeholder="파일을 선택해주세요"
+            onChange={(e) => setSelectedFile(e.target.files?.[0] ?? null)}
           />
 
           <Input

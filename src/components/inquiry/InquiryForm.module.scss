@@ -36,6 +36,13 @@
   font-weight: $font-weight-semibold;
   color: $color-text;
   text-align: center;
+  position: relative;
+}
+
+.title_icon {
+  position: absolute;
+  left: -36px;
+  top: 3px;
 }
 
 .description {
