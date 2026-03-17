@@ -55,6 +55,9 @@
   align-items: center;
   gap:$spacing-40;
 }
+.feed_count{
+  min-width:62px;
+}
 .feed_sort{
   display: flex ;
   align-items: center;

@@ -1,0 +1,52 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.main {
+  padding-top: $header-total-height;
+}
+.container{
+  background-color: $color-background-2;
+}
+.feed_container{
+  background-color: $color-background;
+
+}
+.content{
+  @include flex-column;
+  max-width: $page-width;
+  margin: 0 auto;
+  padding-bottom: 120px;
+}
+//title
+.title {
+  flex:1.5;
+  font-family: $font-literata;
+  font-size: $font-size-title-60;
+  font-weight: $font-weight-regular;
+  font-style: italic;
+  color: $color-text;
+}
+.highlight {
+  font-family: $font-luxurious;
+  font-size: $font-size-title-120;
+}
+
+// feed
+.feed_items{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-12;
+}
+.feed_item{
+  aspect-ratio: 349 / 465;
+  max-width: 349px;
+  max-height: 465px;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.feed_image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

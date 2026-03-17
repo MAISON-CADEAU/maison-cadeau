@@ -3,25 +3,12 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import styles from "./page.module.scss";
+import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@/components/common/icons/ChevronDownIcon";
 import { SearchIcon } from "@/components/common/icons/SearchIcon";
-
-const FEED_ITEMS = [
-  { id: "1", src: "/imgs/feed-1.png", alt: "feed_1" },
-  { id: "2", src: "/imgs/feed-2.png", alt: "feed_2" },
-  { id: "3", src: "/imgs/feed-3.png", alt: "feed_3" },
-  { id: "4", src: "/imgs/feed-4.png", alt: "feed_4" },
-  { id: "5", src: "/imgs/feed-5.png", alt: "feed_5" },
-  { id: "6", src: "/imgs/feed-6.png", alt: "feed_6" },
-  { id: "7", src: "/imgs/feed-7.png", alt: "feed_7" },
-  { id: "8", src: "/imgs/feed-8.png", alt: "feed_8" },
-  { id: "9", src: "/imgs/feed-9.png", alt: "feed_9" },
-  { id: "10", src: "/imgs/feed-10.png", alt: "feed_10" },
-  { id: "11", src: "/imgs/feed-11.png", alt: "feed_11" },
-  { id: "12", src: "/imgs/feed-12.png", alt: "feed_12" },
-];
-
+import { FEED_ITEMS } from "./feed.data";
 
 
 
@@ -34,6 +21,26 @@ const TABS = [
 
 export default function FeedPage() {
     const [activeTab, setActiveTab] = useState("all");
+    const router = useRouter();
+    const [sort, setSort] = useState("newest");
+    const [search, setSearch] = useState("");
+
+    const filteredItems = FEED_ITEMS.filter((item) => {
+      const matchTab = activeTab === "all" || item.category === activeTab;
+      const keyword = search.toLowerCase();
+      const matchSearch =
+        item.title.toLowerCase().includes(keyword) ||
+        item.category.toLowerCase().includes(keyword);
+      return matchTab && matchSearch;
+    });
+
+    const sortedItems = [...filteredItems].sort((a, b) => {
+      if (sort === "newest") return new Date(b.date).getTime() - new Date(a.date).getTime();
+      if (sort === "oldest") return new Date(a.date).getTime() - new Date(b.date).getTime();
+      if (sort === "most_liked") return b.likes - a.likes;
+      return 0;
+    });
+    
   return (
     <>
       <Header theme="light" />
@@ -47,9 +54,13 @@ export default function FeedPage() {
           </div>
           <div className={styles.feed_toolbar}>
             <div className={styles.feed_controls}>
-              <div className={styles.feed_count}>{FEED_ITEMS.length} Posts</div>
+              <div className={styles.feed_count}>{sortedItems.length} Posts</div>
               <div className={styles.feed_sort}>
-                <select className={styles.sort_select}>
+              <select
+                  className={styles.sort_select}
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                >
                   <option value="newest">최신순</option>
                   <option value="oldest">오래된순</option>
                   <option value="most_liked">좋아요순</option>
@@ -58,7 +69,13 @@ export default function FeedPage() {
               </div>
               <div className={styles.feed_search}>
                 <SearchIcon size={20} color="#1B1B1B" className={styles.search_icon} />
-                <input type="text" placeholder="찾고싶은 선물을 검색해보세요" className={styles.search_input} />
+                <input
+                  type="text"
+                  placeholder="찾고싶은 선물을 검색해보세요"
+                  className={styles.search_input}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
               </div>
             </div>
             <div className={styles.feed_tabs}>
@@ -76,11 +93,16 @@ export default function FeedPage() {
             </div>
           </div>
           <div className={styles.feed_container}>
-            {FEED_ITEMS.map((item) => (
-              <div key={item.id} className={styles.feed_item}>
-                <img src={item.src} alt={item.alt} className={styles.feed_image} />
-          </div>
-          ))}
+            {sortedItems.map((item) => (
+              <div
+                key={item.id}
+                className={styles.feed_item}
+                onClick={() => router.push(`/feed/${item.id}`)}
+                role="button"
+              >
+                <Image src={item.src} alt={item.alt} width={349} height={465} className={styles.feed_image} />
+              </div>
+            ))}
         </div>
         </div>
 
