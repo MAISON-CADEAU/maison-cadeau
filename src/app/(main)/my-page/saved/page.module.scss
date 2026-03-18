@@ -13,7 +13,7 @@
   margin: 0 auto;
   padding: $spacing-48 $spacing-24;
   @include flex-column;
-  gap: $spacing-32;
+  gap: $spacing-16;
 
   @include lg {
     padding: $spacing-48 100px;
@@ -27,18 +27,8 @@
   color: $color-text;
 }
 
-.content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-16;
-
-  @include lg {
-    grid-template-columns: 1fr 2fr;
-  }
-}
-
-.menu_grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: $spacing-16;
+.description {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  color: $color-subtext-2;
 }
