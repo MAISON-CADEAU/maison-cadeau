@@ -10,7 +10,7 @@ export function Card(props: ICardProps) {
 
   const rootClassName = [
     styles.card,
-    styles[`card_${variant}` as keyof typeof styles],
+    styles[`card_${variant.replace(/-/g, "_")}` as keyof typeof styles],
     hoverEnabled && styles.card_hover,
     variant === "gender" && props.isActive && styles.card_active,
     className,
@@ -38,24 +38,15 @@ export function Card(props: ICardProps) {
           </div>
         );
 
-      case "product": {
-        const shadowEnabled = props.shadow ?? true;
-        const productSizeStyle = {
-          width: props.width,
-          height: props.height,
-        };
+      case "product":
         return (
-          <div
-            className={[styles.product_shell, !shadowEnabled && styles.product_shell_no_shadow].filter(Boolean).join(" ")}
-            style={productSizeStyle}
-          >
+          <div className={styles.product_shell}>
             <div className={styles.product_card}>
               <div className={styles.product_badge}>
-                  <span className={styles.product_badge_text}>{props.badge}</span>
-                </div>
-
+                <span className={styles.product_badge_text}>{props.badge}</span>
+              </div>
               <div className={styles.product_image}>
-              <Image
+                <Image
                   src={props.imageSrc}
                   alt={props.imageAlt}
                   fill
@@ -63,7 +54,6 @@ export function Card(props: ICardProps) {
                   className={styles.product_image_inner}
                 />
               </div>
-
               <div className={styles.product_info}>
                 <span className={styles.product_title}>{props.title}</span>
                 <span className={styles.product_price}>{props.price}</span>
@@ -71,7 +61,28 @@ export function Card(props: ICardProps) {
             </div>
           </div>
         );
-      }
+
+      case "product-flat":
+        return (
+          <div className={styles.product_flat_shell}>
+            <div className={styles.product_flat_card}>
+              <div className={styles.product_flat_badge}>
+                <span className={styles.product_flat_badge_text}>{props.badge}</span>
+              </div>
+              <Image
+                src={props.imageSrc}
+                alt={props.imageAlt}
+                width={80}
+                height={107}
+                className={styles.product_flat_image}
+              />
+              <div className={styles.product_info}>
+                <span className={styles.product_title}>{props.title}</span>
+                <span className={styles.product_price}>{props.price}</span>
+              </div>
+            </div>
+          </div>
+        );
 
       case "cta":
         if (props.ctaType === "text") {

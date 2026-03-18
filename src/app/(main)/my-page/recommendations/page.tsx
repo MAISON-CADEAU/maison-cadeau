@@ -22,18 +22,18 @@ const MOCK_RECOMMENDATIONS: {
   {
     date: "26.01.23",
     products: [
-      { id: "1", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
-      { id: "2", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
-      { id: "3", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "1", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "2", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "3", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
     ],
   },
   {
     date: "26.01.14",
     products: [
-      { id: "4", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
-      { id: "5", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
-      { id: "6", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
-      { id: "7", badge: "recommand", imageSrc: "/imgs/product_image.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "4", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "5", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "6", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
+      { id: "7", badge: "recommand", imageSrc: "/imgs/product-flat.png", imageAlt: "아누 고블렛 도자기 잔", title: "아누 고블렛 도자기 잔", price: "18,000원" },
     ],
   },
 ];
@@ -67,16 +67,13 @@ export default function RecommendationsPage() {
                     <Card
                       key={product.id}
                       as="button"
-                      variant="product"
+                      variant="product-flat"
                       onClick={() => {}}
                       badge={product.badge}
                       imageSrc={product.imageSrc}
                       imageAlt={product.imageAlt}
                       title={product.title}
                       price={product.price}
-                      shadow={false}
-                      width={284}
-                      height={355}
                     />
                   ))}
                 </div>
