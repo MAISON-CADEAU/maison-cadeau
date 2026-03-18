@@ -38,9 +38,17 @@ export function Card(props: ICardProps) {
           </div>
         );
 
-      case "product":
+      case "product": {
+        const shadowEnabled = props.shadow ?? true;
+        const productSizeStyle = {
+          width: props.width,
+          height: props.height,
+        };
         return (
-          <div className={styles.product_shell}>
+          <div
+            className={[styles.product_shell, !shadowEnabled && styles.product_shell_no_shadow].filter(Boolean).join(" ")}
+            style={productSizeStyle}
+          >
             <div className={styles.product_card}>
               <div className={styles.product_badge}>
                   <span className={styles.product_badge_text}>{props.badge}</span>
@@ -63,6 +71,7 @@ export function Card(props: ICardProps) {
             </div>
           </div>
         );
+      }
 
       case "cta":
         if (props.ctaType === "text") {

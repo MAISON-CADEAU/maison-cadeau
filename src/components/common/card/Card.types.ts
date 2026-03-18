@@ -45,6 +45,9 @@ export type ProductCard = CardBase &
     imageAlt: string;
     title: string;
     price: string;
+    shadow?: boolean;
+    width?: number | string;
+    height?: number | string;
   };
 
 /**

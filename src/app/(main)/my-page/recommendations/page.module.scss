@@ -13,22 +13,57 @@
   margin: 0 auto;
   padding: $spacing-48 $spacing-24;
   @include flex-column;
-  gap: $spacing-16;
+  gap: $spacing-40;
 
   @include lg {
     padding: $spacing-48 100px;
   }
 }
 
+.page_header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-12;
+}
+
+.back_button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: $color-text;
+  @include flex-center;
+
+  &:hover {
+    color: $color-subtext-2;
+  }
+}
+
 .title {
   font-family: $font-pretendard;
-  font-size: $font-size-title-32;
+  font-size: $font-size-body-20;
   font-weight: $font-weight-semibold;
   color: $color-text;
 }
 
-.description {
+.groups {
+  @include flex-column;
+  gap: $spacing-48;
+}
+
+.group {
+  @include flex-column;
+  gap: $spacing-16;
+}
+
+.date {
   font-family: $font-pretendard;
-  font-size: $font-size-body-16;
+  font-size: $font-size-body-14;
   color: $color-subtext-2;
+}
+
+.product_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-16;
 }

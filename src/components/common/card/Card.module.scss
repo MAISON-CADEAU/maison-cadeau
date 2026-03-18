@@ -83,6 +83,16 @@
 }
 
 
+.product_shell_no_shadow::before,
+.product_shell_no_shadow::after {
+  display: none;
+}
+
+.product_shell_no_shadow .product_card {
+  box-shadow: none;
+  border: 1px solid $color-light-grey;
+}
+
 .product_shell:hover .product_badge_text,
 .product_shell:hover .product_image_inner {
   transform: scale(1.05);
