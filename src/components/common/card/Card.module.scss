@@ -260,20 +260,15 @@
 .product_flat_card {
   width: 100%;
   height: 100%;
-  display: flex;
+  padding: $spacing-20;
+  @include flex-center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-16;
   background-color: $color-background;
   border: 1px solid $color-light-grey;
-  border-radius: $radius-16;
+  border-radius: $radius-20;
+  box-shadow: 0 2px 6px 0 rgba(106, 106, 106, 0.25);
   text-align: center;
   transition: all $transition-normal;
-
-  &:hover {
-    box-shadow: $shadow-md;
-  }
 }
 
 .product_flat_badge {
@@ -283,6 +278,7 @@
   min-width: 90px;
   height: 26px;
   padding: 4px 12px;
+  margin-bottom: $spacing-8;
   border-radius: $radius-full;
   background-color: $color-primary;
   color: $color-background;
@@ -291,8 +287,21 @@
 .product_flat_badge_text {
   font-size: $font-size-body-14;
   line-height: $line-height-body;
+  transition: transform $transition-normal;
+}
+
+.product_flat_shell:hover .product_flat_badge_text,
+.product_flat_shell:hover .product_flat_image {
+  transform: scale(1.05);
+}
+
+.product_img_wrapper {
+  width: 180px;
+  height: 180px;
+  @include flex-center;
 }
 
 .product_flat_image {
   object-fit: contain;
+  transition: transform $transition-normal;
 }

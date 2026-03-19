@@ -9,15 +9,10 @@
 
 .container {
   width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 $spacing-24;
+  width: 1432px;
+  margin: 100px auto;
   @include flex-column;
-  gap: $spacing-32;
-
-  @include lg {
-    padding: $spacing-48 100px;
-  }
+  gap: $spacing-40;
 }
 
 .title {
@@ -28,17 +23,12 @@
 }
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-16;
-
-  @include lg {
-    grid-template-columns: 1fr 2fr;
-  }
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu_grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: $spacing-16;
+  gap: $spacing-12;
 }

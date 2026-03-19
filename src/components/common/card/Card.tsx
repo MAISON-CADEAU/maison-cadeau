@@ -69,13 +69,15 @@ export function Card(props: ICardProps) {
               <div className={styles.product_flat_badge}>
                 <span className={styles.product_flat_badge_text}>{props.badge}</span>
               </div>
-              <Image
-                src={props.imageSrc}
-                alt={props.imageAlt}
-                width={80}
-                height={107}
-                className={styles.product_flat_image}
-              />
+              <div className={styles.product_img_wrapper}>
+                <Image
+                  src={props.imageSrc}
+                  alt={props.imageAlt}
+                  width={80}
+                  height={107}
+                  className={styles.product_flat_image}
+                />
+              </div>
               <div className={styles.product_info}>
                 <span className={styles.product_title}>{props.title}</span>
                 <span className={styles.product_price}>{props.price}</span>

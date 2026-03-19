@@ -3,27 +3,22 @@
 
 .main {
   min-height: 100vh;
-  padding-top: 76px;
+  padding-top: 108px;
   background-color: $color-background;
 }
 
 .container {
-  width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 $spacing-24;
+  width: 1432px;
+  margin: 100px auto;
   @include flex-column;
-  gap: $spacing-40;
+  gap: 60px;
 
-  @include lg {
-    padding: $spacing-48 100px;
-  }
 }
 
 .page_header {
   display: flex;
   align-items: center;
-  gap: $spacing-12;
+  gap: $spacing-8;
 }
 
 .back_button {
@@ -41,29 +36,28 @@
 
 .title {
   font-family: $font-pretendard;
-  font-size: $font-size-body-20;
+  font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
   color: $color-text;
 }
 
 .groups {
   @include flex-column;
-  gap: $spacing-48;
+  gap: 60px;
 }
 
 .group {
   @include flex-column;
-  gap: $spacing-16;
+  gap: $spacing-20;
 }
 
 .date {
-  font-family: $font-pretendard;
-  font-size: $font-size-body-14;
+  font-size: $font-size-body-16;
   color: $color-subtext-2;
 }
 
 .product_grid {
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-16;
+  gap: $spacing-20;
 }

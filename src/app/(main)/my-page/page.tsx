@@ -36,17 +36,19 @@ export default function MyPage() {
           <h1 className={styles.title}>마이페이지</h1>
 
           <div className={styles.content}>
-            <Card
-              as="a"
-              variant="cta"
-              ctaType="icon"
-              imageSrc="/imgs/avatar-default.png"
-              imageAlt="프로필 이미지"
-              title="맛있는당근님"
-              icon={<EditPencilIcon size={14} />}
-              description="내 정보 수정하기"
-              link={{ href: "/my-page/edit" }}
-            />
+              <Card
+                as="a"
+                variant="cta"
+                ctaType="icon"
+                imageSrc="/imgs/profile.png"
+                imageAlt="프로필 이미지"
+                title="맛있는당근님"
+                icon={<EditPencilIcon size={14} />}
+                description="내 정보 수정하기"
+                link={{ href: "/my-page/edit" }}
+                width={421}
+                height={144}
+              />
 
             <div className={styles.menu_grid}>
               {MENU_CARDS.map((card) => (
@@ -58,6 +60,8 @@ export default function MyPage() {
                   title={card.title}
                   description={card.description}
                   link={{ href: card.href }}
+                  width={421}
+                  height={144}
                 />
               ))}
             </div>
