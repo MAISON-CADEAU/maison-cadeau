@@ -7,8 +7,9 @@
 }
 
 .container {
-  width: 1432px;
-  margin: 100 auto;
+  width: 100%;
+  max-width: 1432px;
+  margin: 45px auto;
   @include flex-column;
   align-items: center;
   gap: $spacing-40;
@@ -23,9 +24,21 @@
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-8;
   font-family: $font-pretendard;
   font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.back_button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  @include flex-center;
   color: $color-text;
 }
 
