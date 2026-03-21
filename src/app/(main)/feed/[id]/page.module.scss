@@ -13,9 +13,15 @@
 }
 .content{
   @include flex-column;
-  max-width: $page-width;
+  max-width: 1432px;
   margin: 0 auto;
-  padding-bottom: 120px;
+  padding-bottom: calc(120 / 1920 * 100vw);
+}
+@media (max-width: 1480px) {
+  .content{
+    padding:0 24px calc(120 / 1920 * 100vw);
+    max-width:100%;
+  }
 }
 //title
 .title {

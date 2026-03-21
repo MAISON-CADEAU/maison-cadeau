@@ -4,6 +4,7 @@ import styles from "./page.module.scss";
 import { FEED_ITEMS } from "@/app/(main)/feed/feed.data";
 import { SwiperSection } from "@/components/common/swiper";
 import Image from "next/image";
+import Link from "next/link";
 
 interface IFeedDetailPageProps {
   params: Promise<{ id: string }>;
@@ -19,7 +20,7 @@ export default async function FeedDetailPage({ params }: IFeedDetailPageProps) {
   if (!currentItem) return <div>Not Found</div>;
 
   const relatedItems = FEED_ITEMS.filter(
-    (feed) => feed.id !== currentItem.id
+    (feed) => feed.id !== currentItem.id && feed.category === currentItem.category
   );
 
   return (
@@ -43,11 +44,10 @@ export default async function FeedDetailPage({ params }: IFeedDetailPageProps) {
 
               <div className={styles.feed_items}>
                 {relatedItems.map((feed) => (
-                  <div
+                  <Link
                     key={feed.id}
+                    href={`/feed/${feed.id}`}
                     className={styles.feed_item}
-                    role="button"
-                    tabIndex={0}
                   >
                     <Image
                       src={feed.src}
@@ -56,7 +56,7 @@ export default async function FeedDetailPage({ params }: IFeedDetailPageProps) {
                       height={465}
                       className={styles.feed_image}
                     />
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
