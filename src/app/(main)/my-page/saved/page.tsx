@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Modal } from "@/components/common/modal";
 import { Input } from "@/components/common/input";
 import { Button } from "@/components/common/button";
-import { ChevronLeftIcon, CheckSmIcon } from "@/components/common/icons";
+import { ChevronLeftIcon, CheckSmIcon, EditPencilIcon, TrashIcon } from "@/components/common/icons";
 import styles from "./page.module.scss";
 
 interface Folder {
@@ -34,6 +35,8 @@ const INITIAL_FOLDERS: Folder[] = [
 ];
 
 export default function SavedPage() {
+  const router = useRouter();
+
   // 뷰 상태
   const [view, setView] = useState<"all" | "folder">("all");
   const [currentFolder, setCurrentFolder] = useState<Folder | null>(null);
@@ -154,13 +157,15 @@ export default function SavedPage() {
           {/* 페이지 헤더 */}
           <div className={styles.page_header}>
             <div className={styles.page_header_left}>
-              {view === "folder" && (
-                <button type="button" onClick={handleBackToAll} className={styles.back_button}>
-                  <ChevronLeftIcon size={20} />
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={view === "all" ? () => router.push("/my-page") : handleBackToAll}
+                className={styles.back_button}
+              >
+                <ChevronLeftIcon size={20} />
+              </button>
               <h1 className={styles.title}>
-                {view === "all" ? "나만의 게시물 모음집" : currentFolder?.name}
+                {view === "all" ? "선물 보관함" : currentFolder?.name}
               </h1>
             </div>
 
@@ -180,10 +185,12 @@ export default function SavedPage() {
                       onClick={handleDeleteClick}
                       className={`${styles.action_button} ${styles.action_button_danger}`}
                     >
+                      <TrashIcon size={14} />
                       삭제
                     </button>
                   ) : (
                     <button type="button" onClick={handleEditClick} className={styles.action_button}>
+                      <EditPencilIcon size={14} />
                       편집
                     </button>
                   )}
@@ -194,11 +201,13 @@ export default function SavedPage() {
 
           {/* 탭 */}
           <div className={styles.tabs}>
-            {view === "all" && (
-              <button type="button" className={`${styles.tab} ${styles.tab_active}`}>
-                전체 보기
-              </button>
-            )}
+            <button
+              type="button"
+              className={`${styles.tab} ${view === "all" ? styles.tab_active : ""}`}
+              onClick={handleBackToAll}
+            >
+              전체 보기
+            </button>
             {folders.map((folder) => (
               <button
                 key={folder.id}
@@ -212,12 +221,21 @@ export default function SavedPage() {
           </div>
 
           {/* 피드 그리드 */}
+          {currentFeeds.length === 0 ? (
+            <p className={styles.empty_message}>스크랩된 피드가 없습니다.</p>
+          ) : (
           <div className={styles.feed_grid}>
             {currentFeeds.map((feed) => (
               <div
                 key={feed.id}
                 className={styles.feed_item}
-                onClick={() => isEditMode && handleDeleteSelect(feed.id)}
+                onClick={() => {
+                  if (isEditMode) {
+                    handleDeleteSelect(feed.id);
+                  } else {
+                    router.push(`/feed/${feed.id}`);
+                  }
+                }}
               >
                 <Image
                   src={feed.imageSrc}
@@ -242,6 +260,7 @@ export default function SavedPage() {
               </div>
             ))}
           </div>
+          )}
         </div>
       </main>
       <Footer />
@@ -287,26 +306,36 @@ export default function SavedPage() {
         completeLabel="완료"
       >
         <div className={styles.feed_select_grid}>
-          {MOCK_SCRAPED_FEEDS.map((feed) => (
-            <div
-              key={feed.id}
-              className={`${styles.feed_select_item} ${selectedFeedIds.includes(feed.id) ? styles.feed_select_item_active : ""}`}
-              onClick={() => handleFeedSelect(feed.id)}
-            >
-              <Image
-                src={feed.imageSrc}
-                alt="피드"
-                fill
-                sizes="25vw"
-                className={styles.feed_select_image}
-              />
-              {selectedFeedIds.includes(feed.id) && (
-                <div className={styles.feed_select_check}>
-                  <CheckSmIcon size={16} color="#ffffff" />
-                </div>
-              )}
-            </div>
-          ))}
+          {MOCK_SCRAPED_FEEDS.map((feed) => {
+            const isSelected = selectedFeedIds.includes(feed.id);
+            return (
+              <div
+                key={feed.id}
+                className={`${styles.feed_select_item} ${isSelected ? styles.feed_select_item_selected : ""}`}
+                onClick={() => handleFeedSelect(feed.id)}
+              >
+                <img
+                  src={feed.imageSrc}
+                  alt="피드"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+                {isSelected && <div className={styles.feed_select_overlay} />}
+                {isSelected && (
+                  <div className={styles.feed_select_check}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2.5 7L5.5 10L11.5 4"
+                        stroke="#ffffff"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </Modal>
 
