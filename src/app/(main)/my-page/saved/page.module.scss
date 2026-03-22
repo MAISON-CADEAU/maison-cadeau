@@ -13,22 +13,219 @@
   margin: 0 auto;
   padding: $spacing-48 $spacing-24;
   @include flex-column;
-  gap: $spacing-16;
+  gap: $spacing-24;
 
   @include lg {
     padding: $spacing-48 100px;
   }
 }
 
+/* ---- 페이지 헤더 ---- */
+.page_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page_header_left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-8;
+}
+
+.back_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: $color-text;
+  padding: 0;
+}
+
 .title {
   font-family: $font-pretendard;
-  font-size: $font-size-title-32;
+  font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
   color: $color-text;
 }
 
-.description {
+.page_header_right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-16;
+}
+
+.action_button {
+  background: none;
+  border: none;
+  cursor: pointer;
   font-family: $font-pretendard;
-  font-size: $font-size-body-16;
-  color: $color-subtext-2;
+  font-size: $font-size-body-14;
+  color: $color-text;
+  padding: 0;
+
+  &:hover {
+    color: $color-subtext-2;
+  }
+}
+
+.action_button_danger {
+  color: $color-red-500;
+}
+
+/* ---- 탭 ---- */
+.tabs {
+  display: flex;
+  gap: $spacing-8;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: $spacing-8 $spacing-16;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-full;
+  background: none;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-text;
+  cursor: pointer;
+  transition: all $transition-normal;
+
+  &:hover {
+    border-color: $color-text;
+  }
+}
+
+.tab_active {
+  background-color: $color-text;
+  color: $color-background;
+  border-color: $color-text;
+}
+
+/* ---- 피드 그리드 ---- */
+.feed_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 271px);
+  gap: 20px;
+}
+
+.feed_item {
+  position: relative;
+  width: 271px;
+  height: 271px;
+  border-radius: $radius-8;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.feed_image {
+  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.feed_overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: $spacing-8;
+  z-index: 1;
+  transition: background $transition-normal;
+}
+
+.feed_overlay_selected {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.feed_checkbox {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-full;
+  border: 2px solid $color-background;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed_checkbox_checked {
+  background: $color-primary;
+  border-color: $color-primary;
+}
+
+/* ---- 모달: 새 컬렉션 ---- */
+.modal_body {
+  @include flex-column;
+  gap: $spacing-24;
+  min-width: 320px;
+}
+
+.modal_field {
+  @include flex-column;
+  gap: $spacing-8;
+}
+
+.modal_label {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+/* ---- 모달: 피드 선택 ---- */
+.feed_select_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-12;
+}
+
+.feed_select_item {
+  position: relative;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border-radius: $radius-8;
+  overflow: hidden;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.feed_select_item_active {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: $radius-8;
+  }
+}
+
+.feed_select_image {
+  object-fit: cover;
+}
+
+.feed_select_check {
+  position: absolute;
+  top: $spacing-8;
+  right: $spacing-8;
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-full;
+  background: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* ---- 모달: Alert ---- */
+.alert_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 280px;
 }
