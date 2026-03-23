@@ -172,7 +172,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={styles.selection_section}>
+        {/* <section className={styles.selection_section}>
           <div className={styles.selection_text}>
             <h3 className={styles.selection_title}>What’s your Category</h3>
             <p className={styles.selection_description}>어떠한 상황에서 선물하실 예정인가요?</p>
@@ -189,7 +189,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
       </main>
       <Footer />
