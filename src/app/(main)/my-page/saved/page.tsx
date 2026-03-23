@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/footer";
 import { Modal } from "@/components/common/modal";
 import { Input } from "@/components/common/input";
 import { Button } from "@/components/common/button";
-import { ChevronLeftIcon, CheckSmIcon, EditPencilIcon, TrashIcon } from "@/components/common/icons";
+import { ChevronLeftIcon, CheckSmIcon, EditPencilIcon, TrashIcon, PlusIcon } from "@/components/common/icons";
 import styles from "./page.module.scss";
 
 interface Folder {
@@ -54,8 +54,15 @@ export default function SavedPage() {
   const [selectedFeedIds, setSelectedFeedIds] = useState<string[]>([]);
   const [isAddingToFolder, setIsAddingToFolder] = useState(false);
 
-  // Alert 모달
+  // Alert 모달 (단순 알림)
   const [alertModal, setAlertModal] = useState({ isOpen: false, message: "" });
+
+  // Confirm 모달 (확인/취소)
+  const [confirmModal, setConfirmModal] = useState<{
+    isOpen: boolean;
+    message: string;
+    onConfirm: () => void;
+  }>({ isOpen: false, message: "", onConfirm: () => {} });
 
   const handleFolderClick = (folder: Folder) => {
     setView("folder");
@@ -91,6 +98,9 @@ export default function SavedPage() {
   };
 
   const handleFeedModalComplete = () => {
+    // 피드를 하나도 선택하지 않으면 완료 불가
+    if (selectedFeedIds.length === 0) return;
+
     if (isAddingToFolder && currentFolder) {
       const updated: Folder = {
         ...currentFolder,
@@ -124,18 +134,46 @@ export default function SavedPage() {
     setSelectedForDelete([]);
   };
 
-  const handleDeleteClick = () => {
-    if (currentFolder && selectedForDelete.length > 0) {
-      const updated: Folder = {
-        ...currentFolder,
-        feedIds: currentFolder.feedIds.filter((id) => !selectedForDelete.includes(id)),
-      };
-      setFolders((prev) => prev.map((f) => (f.id === currentFolder.id ? updated : f)));
-      setCurrentFolder(updated);
-    }
+  const handleCancelEdit = () => {
     setIsEditMode(false);
     setSelectedForDelete([]);
-    setAlertModal({ isOpen: true, message: "삭제되었습니다." });
+  };
+
+  const handleFeedDeleteClick = () => {
+    if (selectedForDelete.length === 0) return;
+    setConfirmModal({
+      isOpen: true,
+      message: "선택한 피드를 삭제하시겠어요?",
+      onConfirm: () => {
+        if (currentFolder) {
+          const updated: Folder = {
+            ...currentFolder,
+            feedIds: currentFolder.feedIds.filter((id) => !selectedForDelete.includes(id)),
+          };
+          setFolders((prev) => prev.map((f) => (f.id === currentFolder.id ? updated : f)));
+          setCurrentFolder(updated);
+        }
+        setIsEditMode(false);
+        setSelectedForDelete([]);
+        setConfirmModal({ isOpen: false, message: "", onConfirm: () => {} });
+        setAlertModal({ isOpen: true, message: "피드가 삭제되었습니다." });
+      },
+    });
+  };
+
+  const handleFolderDeleteClick = () => {
+    setConfirmModal({
+      isOpen: true,
+      message: "폴더를 삭제하시겠어요?",
+      onConfirm: () => {
+        if (currentFolder) {
+          setFolders((prev) => prev.filter((f) => f.id !== currentFolder.id));
+        }
+        setConfirmModal({ isOpen: false, message: "", onConfirm: () => {} });
+        handleBackToAll();
+        setAlertModal({ isOpen: true, message: "폴더가 삭제되었습니다." });
+      },
+    });
   };
 
   const handleDeleteSelect = (feedId: string) => {
@@ -162,7 +200,7 @@ export default function SavedPage() {
                 onClick={view === "all" ? () => router.push("/my-page") : handleBackToAll}
                 className={styles.back_button}
               >
-                <ChevronLeftIcon size={20} />
+                <ChevronLeftIcon size={28} />
               </button>
               <h1 className={styles.title}>
                 {view === "all" ? "선물 보관함" : currentFolder?.name}
@@ -172,28 +210,46 @@ export default function SavedPage() {
             <div className={styles.page_header_right}>
               {view === "all" ? (
                 <button type="button" onClick={handleNewFolderClick} className={styles.action_button}>
-                  + 폴더추가
+                  <PlusIcon size={14} />
+                  폴더추가
                 </button>
+              ) : isEditMode ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleFeedDeleteClick}
+                    disabled={selectedForDelete.length === 0}
+                    className={`${styles.action_button} ${styles.action_button_danger} ${selectedForDelete.length === 0 ? styles.action_button_disabled : ""}`}
+                  >
+                    <TrashIcon size={14} />
+                    피드 삭제
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleFolderDeleteClick}
+                    className={`${styles.action_button} ${styles.action_button_danger}`}
+                  >
+                    <TrashIcon size={14} />
+                    폴더 삭제
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCancelEdit}
+                    className={styles.action_button}
+                  >
+                    취소
+                  </button>
+                </>
               ) : (
                 <>
                   <button type="button" onClick={handleAddToFolder} className={styles.action_button}>
-                    + 추가
+                    <PlusIcon size={14} />
+                    피드 추가
                   </button>
-                  {isEditMode ? (
-                    <button
-                      type="button"
-                      onClick={handleDeleteClick}
-                      className={`${styles.action_button} ${styles.action_button_danger}`}
-                    >
-                      <TrashIcon size={14} />
-                      삭제
-                    </button>
-                  ) : (
-                    <button type="button" onClick={handleEditClick} className={styles.action_button}>
-                      <EditPencilIcon size={14} />
-                      편집
-                    </button>
-                  )}
+                  <button type="button" onClick={handleEditClick} className={styles.action_button}>
+                    <EditPencilIcon size={14} />
+                    편집
+                  </button>
                 </>
               )}
             </div>
@@ -224,42 +280,42 @@ export default function SavedPage() {
           {currentFeeds.length === 0 ? (
             <p className={styles.empty_message}>스크랩된 피드가 없습니다.</p>
           ) : (
-          <div className={styles.feed_grid}>
-            {currentFeeds.map((feed) => (
-              <div
-                key={feed.id}
-                className={styles.feed_item}
-                onClick={() => {
-                  if (isEditMode) {
-                    handleDeleteSelect(feed.id);
-                  } else {
-                    router.push(`/feed/${feed.id}`);
-                  }
-                }}
-              >
-                <Image
-                  src={feed.imageSrc}
-                  alt="스크랩 피드"
-                  width={271}
-                  height={271}
-                  className={styles.feed_image}
-                />
-                {isEditMode && (
-                  <div
-                    className={`${styles.feed_overlay} ${selectedForDelete.includes(feed.id) ? styles.feed_overlay_selected : ""}`}
-                  >
+            <div className={styles.feed_grid}>
+              {currentFeeds.map((feed) => (
+                <div
+                  key={feed.id}
+                  className={styles.feed_item}
+                  onClick={() => {
+                    if (isEditMode) {
+                      handleDeleteSelect(feed.id);
+                    } else {
+                      router.push(`/feed/${feed.id}`);
+                    }
+                  }}
+                >
+                  <Image
+                    src={feed.imageSrc}
+                    alt="스크랩 피드"
+                    width={270}
+                    height={270}
+                    className={styles.feed_image}
+                  />
+                  {isEditMode && (
                     <div
-                      className={`${styles.feed_checkbox} ${selectedForDelete.includes(feed.id) ? styles.feed_checkbox_checked : ""}`}
+                      className={`${styles.feed_overlay} ${selectedForDelete.includes(feed.id) ? styles.feed_overlay_selected : ""}`}
                     >
-                      {selectedForDelete.includes(feed.id) && (
-                        <CheckSmIcon size={16} color="#ffffff" />
-                      )}
+                      <div
+                        className={`${styles.feed_checkbox} ${selectedForDelete.includes(feed.id) ? styles.feed_checkbox_checked : ""}`}
+                      >
+                        {selectedForDelete.includes(feed.id) && (
+                          <CheckSmIcon size={16} color="#ffffff" />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </main>
@@ -336,6 +392,33 @@ export default function SavedPage() {
               </div>
             );
           })}
+        </div>
+      </Modal>
+
+      {/* Confirm 모달 (삭제 확인) */}
+      <Modal
+        isOpen={confirmModal.isOpen}
+        variant="alert"
+        title={confirmModal.message}
+        onClose={() => setConfirmModal({ isOpen: false, message: "", onConfirm: () => {} })}
+      >
+        <div className={styles.confirm_body}>
+          <Button
+            variant="background-black-2xl"
+            type="button"
+            onClick={confirmModal.onConfirm}
+            style={{ width: "100%" }}
+          >
+            삭제
+          </Button>
+          <Button
+            variant="border-lg"
+            type="button"
+            onClick={() => setConfirmModal({ isOpen: false, message: "", onConfirm: () => {} })}
+            style={{ width: "100%" }}
+          >
+            취소
+          </Button>
         </div>
       </Modal>
 

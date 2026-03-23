@@ -3,21 +3,15 @@
 
 .main {
   min-height: 100vh;
-  padding-top: 76px;
+  padding-top: 108px;
   background-color: $color-background;
 }
 
 .container {
   width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 $spacing-24;
+  width: 1432px;
+  margin: 100px auto;
   @include flex-column;
-  gap: $spacing-24;
-
-  @include lg {
-    padding: $spacing-48 100px;
-  }
 }
 
 /* ---- 페이지 헤더 ---- */
@@ -25,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 60px;
 }
 
 .page_header_left {
@@ -59,12 +54,12 @@
 .action_button {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
   font-family: $font-pretendard;
-  font-size: $font-size-body-14;
+  font-size: $font-size-body-16;
   color: $color-text;
   padding: 0;
 
@@ -82,11 +77,18 @@
   }
 }
 
+.action_button_disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* ---- 탭 ---- */
 .tabs {
   display: flex;
-  gap: $spacing-8;
+  gap: $spacing-12;
   flex-wrap: wrap;
+  margin-bottom: $spacing-24;
 }
 
 .tab {
@@ -95,7 +97,7 @@
   border-radius: $radius-full;
   background: none;
   font-family: $font-pretendard;
-  font-size: $font-size-body-14;
+  font-size: $font-size-body-16;
   color: $color-text;
   cursor: pointer;
   transition: all $transition-normal;
@@ -114,8 +116,8 @@
 /* ---- 피드 그리드 ---- */
 .feed_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 271px);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, 270px);
+  gap: $spacing-20;
 }
 
 .feed_item {
@@ -129,7 +131,7 @@
 
 .empty_message {
   font-family: $font-pretendard;
-  font-size: $font-size-body-14;
+  font-size: $font-size-body-16;
   color: $color-subtext-2;
   text-align: center;
   padding: $spacing-48 0;
@@ -230,6 +232,15 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+}
+
+/* ---- 모달: Confirm ---- */
+.confirm_body {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-8;
+  align-items: center;
+  min-width: 280px;
 }
 
 /* ---- 모달: Alert ---- */
