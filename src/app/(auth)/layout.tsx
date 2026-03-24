@@ -1,5 +1,4 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { Footer, Header } from "@/components/layout";
 import styles from "./layout.module.scss";
 
 export default function AuthLayout({
@@ -8,23 +7,13 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={styles.auth_layout}>
-      <Header theme="light" />
-      <main className={styles.main}>
-        {/* Left Image Section */}
-        <div className={styles.image_section}>
-          <div
-            className={styles.background_image}
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1539906071507-c5e9f091b3ce?q=80&w=1000&auto=format&fit=crop')`,
-            }}
-          />
-        </div>
-
-        {/* Right Form Section */}
+    <>
+      <Header theme="light"/>
+      <div className={styles.auth_layout}>
+        <div className={styles.image_section} />
         <div className={styles.form_section}>{children}</div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+      <Footer/>
+    </>
   );
 }
