@@ -35,11 +35,24 @@ AsButton & {
   };
 
 /**
- * 2) product: button or link + badge + img + title + price
+ * 2) product: button or link + badge + img + title + price (with stacked shadow)
  */
 export type ProductCard = CardBase &
   (AsLink | AsButton) & {
     variant: "product";
+    badge: string;
+    imageSrc: string;
+    imageAlt: string;
+    title: string;
+    price: string;
+  };
+
+/**
+ * 2-1) product-flat: shadow 없는 단일 카드 (284×355)
+ */
+export type FlatProductCard = CardBase &
+  (AsLink | AsButton) & {
+    variant: "product-flat";
     badge: string;
     imageSrc: string;
     imageAlt: string;
@@ -74,4 +87,4 @@ export type CtaIconCard = CardBase &
     description: string;
   };
 
-export type ICardProps = GenderCard | ProductCard | CtaTextCard | CtaIconCard;
+export type ICardProps = GenderCard | ProductCard | FlatProductCard | CtaTextCard | CtaIconCard;

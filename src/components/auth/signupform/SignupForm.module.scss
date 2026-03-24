@@ -2,149 +2,49 @@
 @use "@/styles/mixins" as *;
 
 .signup_container {
-  width: 100%;
-  max-width: 28rem;
   @include flex-column;
-  gap: $spacing-24;
-}
-
-.title_section {
-  text-align: center;
 }
 
 .title {
-  font-family: $font-literata;
   font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
-  font-style: italic;
-  color: $color-primary;
+  color: $color-text;
+  text-align: center;
+  margin-bottom: $spacing-40;
 }
 
-.subtitle {
-  margin-top: $spacing-8;
-  font-family: $font-pretendard;
-  font-size: $font-size-body-14;
-  color: $color-subtext-2;
-}
-
-// Divider
-.divider {
-  position: relative;
-}
-
-.divider_line {
-  position: absolute;
-  inset: 0;
-  @include flex-center;
-}
-
-.divider_border {
-  width: 100%;
-  border-top: 1px solid $color-light-grey;
-}
-
-.divider_text {
-  position: relative;
-  @include flex-center;
-}
-
-.divider_label {
-  padding: 0 $spacing-16;
-  font-family: $font-pretendard;
-  font-size: $font-size-body-14;
-  color: $color-subtext-3;
-  background-color: $color-background;
-}
-
-// Form
 .form {
   @include flex-column;
-  gap: $spacing-16;
+  gap: $spacing-40;
 }
 
-// Agreements
-.agreements {
+.signup_input_box {
+  position: relative;
   @include flex-column;
   gap: $spacing-12;
-  padding-top: $spacing-8;
 }
 
-.agreement_item {
-  display: flex;
-  align-items: flex-start;
-  gap: $spacing-12;
+
+.checkbox_wrapper {
+  position: relative;
 }
 
-.checkbox {
-  margin-top: 2px;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: $radius-4;
-  border: 1px solid $color-light-grey;
-  accent-color: $color-primary;
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px $color-primary;
-  }
-}
-
-.checkbox_error {
-  border-color: $color-red-500;
-}
-
-.agreement_text {
+.error_text {
+  position: absolute;
+  bottom: -$spacing-20;
+  left: 0;
   font-family: $font-pretendard;
-  font-size: $font-size-body-14;
-  color: $color-subtext-2;
-}
-
-.required {
+  font-size: $font-size-body-12;
   color: $color-red-500;
 }
 
-.link {
-  text-decoration: underline;
-}
-
-.agreement_error {
-  margin-left: $spacing-32;
-  font-family: $font-pretendard;
-  font-size: $font-size-body-14;
-  color: $color-red-500;
-}
-
-// Error
 .error_message {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
   font-family: $font-pretendard;
-  font-size: $font-size-body-14;
+  font-size: $font-size-body-12;
   color: $color-red-500;
   text-align: center;
-}
-
-// Login link
-.login_section {
-  font-family: $font-pretendard;
-  font-size: $font-size-body-14;
-  text-align: center;
-}
-
-.login_text {
-  color: $color-subtext-2;
-}
-
-.login_link {
-  font-weight: $font-weight-medium;
-  color: $color-primary;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-// Kakao button icon
-.kakao_icon {
-  margin-right: $spacing-8;
-  width: 1.25rem;
-  height: 1.25rem;
 }

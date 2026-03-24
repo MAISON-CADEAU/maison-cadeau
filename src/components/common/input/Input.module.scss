@@ -10,7 +10,7 @@
   margin-bottom: $spacing-8;
   font-family: $font-pretendard;
   font-size: $font-size-body-14;
-  font-weight: $font-weight-medium;
+  font-weight: 200;
   color: $color-subtext-2;
 }
 
@@ -156,6 +156,64 @@
     cursor: not-allowed;
     opacity: 0.5;
   }
+}
+
+// File Input
+.file_input_hidden {
+  display: none;
+}
+
+.file_input_display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 486px;
+  height: 62px;
+  padding: 0 $spacing-16;
+  background-color: $color-background-2;
+  border: 1px solid $color-background-2;
+  border-radius: $radius-8;
+  cursor: pointer;
+  @include transition;
+
+  &:hover {
+    border-color: $color-subtext-3;
+  }
+
+  &.input_error {
+    border-color: $color-primary;
+  }
+}
+
+.file_placeholder {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  font-weight: 200;
+  color: $color-subtext-3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file_name {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  font-weight: 200;
+  color: $color-text;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file_button {
+  flex-shrink: 0;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-subtext-2;
+  border: 1px solid $color-light-grey;
+  padding: $spacing-4 $spacing-8;
+  border-radius: $radius-4;
+  margin-left: $spacing-12;
 }
 
 // Checkbox

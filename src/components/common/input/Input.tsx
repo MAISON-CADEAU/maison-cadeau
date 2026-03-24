@@ -1,8 +1,8 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useRef, useState } from "react";
 import { SearchIcon, CheckSmIcon } from "@/components/common/icons";
-import type { IInputProps, ITextareaProps, ICheckboxProps } from "./Input.types";
+import type { IInputProps, ITextareaProps, ICheckboxProps, IFileInputProps } from "./Input.types";
 import styles from "./Input.module.scss";
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
@@ -118,4 +118,53 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
 
 Checkbox.displayName = "Checkbox";
 
-export { Input, Textarea, Checkbox };
+const FileInput = forwardRef<HTMLInputElement, IFileInputProps>(
+  ({ className, label, error, placeholder = "파일을 선택해주세요", id, onChange, ...props }, ref) => {
+    const [fileName, setFileName] = useState<string>("");
+    const internalRef = useRef<HTMLInputElement>(null);
+    const inputRef = (ref as React.RefObject<HTMLInputElement>) ?? internalRef;
+
+    const fileInputClassNames = [
+      styles.file_input_display,
+      error && styles.input_error,
+      className,
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      setFileName(file ? file.name : "");
+      onChange?.(e);
+    };
+
+    return (
+      <div className={styles.input_wrapper}>
+        {label && (
+          <label className={styles.label}>{label}</label>
+        )}
+        <div
+          className={fileInputClassNames}
+          onClick={() => inputRef.current?.click()}
+        >
+          <span className={fileName ? styles.file_name : styles.file_placeholder}>
+            {fileName || placeholder}
+          </span>
+          <span className={styles.file_button}>파일 선택</span>
+        </div>
+        <input
+          ref={inputRef}
+          type="file"
+          id={id}
+          className={styles.file_input_hidden}
+          onChange={handleChange}
+          {...props}
+        />
+      </div>
+    );
+  }
+);
+
+FileInput.displayName = "FileInput";
+
+export { Input, Textarea, Checkbox, FileInput };

@@ -2,30 +2,48 @@
 @use "@/styles/mixins" as *;
 
 .main {
-  min-height: 100vh;
-  padding-top: 76px;
+  padding-top: 108px;
   background-color: $color-background;
 }
 
 .container {
   width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 100px;
+  max-width: 1432px;
+  margin: 45px auto;
   @include flex-column;
+  align-items: center;
+  gap: $spacing-40;
+
+}
+
+.page_header {
+  @include flex-column;
+  align-items: center;
   gap: $spacing-24;
+  text-align: center;
 }
 
 .title {
-  font-family: $font-literata;
-  font-size: $font-size-title-40;
+  display: flex;
+  align-items: center;
+  gap: $spacing-8;
+  font-family: $font-pretendard;
+  font-size: $font-size-title-24;
   font-weight: $font-weight-semibold;
-  font-style: italic;
+  color: $color-text;
+}
+
+.back_button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  @include flex-center;
   color: $color-text;
 }
 
 .description {
   font-family: $font-pretendard;
-  font-size: $font-size-body-20;
+  font-size: $font-size-body-14;
   color: $color-subtext-2;
 }

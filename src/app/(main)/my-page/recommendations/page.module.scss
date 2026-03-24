@@ -1,0 +1,63 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.main {
+  min-height: 100vh;
+  padding-top: 108px;
+  background-color: $color-background;
+}
+
+.container {
+  width: 1432px;
+  margin: 100px auto;
+  @include flex-column;
+  gap: 60px;
+
+}
+
+.page_header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-8;
+}
+
+.back_button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: $color-text;
+  @include flex-center;
+
+  &:hover {
+    color: $color-subtext-2;
+  }
+}
+
+.title {
+  font-family: $font-pretendard;
+  font-size: $font-size-title-24;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.groups {
+  @include flex-column;
+  gap: 60px;
+}
+
+.group {
+  @include flex-column;
+  gap: $spacing-20;
+}
+
+.date {
+  font-size: $font-size-body-16;
+  color: $color-subtext-2;
+}
+
+.product_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-20;
+}

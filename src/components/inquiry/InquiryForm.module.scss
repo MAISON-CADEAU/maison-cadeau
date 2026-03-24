@@ -1,0 +1,68 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.inquiry_form {
+  @include flex-column;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-40;
+}
+
+.header {
+  @include flex-center;
+  gap: $spacing-8;
+  position: relative;
+}
+
+.back_button {
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+  font-size: $font-size-body-16;
+  color: $color-text;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+
+  &:hover {
+    color: $color-subtext-2;
+  }
+}
+
+.title {
+  font-family: $font-pretendard;
+  font-size: $font-size-title-24;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  text-align: center;
+  position: relative;
+}
+
+.title_icon {
+  position: absolute;
+  left: -36px;
+  top: 3px;
+}
+
+.description {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  color: $color-text;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.form {
+  @include flex-column;
+  background-color: $color-background;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-12;
+  padding: $spacing-40;
+  gap: $spacing-40;
+}
+
+.input_container {
+  @include flex-column;
+  gap: $spacing-20;
+}
