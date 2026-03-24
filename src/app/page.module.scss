@@ -1,32 +1,215 @@
 @use "@/styles/variables" as *;
 @use "@/styles/mixins" as *;
 
+
 .main {
   min-height: 100vh;
   background-color: $color-background;
 }
 
+.section {
+  margin-bottom: 120px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .hero_section {
+  @extend .section;
   position: relative;
   width: 100%;
   height: 100vh;
-  @include flex-center;
+  display: flex;
+  justify-content: center;
+  align-items: end;
   background-image: url('/imgs/main-bg-top.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+.hero_title_box {
+  @include flex-column
+}
+
+.hero_title_top {
+  color: $color-background;
+  font-size: $font-size-body-20;
+  font-weight: 100;
+  text-align: center;
+}
+
+.hero_title_bottom {
+  @include flex-center;
+  font-family: $font-literata;
+  font-size: 100px;
+  font-weight: 300;
+  font-style: italic;
+  color: $color-background;
+
+  span {
+    font-family: $font-luxurious;
+    font-style: normal;
+    font-size: 320px;
+    font-weight: 100;
+    line-height: 0.9;
+    margin-right: 20px;
+  }
+}
+
+// ================================
+// Section 3: Feed Swiper
+// ================================
+
+.contents_section {
+  @extend .section;
+  margin-left: 100px;
+}
+
+.contents_header {
+  @include flex-between;
+  margin-right: 100px;
+  margin-bottom: $spacing-24;
+}
+
+.contents_title {
+  font-family: $font-literata;
+  font-size: $font-size-title-60;
+  font-style: italic;
+  font-weight: 400;
+  color: $color-secondary;
+  line-height: 0.9;
+
+  span {
+    font-family: $font-luxurious;
+    font-style: normal;
+    font-size: 120px;
+    line-height: 0.9;
+    margin-right: $spacing-4;
+  }
+}
+
+.contents_nav {
+  display: flex;
+  gap: $spacing-16;
+}
+
+.feed_swiper {
+  width: 100%;
+  // 561px × 2행 + 24px row-gap = 1146px
+  height: 1146px;
+
+  // Swiper v12 Grid는 CSS Grid 기반 → row-gap 분리 가능
+  // (spaceBetween: 12 = 컬럼 gap, row-gap: 24 = 행 gap)
+  :global(.swiper-wrapper) {
+    row-gap: 24px;
+  }
+}
+
+.feed_card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: $color-background;
+    opacity: 0;
+    transition: opacity $transition-normal;
+    z-index: 1;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 0.4;
+    }
+  }
+}
+
+.feed_card_image {
+  object-fit: cover;
+  transition: transform $transition-normal;
+}
+
+.banner_top_section {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+
+  > div {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.banner_top_left {
+  background-image: url('/imgs/main-banner-1.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.hero_title {
-  font-family: $font-literata;
-  font-size: $font-size-title-40;
-  font-weight: $font-weight-regular;
-  font-style: italic;
-  color: $color-background;
-  text-align: center;
-
-  span {
-    font-family: $font-luxurious;
-    font-size: 320px;
-  }
+.banner_top_right {
+  display: flex;
+  align-items: center;
+  margin-left: 137px;
 }
+
+.banner_bottom_section {
+  @extend .section;
+  width: 100%;
+}
+
+.banner_bottom_wrapper {
+  padding: 140px 0 140px 100px;
+  background-image: url('/imgs/main-banner-2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// .selection_section {
+//   @extend .section;
+//   @include flex-column;
+//   gap: 80px;
+// }
+
+// .selection_text{    
+//   @include flex-column;
+//   justify-content: center;
+//   align-items: center;
+//   gap: $spacing-40;
+// }
+// .selection_title{
+//   font-family: $font-literata;
+//   font-size: $font-size-title-40;
+//   font-style: italic;
+//   font-weight: 400;
+//   padding-bottom:$spacing-40;
+//   color: $color-text;
+// }
+// .selection_description{
+//   font-size: $font-size-body-16;
+//   color: $color-text;
+//   padding-bottom:$spacing-60;
+//   line-height: $line-height-body;
+//   white-space: pre-line;
+// }
+
+// .selection_buttons {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   gap: 28px;
+// }
+
+// .selection_row {
+//   display: flex;
+//   gap: 28px;
+// }
