@@ -33,6 +33,16 @@ button {
   font: inherit;
 }
 
+button,
+select,
+input {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+
 img {
   max-width: 100%;
   height: auto;

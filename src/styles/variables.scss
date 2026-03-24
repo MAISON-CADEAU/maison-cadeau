@@ -21,7 +21,11 @@ $color-red-600: #dc2626;
 $color-kakao: #fee500;
 $color-kakao-hover: #fdd835;
 
-
+// ================================
+// Dimensions
+// ================================
+$page-width: 1432px;
+$page-width-wide: 1720px;
 
 // ================================
 // Typography
@@ -33,6 +37,7 @@ $font-luxurious: "Luxurious Script", cursive;
 $font-pretendard: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
 // Font Sizes - Title
+$font-size-title-120: 7.5rem; // 120px
 $font-size-title-60: 3.75rem; // 60px
 $font-size-title-40: 2.5rem; // 40px
 $font-size-title-32: 2rem; // 32px
@@ -74,6 +79,10 @@ $spacing-64: 4rem; // 64px
 $spacing-80: 5rem; // 80px
 $spacing-96: 6rem; // 96px
 $spacing-128: 8rem; // 128px
+
+$header-total-height: 108px;
+$gnb-height: 76px;
+$announcement-height: 32px;
 
 // ================================
 // Border Radius
