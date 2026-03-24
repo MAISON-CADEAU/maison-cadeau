@@ -1,0 +1,52 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.wrapper {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-20;
+}
+
+.cookie_area {
+  width: 256px;
+  height: 256px;
+  @include flex-center;
+  background-color: $color-light-grey;
+  border-radius: $radius-full;
+}
+
+.cookie_img {
+  object-fit: contain;
+  display: block;
+}
+
+/* 운세 텍스트 고정 높이 영역 — 내용 유무와 관계없이 공간 유지 */
+.fortune_area {
+  width: 280px;
+  min-height: 72px;
+  @include flex-center;
+}
+
+.fortune_paper {
+  width: 100%;
+  background-color: $color-background;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-8;
+  padding: $spacing-12 $spacing-16;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.fortune_text {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-text;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 버튼 고정 높이 영역 — 버튼 사라져도 공간 유지 */
+.button_area {
+  height: 62px;
+  @include flex-center;
+}
