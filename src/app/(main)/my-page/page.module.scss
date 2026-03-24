@@ -3,29 +3,32 @@
 
 .main {
   min-height: 100vh;
-  padding-top: 76px;
+  padding-top: 108px;
   background-color: $color-background;
 }
 
 .container {
   width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: $spacing-48 100px;
+  width: 1432px;
+  margin: 100px auto;
   @include flex-column;
-  gap: $spacing-24;
+  gap: $spacing-40;
 }
 
 .title {
-  font-family: $font-literata;
-  font-size: $font-size-title-40;
+  font-family: $font-pretendard;
+  font-size: $font-size-title-32;
   font-weight: $font-weight-semibold;
-  font-style: italic;
   color: $color-text;
 }
 
-.description {
-  font-family: $font-pretendard;
-  font-size: $font-size-body-20;
-  color: $color-subtext-2;
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-12;
 }
