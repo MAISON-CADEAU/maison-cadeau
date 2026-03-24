@@ -17,3 +17,9 @@ export interface ITextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEleme
 export interface ICheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   label?: string;
 }
+
+export interface IFileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+  label?: string;
+  error?: string;
+  placeholder?: string;
+}
