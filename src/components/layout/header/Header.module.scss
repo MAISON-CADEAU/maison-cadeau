@@ -172,6 +172,11 @@
   height: 1.25rem;
 }
 
+.profile_image {
+  border-radius: $radius-full;
+  object-fit: cover;
+}
+
 // Search Modal
 .modal_overlay {
   position: fixed;

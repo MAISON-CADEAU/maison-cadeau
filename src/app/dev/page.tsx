@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./dev.module.scss";
 import pageStyles from "./page.module.scss";
+import { DevTestSection } from "./DevTestSection";
 
 const components = [
   { href: "/dev/button", label: "Button", description: "icon-group, arrow, house, primary, secondary, kakao" },
@@ -24,6 +25,7 @@ export default function DevPage() {
           </Link>
         ))}
       </div>
+      <DevTestSection />
     </>
   );
 }

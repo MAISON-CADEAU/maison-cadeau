@@ -24,11 +24,13 @@ const bannerMessages = [
   "Limited time offer: Buy 2 Get 1 Free",
 ];
 
-export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => {
+export const Header = ({ theme = "dark", isLoggedIn = false, profileImageSrc = "/imgs/avatar-default.png" }: IHeaderProps) => {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const devLogin = typeof window !== "undefined" ? localStorage.getItem("dev_isLoggedIn") === "true" : false;
+  const effectiveIsLoggedIn = isLoggedIn || devLogin;
 
   useEffect(() => {
     if (theme !== "dark") return;
@@ -118,11 +120,21 @@ export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => 
                 <SearchIcon size={20} color={isDarkTheme ? "#ffffff" : "#1b1b1b"} />
               </button>
               <Link
-                href={isLoggedIn ? "/my-page" : "/login"}
+                href={effectiveIsLoggedIn ? "/my-page" : "/login"}
                 className={styles.icon_button}
                 aria-label="User profile"
               >
-                <UserIcon size={20} color={isDarkTheme ? "#ffffff" : "#1b1b1b"} />
+                {effectiveIsLoggedIn ? (
+                  <Image
+                    src={profileImageSrc}
+                    alt="프로필"
+                    width={28}
+                    height={28}
+                    className={styles.profile_image}
+                  />
+                ) : (
+                  <UserIcon size={20} color={isDarkTheme ? "#ffffff" : "#1b1b1b"} />
+                )}
               </Link>
             </div>
           </div>
