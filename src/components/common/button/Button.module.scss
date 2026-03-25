@@ -34,6 +34,78 @@
   }
 }
 
+.share_container {
+  position: relative;
+}
+
+.share_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+}
+
+.share_menu {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $color-background;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-12;
+  padding: $spacing-8;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  min-width: 140px;
+}
+
+.share_item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-12;
+  padding: $spacing-8 $spacing-12;
+  background: none;
+  border: none;
+  border-radius: $radius-8;
+  cursor: pointer;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-text;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: $color-background-2;
+  }
+}
+
+.scrap_toast {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $color-text;
+  color: $color-background;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  padding: $spacing-8 $spacing-16;
+  border-radius: $radius-full;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .button_icon_item {
   position: relative;
   display: flex;
