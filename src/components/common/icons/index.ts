@@ -30,6 +30,7 @@ export { ShareIcon } from "./ShareIcon";
 export { TrashIcon } from "./TrashIcon";
 export { TruckIcon } from "./TruckIcon";
 export { TwitterIcon } from "./TwitterIcon";
+export { ThreadsIcon } from "./ThreadsIcon";
 export { UserIcon } from "./UserIcon";
 export { FemaleIcon } from "./FemaleIcon";
 export { MaleIcon } from "./MaleIcon";
