@@ -48,8 +48,32 @@
   gap: 62px;
 }
 
+.result_list {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-40;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .result_button_box {
   @include flex-column;
   align-items: center;
   gap: $spacing-12;
+}
+
+.result_reason {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-subtext-2;
+  text-align: center;
+  margin-top: $spacing-8;
+}
+
+.loading {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  color: $color-subtext-2;
+  text-align: center;
+  padding: $spacing-60;
 }

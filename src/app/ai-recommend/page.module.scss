@@ -20,8 +20,15 @@
 }
 
 .step_header {
-  @include flex-center;
-  gap: $spacing-20;
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-12;
+}
+
+.multi_select_hint {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-subtext-3;
 }
 
 .step_indicator {
