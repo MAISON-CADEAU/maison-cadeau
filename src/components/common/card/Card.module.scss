@@ -62,25 +62,6 @@
   height: 441px;
 }
 
-.product_shell::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: $radius-40;
-  background-color: $color-light-grey;
-  transform: translateX(14px) translateY(-2px) rotate(2deg);
-  z-index: 0;
-}
-
-.product_shell::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: $radius-40;
-  background-color: $color-light-grey;
-  transform: translateX(14px)translateY(7px)rotate(10deg);
-  z-index: 1;
-}
 
 
 .product_shell:hover .product_badge_text,
@@ -122,7 +103,9 @@
 }
 .product_badge_text {
   font-size: $font-size-body-16;
+  font-weight: $font-weight-regular;
   line-height: $line-height-body;
+  text-transform: lowercase;
   transition: all $transition-normal;
 }
 

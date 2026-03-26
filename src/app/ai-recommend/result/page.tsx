@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCards } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Card } from "@/components/common/card";
@@ -10,6 +13,7 @@ import { useRecommendStore } from "@/store/recommendStore";
 import { createClient } from "@/lib/supabase/client";
 import { FEED_ITEMS } from "@/app/(main)/feed/feed.data";
 import styles from "./page.module.scss";
+import "swiper/css";
 
 interface RecommendedItem {
   id: string;
@@ -19,10 +23,12 @@ interface RecommendedItem {
 
 export default function AiRecommendResultPage() {
   const router = useRouter();
+  const swiperRef = useRef<SwiperType | null>(null);
   const { situation, preference, gender, budget, reset } = useRecommendStore();
   const [items, setItems] = useState<RecommendedItem[]>([]);
   const [reason, setReason] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -36,7 +42,6 @@ export default function AiRecommendResultPage() {
         setItems(data.items ?? []);
         setReason(data.reason ?? "");
 
-        // 로그인된 유저라면 히스토리 저장
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
@@ -61,7 +66,8 @@ export default function AiRecommendResultPage() {
     fetchRecommendations();
   }, [situation, preference, gender, budget]);
 
-  const getFeedItem = (id: string) => FEED_ITEMS.find((f) => f.id === id);
+  const getFeed = (id: string) => FEED_ITEMS.find((f) => f.id === id);
+  const currentItem = items[activeIndex];
 
   const handleRetry = () => {
     reset();
@@ -82,39 +88,66 @@ export default function AiRecommendResultPage() {
           {isLoading ? (
             <div className={styles.loading}>추천 선물을 찾는 중...</div>
           ) : (
-            <div className={styles.result_list}>
-              {items.map((item) => {
-                const feed = getFeedItem(item.id);
-                return (
-                  <div key={item.id} className={styles.result_contents}>
-                    <Card
-                      variant="product"
-                      as="button"
-                      onClick={() => router.push(`/feed/${item.id}`)}
-                      badge="RECOMMEND"
-                      imageSrc={feed?.src ?? "/imgs/product_image.png"}
-                      imageAlt={item.title}
-                      title={item.title}
-                      price=""
-                    />
-                    <div className={styles.result_button_box}>
-                      <Button
-                        variant="background-black-sm"
-                        onClick={() => router.push(`/feed/${item.id}`)}
+            <div className={styles.result_contents}>
+              <div className={styles.swiper_row}>
+                <Button
+                  variant="arrow-left"
+                  onClick={() => swiperRef.current?.slidePrev()}
+                />
+
+                <Swiper
+                  effect="cards"
+                  grabCursor={true}
+                  modules={[EffectCards]}
+                  onSwiper={(swiper) => { swiperRef.current = swiper; }}
+                  onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                  className="mySwiper"
+                  style={{ overflow: 'visible' }}
+                >
+                  {items.map((item) => {
+                    const feed = getFeed(item.id);
+                    return (
+                      <SwiperSlide 
+                      key={item.id}
+                      className="swiper_slide"
                       >
-                        선물 자세히보기
-                      </Button>
-                      <Button variant="icon-group" />
-                    </div>
-                  </div>
-                );
-              })}
+                        <Card
+                          variant="product"
+                          as="button"
+                          onClick={() => router.push(`/feed/${item.id}`)}
+                          badge="RECOMMEND"
+                          imageSrc={feed?.src ?? "/imgs/product_image.png"}
+                          imageAlt={item.title}
+                          title={item.title}
+                          price={feed?.price ?? ""}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+
+                <Button
+                  variant="arrow-right"
+                  onClick={() => swiperRef.current?.slideNext()}
+                />
+              </div>
+
+              <div className={styles.result_button_box}>
+                <div className={styles.action_buttons}>
+                  <Button variant="border-sm" onClick={handleRetry}>
+                    다시 추천받기
+                  </Button>
+                  <Button
+                    variant="background-black-sm"
+                    onClick={() => currentItem && router.push(`/feed/${currentItem.id}`)}
+                  >
+                    선물 자세히보기
+                  </Button>
+                </div>
+                <Button variant="icon-group" />
+              </div>
             </div>
           )}
-
-          <Button variant="background-gray" onClick={handleRetry}>
-            다시 추천받기
-          </Button>
         </section>
       </main>
       <Footer />
