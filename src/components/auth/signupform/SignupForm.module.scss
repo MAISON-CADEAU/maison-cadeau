@@ -38,6 +38,14 @@
   color: $color-red-500;
 }
 
+.confirm_message {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-subtext-2;
+  text-align: center;
+  line-height: $line-height-body;
+}
+
 .error_message {
   position: absolute;
   bottom: 2px;
