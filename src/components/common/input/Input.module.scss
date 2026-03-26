@@ -5,6 +5,23 @@
   width: 100%;
 }
 
+.input_inner {
+  position: relative;
+}
+
+.error_label {
+  position: absolute;
+  top: -9px;
+  left: $spacing-12;
+  padding: 0 $spacing-4;
+  background-color: $color-background;
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-primary;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .label {
   display: block;
   margin-bottom: $spacing-8;

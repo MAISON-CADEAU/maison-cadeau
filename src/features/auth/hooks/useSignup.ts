@@ -8,6 +8,7 @@ export function useSignup() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [needsEmailConfirm, setNeedsEmailConfirm] = useState(false)
 
   const signup = async (data: SignUpData) => {
     setIsLoading(true)
@@ -16,9 +17,8 @@ export function useSignup() {
     try {
       const result = await authApi.signUp(data)
 
-      // 이메일 확인이 필요한 경우
       if (result.user && !result.session) {
-        router.push('/login?message=이메일을 확인해주세요.')
+        setNeedsEmailConfirm(true)
       } else {
         router.push('/')
         router.refresh()
@@ -38,6 +38,7 @@ export function useSignup() {
     signup,
     isLoading,
     error,
+    needsEmailConfirm,
     clearError: () => setError(null),
   }
 }

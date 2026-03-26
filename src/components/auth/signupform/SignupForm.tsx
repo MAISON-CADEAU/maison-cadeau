@@ -9,7 +9,7 @@ import { signupSchema, type SignupFormData } from "@/lib/utils/validators";
 import styles from "./SignupForm.module.scss";
 
 export const SignupForm = () => {
-  const { signup, isLoading, error } = useSignup();
+  const { signup, isLoading, error, needsEmailConfirm } = useSignup();
 
   const {
     register,
@@ -34,6 +34,18 @@ export const SignupForm = () => {
       // 에러는 useSignup에서 처리됨
     }
   };
+
+  if (needsEmailConfirm) {
+    return (
+      <div className={styles.signup_container}>
+        <h1 className={styles.title}>JOIN US</h1>
+        <p className={styles.confirm_message}>
+          입력하신 이메일로 인증 링크를 보내드렸습니다.<br />
+          이메일에서 인증을 완료해야 회원가입이 완료됩니다.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.signup_container}>
@@ -75,7 +87,17 @@ export const SignupForm = () => {
 
           <div className={styles.checkbox_wrapper}>
             <Checkbox
-              label="개인정보 약관에 동의합니다"
+              label="이용약관에 동의합니다"
+              {...register("termsAgreed")}
+            />
+            {errors.termsAgreed && (
+              <p className={styles.error_text}>{errors.termsAgreed.message}</p>
+            )}
+          </div>
+
+          <div className={styles.checkbox_wrapper}>
+            <Checkbox
+              label="개인정보 처리방침에 동의합니다"
               {...register("privacyAgreed")}
             />
             {errors.privacyAgreed && (

@@ -28,7 +28,10 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
             {label}
           </label>
         )}
-        <div style={{ position: "relative" }}>
+        <div className={styles.input_inner}>
+          {error && (
+            <span className={styles.error_label}>{error}</span>
+          )}
           {variant === "search" && (
             <div className={styles.search_icon}>
               <SearchIcon size={20}  />
