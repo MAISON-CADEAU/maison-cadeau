@@ -16,15 +16,17 @@
   align-items: center;
   justify-content: center;
   width: 854px;
-  height: 877px;
+  min-height: 877px;
   border-radius: $radius-40;
   background-color: $color-background;
+  padding: $spacing-60 $spacing-48;
+  gap: $spacing-40;
 }
 
 .result_title_box {
   @include flex-column;
   gap: $spacing-16;
-  margin-bottom: 46px;
+  align-items: center;
 }
 
 .result_title {
@@ -36,20 +38,51 @@
   text-align: center;
 }
 
-.result_description{
+.result_description {
   font-size: $font-size-title-24;
-  font-weight:$font-weight-semibold;
+  font-weight: $font-weight-semibold;
   color: $color-text;
+  text-align: center;
+}
+
+.result_reason {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  color: $color-subtext-2;
   text-align: center;
 }
 
 .result_contents {
   @include flex-column;
-  gap: 62px;
+  align-items: center;
+  gap: $spacing-40;
+  width: 100%;
 }
+
+.swiper_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-48;
+}
+
 
 .result_button_box {
   @include flex-column;
   align-items: center;
+  gap: $spacing-16;
+}
+
+.action_buttons {
+  display: flex;
   gap: $spacing-12;
+  align-items: center;
+}
+
+.loading {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-16;
+  color: $color-subtext-2;
+  text-align: center;
+  padding: $spacing-60;
 }

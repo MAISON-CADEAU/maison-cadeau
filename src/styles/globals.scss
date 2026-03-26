@@ -53,6 +53,25 @@ ol {
   list-style: none;
 }
 
+// Swiper EffectCards (flattened from swiper/css/effect-cards which uses CSS nesting)
+.mySwiper {
+  width: 353px;
+  height: 441px;
+}
+
+.swiper.swiper-cards {
+  overflow: visible;
+}
+
+.swiper-cards .swiper-slide {
+  transform-origin: center bottom;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: $spacing-40;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+}
+
 // Utility classes
 .visually_hidden {
   position: absolute;
