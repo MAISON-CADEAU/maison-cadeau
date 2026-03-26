@@ -1,4 +1,5 @@
 export interface ISwiperSectionProps {
+  id: string;
   text: React.ReactNode;
   title: string;
   images: string[];

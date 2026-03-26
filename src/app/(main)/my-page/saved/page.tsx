@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Header } from "@/components/layout/header";
@@ -9,6 +9,8 @@ import { Modal } from "@/components/common/modal";
 import { Input } from "@/components/common/input";
 import { Button } from "@/components/common/button";
 import { ChevronLeftIcon, CheckSmIcon, EditPencilIcon, TrashIcon, PlusIcon } from "@/components/common/icons";
+import { createClient } from "@/lib/supabase/client";
+import { FEED_ITEMS } from "@/app/(main)/feed/feed.data";
 import styles from "./page.module.scss";
 
 interface Folder {
@@ -17,22 +19,11 @@ interface Folder {
   feedIds: string[];
 }
 
-// TODO: Supabase 연동 시 실제 사용자 스크랩 데이터로 대체
-const MOCK_SCRAPED_FEEDS = [
-  { id: "1", imageSrc: "/imgs/scraped-1.png" },
-  { id: "2", imageSrc: "/imgs/scraped-2.png" },
-  { id: "3", imageSrc: "/imgs/scraped-3.png" },
-  { id: "4", imageSrc: "/imgs/scraped-1.png" },
-  { id: "5", imageSrc: "/imgs/scraped-2.png" },
-  { id: "6", imageSrc: "/imgs/scraped-3.png" },
-  { id: "7", imageSrc: "/imgs/scraped-1.png" },
-  { id: "8", imageSrc: "/imgs/scraped-2.png" },
-];
-
-const INITIAL_FOLDERS: Folder[] = [
-  { id: "1", name: "생일 선물 모음", feedIds: ["1", "2"] },
-  { id: "2", name: "2025 연말 선물", feedIds: ["3"] },
-];
+interface ScrapFeed {
+  id: string;
+  imageSrc: string;
+  scrapId: string;
+}
 
 export default function SavedPage() {
   const router = useRouter();
@@ -41,8 +32,51 @@ export default function SavedPage() {
   const [view, setView] = useState<"all" | "folder">("all");
   const [currentFolder, setCurrentFolder] = useState<Folder | null>(null);
 
+  // 스크랩 데이터
+  const [scrapFeeds, setScrapFeeds] = useState<ScrapFeed[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
+
   // 폴더 목록
-  const [folders, setFolders] = useState<Folder[]>(INITIAL_FOLDERS);
+  const [folders, setFolders] = useState<Folder[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setIsDataLoading(false); return; }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const sb = supabase as any;
+      const [{ data: scraps }, { data: collections }] = await Promise.all([
+        sb.from("scraps").select("*").eq("user_id", user.id).order("created_at", { ascending: false }),
+        sb.from("collections").select("*").eq("user_id", user.id).order("created_at", { ascending: false }),
+      ]);
+
+      if (scraps) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const feeds: ScrapFeed[] = scraps.map((s: any) => {
+          const feed = FEED_ITEMS.find((f) => f.id === s.gift_id);
+          return { id: s.gift_id, imageSrc: feed?.src ?? "/imgs/product_image.png", scrapId: s.id };
+        });
+        setScrapFeeds(feeds);
+      }
+
+      if (collections && scraps) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const folderList: Folder[] = (collections as any[]).map((c: any) => ({
+          id: c.id,
+          name: c.name,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          feedIds: (scraps as any[]).filter((s: any) => s.collection_id === c.id).map((s: any) => s.gift_id),
+        }));
+        setFolders(folderList);
+      }
+
+      setIsDataLoading(false);
+    };
+
+    fetchData();
+  }, []);
 
   // 편집 모드
   const [isEditMode, setIsEditMode] = useState(false);
@@ -97,11 +131,21 @@ export default function SavedPage() {
     );
   };
 
-  const handleFeedModalComplete = () => {
-    // 피드를 하나도 선택하지 않으면 완료 불가
+  const handleFeedModalComplete = async () => {
     if (selectedFeedIds.length === 0) return;
 
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sb = supabase as any;
+
     if (isAddingToFolder && currentFolder) {
+      await sb.from("scraps")
+        .update({ collection_id: currentFolder.id })
+        .eq("user_id", user.id)
+        .in("gift_id", selectedFeedIds);
+
       const updated: Folder = {
         ...currentFolder,
         feedIds: [...new Set([...currentFolder.feedIds, ...selectedFeedIds])],
@@ -112,12 +156,20 @@ export default function SavedPage() {
       setModalStep(0);
       setAlertModal({ isOpen: true, message: "피드가 추가되었습니다." });
     } else {
-      const newFolder: Folder = {
-        id: Date.now().toString(),
-        name: newFolderName,
-        feedIds: selectedFeedIds,
-      };
-      setFolders((prev) => [...prev, newFolder]);
+      const { data: newCol } = await sb.from("collections")
+        .insert({ user_id: user.id, name: newFolderName })
+        .select()
+        .single();
+
+      if (newCol) {
+        await sb.from("scraps")
+          .update({ collection_id: newCol.id })
+          .eq("user_id", user.id)
+          .in("gift_id", selectedFeedIds);
+
+        const newFolder: Folder = { id: newCol.id, name: newFolderName, feedIds: selectedFeedIds };
+        setFolders((prev) => [...prev, newFolder]);
+      }
       setModalStep(0);
       setAlertModal({ isOpen: true, message: "컬렉션이 생성되었습니다." });
     }
@@ -141,22 +193,38 @@ export default function SavedPage() {
 
   const handleFeedDeleteClick = () => {
     if (selectedForDelete.length === 0) return;
+    const isInFolder = view === "folder" && currentFolder;
     setConfirmModal({
       isOpen: true,
-      message: "선택한 피드를 삭제하시겠어요?",
-      onConfirm: () => {
-        if (currentFolder) {
-          const updated: Folder = {
-            ...currentFolder,
-            feedIds: currentFolder.feedIds.filter((id) => !selectedForDelete.includes(id)),
-          };
-          setFolders((prev) => prev.map((f) => (f.id === currentFolder.id ? updated : f)));
-          setCurrentFolder(updated);
+      message: isInFolder ? "선택한 피드를 폴더에서 제거하시겠어요?" : "선택한 피드를 삭제하시겠어요?",
+      onConfirm: async () => {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const sb = supabase as any;
+        if (user) {
+          if (isInFolder) {
+            // 폴더 뷰: scraps에서 collection_id만 null로 업데이트 (스크랩은 유지)
+            await sb.from("scraps")
+              .update({ collection_id: null })
+              .eq("user_id", user.id)
+              .in("gift_id", selectedForDelete);
+            const updated: Folder = {
+              ...currentFolder,
+              feedIds: currentFolder.feedIds.filter((id) => !selectedForDelete.includes(id)),
+            };
+            setFolders((prev) => prev.map((f) => (f.id === currentFolder.id ? updated : f)));
+            setCurrentFolder(updated);
+          } else {
+            // 전체보기: scraps 완전 삭제
+            await sb.from("scraps").delete().eq("user_id", user.id).in("gift_id", selectedForDelete);
+            setScrapFeeds((prev) => prev.filter((f) => !selectedForDelete.includes(f.id)));
+          }
         }
         setIsEditMode(false);
         setSelectedForDelete([]);
         setConfirmModal({ isOpen: false, message: "", onConfirm: () => {} });
-        setAlertModal({ isOpen: true, message: "피드가 삭제되었습니다." });
+        setAlertModal({ isOpen: true, message: isInFolder ? "폴더에서 제거되었습니다." : "피드가 삭제되었습니다." });
       },
     });
   };
@@ -165,8 +233,17 @@ export default function SavedPage() {
     setConfirmModal({
       isOpen: true,
       message: "폴더를 삭제하시겠어요?",
-      onConfirm: () => {
-        if (currentFolder) {
+      onConfirm: async () => {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const sb = supabase as any;
+        if (user && currentFolder) {
+          await sb.from("scraps")
+            .update({ collection_id: null })
+            .eq("user_id", user.id)
+            .eq("collection_id", currentFolder.id);
+          await sb.from("collections").delete().eq("id", currentFolder.id);
           setFolders((prev) => prev.filter((f) => f.id !== currentFolder.id));
         }
         setConfirmModal({ isOpen: false, message: "", onConfirm: () => {} });
@@ -184,8 +261,8 @@ export default function SavedPage() {
 
   const currentFeeds =
     view === "all"
-      ? MOCK_SCRAPED_FEEDS
-      : MOCK_SCRAPED_FEEDS.filter((f) => currentFolder?.feedIds.includes(f.id));
+      ? scrapFeeds
+      : scrapFeeds.filter((f) => currentFolder?.feedIds.includes(f.id));
 
   return (
     <>
@@ -277,7 +354,9 @@ export default function SavedPage() {
           </div>
 
           {/* 피드 그리드 */}
-          {currentFeeds.length === 0 ? (
+          {isDataLoading ? (
+            <p className={styles.empty_message}>불러오는 중...</p>
+          ) : currentFeeds.length === 0 ? (
             <p className={styles.empty_message}>스크랩된 피드가 없습니다.</p>
           ) : (
             <div className={styles.feed_grid}>
@@ -362,7 +441,7 @@ export default function SavedPage() {
         completeLabel="완료"
       >
         <div className={styles.feed_select_grid}>
-          {MOCK_SCRAPED_FEEDS.map((feed) => {
+          {scrapFeeds.map((feed) => {
             const isSelected = selectedFeedIds.includes(feed.id);
             return (
               <div

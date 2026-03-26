@@ -16,6 +16,7 @@ import { Button } from "../button";
 
 
 export function SwiperSection({
+  id,
   text,
   title,
   images,
@@ -151,7 +152,7 @@ export function SwiperSection({
 
           {/* right */}
           <div className={styles.actions}>
-            <Button variant="icon-group" type="button" className={styles.btn_save}/>
+            <Button variant="icon-group" type="button" className={styles.btn_save} giftId={id} />
           </div>
         </div>
       </div>

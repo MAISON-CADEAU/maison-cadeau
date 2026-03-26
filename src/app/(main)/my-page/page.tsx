@@ -1,7 +1,13 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Card } from "@/components/common/card";
 import { EditPencilIcon } from "@/components/common/icons";
+import { createClient } from "@/lib/supabase/client";
 import styles from "./page.module.scss";
 
 const MENU_CARDS = [
@@ -28,27 +34,67 @@ const MENU_CARDS = [
 ];
 
 export default function MyPage() {
+  const [userName, setUserName] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) return;
+      const name =
+        user.user_metadata?.name ||
+        user.user_metadata?.full_name ||
+        user.email?.split("@")[0] ||
+        "";
+      setUserName(name);
+      const avatar =
+        user.user_metadata?.avatar_url ||
+        user.user_metadata?.picture ||
+        null;
+      setProfileImageUrl(avatar);
+    });
+  }, []);
+
+  const avatarLetter = userName.charAt(0).toUpperCase() || "U";
+
   return (
     <>
-      <Header theme="light" isLoggedIn={true} />
+      <Header theme="light" />
       <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.title}>마이페이지</h1>
 
           <div className={styles.content}>
-              <Card
-                as="a"
-                variant="cta"
-                ctaType="icon"
-                imageSrc="/imgs/profile.png"
-                imageAlt="프로필 이미지"
-                title="맛있는당근님"
-                icon={<EditPencilIcon size={14} />}
-                description="내 정보 수정하기"
-                link={{ href: "/my-page/edit" }}
-                width={421}
-                height={144}
-              />
+            {/* 프로필 카드 */}
+            <Link href="/my-page/edit" className={styles.profile_card}>
+              <div className={styles.profile_card_inner}>
+                {/* 아바타 */}
+                <div className={styles.profile_avatar_wrap}>
+                  {profileImageUrl ? (
+                    <Image
+                      src={profileImageUrl}
+                      alt="프로필 이미지"
+                      fill
+                      sizes="80px"
+                      className={styles.profile_avatar_img}
+                    />
+                  ) : (
+                    <span className={styles.profile_avatar_letter}>
+                      {avatarLetter}
+                    </span>
+                  )}
+                </div>
+
+                {/* 이름 + 수정 링크 */}
+                <div className={styles.profile_body}>
+                  <span className={styles.profile_name}>{userName || "사용자"}</span>
+                  <div className={styles.profile_edit}>
+                    <EditPencilIcon size={14} />
+                    <span className={styles.profile_edit_text}>내 정보 수정하기</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
 
             <div className={styles.menu_grid}>
               {MENU_CARDS.map((card) => (

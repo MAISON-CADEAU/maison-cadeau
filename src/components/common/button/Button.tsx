@@ -3,11 +3,12 @@
 import { forwardRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FolderPlusIcon, ShareIcon, ArrowLeftIcon, ArrowRightIcon, KakaoIcon, InstaBlackIcon, TwitterIcon, ThreadsIcon } from "@/components/common/icons";
+import { createClient } from "@/lib/supabase/client";
 import type { IButtonProps } from "./Button.types";
 import styles from "./Button.module.scss";
 
 const Button = forwardRef<HTMLButtonElement, IButtonProps>(
-  ({ className, variant, children, style, ...props }, ref) => {
+  ({ className, variant, children, style, giftId, ...props }, ref) => {
     const router = useRouter();
     const [showShareMenu, setShowShareMenu] = useState(false);
     const [scrapDone, setScrapDone] = useState(false);
@@ -26,13 +27,21 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
 
     // Icon group buttons
     if (variant === "icon-group") {
-      const handleScrap = () => {
-        const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("dev_isLoggedIn") === "true";
-        if (!isLoggedIn) {
+      const handleScrap = async () => {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
           router.push("/login");
           return;
         }
-        // TODO: Supabase 연동 시 실제 저장 로직으로 대체
+        if (giftId) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { error } = await (supabase as any).from("scraps").insert({ user_id: user.id, gift_id: giftId });
+          if (error) {
+            console.error("스크랩 저장 오류:", error);
+            return;
+          }
+        }
         setScrapDone(true);
         setTimeout(() => setScrapDone(false), 2000);
       };

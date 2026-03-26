@@ -8,7 +8,6 @@
 }
 
 .container {
-  width: 100%;
   width: 1432px;
   margin: 100px auto;
   @include flex-column;
@@ -31,4 +30,88 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: $spacing-12;
+}
+
+/* ===========================
+   Profile Card
+=========================== */
+.profile_card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 421px;
+  height: 144px;
+  border: 1px solid $color-light-grey;
+  border-radius: $radius-12;
+  background-color: $color-background;
+  transition: box-shadow $transition-normal;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.profile_card_inner {
+  width: 100%;
+  height: 100%;
+  padding: $spacing-32;
+  display: flex;
+  align-items: center;
+  gap: $spacing-24;
+}
+
+.profile_avatar_wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: $radius-full;
+  background-color: $color-text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.profile_avatar_letter {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-20;
+  font-weight: $font-weight-semibold;
+  color: $color-background;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.profile_avatar_img {
+  object-fit: cover;
+}
+
+.profile_body {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-12;
+}
+
+.profile_name {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-20;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.profile_edit {
+  display: flex;
+  align-items: center;
+  gap: $spacing-8;
+  color: $color-subtext-2;
+
+  .profile_card:hover & {
+    color: $color-text;
+  }
+}
+
+.profile_edit_text {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-14;
+  font-weight: $font-weight-regular;
 }

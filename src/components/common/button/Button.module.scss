@@ -88,6 +88,7 @@
   bottom: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 200;
   background-color: $color-text;
   color: $color-background;
   font-family: $font-pretendard;

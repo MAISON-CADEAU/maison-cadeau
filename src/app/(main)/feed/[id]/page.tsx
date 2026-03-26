@@ -30,6 +30,7 @@ export default async function FeedDetailPage({ params }: IFeedDetailPageProps) {
       <main className={styles.main}>
         <div className={styles.container}>
           <SwiperSection
+            id={currentItem.id}
             text={currentItem.category}
             title={currentItem.title}
             images={currentItem.images}
