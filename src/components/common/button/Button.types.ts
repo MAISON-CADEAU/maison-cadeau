@@ -9,4 +9,5 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   target?: "_self" | "_blank";
   rel?: string;
+  giftId?: string;
 }

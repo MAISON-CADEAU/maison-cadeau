@@ -9,6 +9,7 @@ export default function SwiperDevPage() {
       <div className={styles.section}>
         <h2 className={styles.section_title}>기본 슬라이더 + 썸네일</h2>
         <SwiperSection
+          id="dev"
           text="gift"
           title="지금 딱 보내기 좋은 |카카오톡 선물하기 5"
           images={[
