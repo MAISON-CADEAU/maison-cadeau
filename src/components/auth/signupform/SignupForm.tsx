@@ -75,7 +75,17 @@ export const SignupForm = () => {
 
           <div className={styles.checkbox_wrapper}>
             <Checkbox
-              label="개인정보 약관에 동의합니다"
+              label="이용약관에 동의합니다"
+              {...register("termsAgreed")}
+            />
+            {errors.termsAgreed && (
+              <p className={styles.error_text}>{errors.termsAgreed.message}</p>
+            )}
+          </div>
+
+          <div className={styles.checkbox_wrapper}>
+            <Checkbox
+              label="개인정보 처리방침에 동의합니다"
               {...register("privacyAgreed")}
             />
             {errors.privacyAgreed && (
