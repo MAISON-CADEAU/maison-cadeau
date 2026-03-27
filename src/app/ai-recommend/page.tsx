@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -136,8 +136,14 @@ function RecommendContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const step = Math.min(Math.max(Number(searchParams.get("step") ?? "1"), 1), TOTAL_STEPS);
-  const { setAnswer, ...answers } = useRecommendStore();
+  const { setAnswer, reset, ...answers } = useRecommendStore();
   const [useAlternate, setUseAlternate] = useState(false);
+
+  // step=1 진입 시 스토어 초기화 (페이지 새로고침 또는 처음 진입 시)
+  useEffect(() => {
+    if (step === 1) reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const currentStep = STEPS[step - 1];
   const selectedValue = answers[currentStep.key];

@@ -25,6 +25,60 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       ...style,
     };
 
+    // Share only button (ai-recommend 결과 화면용)
+    if (variant === "share-only") {
+      const handleSharePlatform = (platform: string) => {
+        const url = typeof window !== "undefined" ? window.location.href : "";
+        const text = "메종카도에서 발견한 선물 아이디어를 공유해요!";
+        const shareUrls: Record<string, string> = {
+          kakao: `https://story.kakao.com/share?url=${encodeURIComponent(url)}`,
+          instagram: `https://www.instagram.com/`,
+          x: `https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+          threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(`${text} ${url}`)}`,
+        };
+        window.open(shareUrls[platform], "_blank");
+        setShowShareMenu(false);
+      };
+
+      return (
+        <div className={styles.icon_group_wrapper}>
+          <div className={styles.share_container}>
+            <button
+              className={`${styles.button} ${styles.button_icon_item}`}
+              onClick={() => setShowShareMenu((prev) => !prev)}
+            >
+              <ShareIcon size={20} color="currentColor" />
+              <span className={styles.label}>공유하기</span>
+            </button>
+
+            {showShareMenu && (
+              <>
+                <div className={styles.share_overlay} onClick={() => setShowShareMenu(false)} />
+                <div className={styles.share_menu}>
+                  <button className={styles.share_item} onClick={() => handleSharePlatform("kakao")}>
+                    <KakaoIcon size={20} />
+                    <span>카카오톡</span>
+                  </button>
+                  <button className={styles.share_item} onClick={() => handleSharePlatform("instagram")}>
+                    <InstaBlackIcon size={20} />
+                    <span>인스타그램</span>
+                  </button>
+                  <button className={styles.share_item} onClick={() => handleSharePlatform("x")}>
+                    <TwitterIcon size={20} />
+                    <span>X</span>
+                  </button>
+                  <button className={styles.share_item} onClick={() => handleSharePlatform("threads")}>
+                    <ThreadsIcon size={20} color="currentColor" />
+                    <span>쓰레드</span>
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+
     // Icon group buttons
     if (variant === "icon-group") {
       const handleScrap = async () => {

@@ -11,19 +11,22 @@ import { Card } from "@/components/common/card";
 import { Button } from "@/components/common";
 import { useRecommendStore } from "@/store/recommendStore";
 import { createClient } from "@/lib/supabase/client";
-import { FEED_ITEMS } from "@/app/(main)/feed/feed.data";
 import styles from "./page.module.scss";
 import "swiper/css";
 
 interface RecommendedItem {
   id: string;
   title: string;
-  category: string;
+  image: string;
+  price: string;
+  link: string;
+  mallName: string;
 }
 
 export default function AiRecommendResultPage() {
   const router = useRouter();
   const swiperRef = useRef<SwiperType | null>(null);
+  const hasFetched = useRef(false);
   const { situation, preference, gender, budget, reset } = useRecommendStore();
   const [items, setItems] = useState<RecommendedItem[]>([]);
   const [reason, setReason] = useState("");
@@ -31,6 +34,10 @@ export default function AiRecommendResultPage() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    // StrictMode 이중 실행 방지
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     const fetchRecommendations = async () => {
       try {
         const res = await fetch("/api/ai-recommend", {
@@ -44,7 +51,7 @@ export default function AiRecommendResultPage() {
 
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
+        if (user && data.items?.length > 0) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           await (supabase as any).from("recommendation_history").insert({
             user_id: user.id,
@@ -53,6 +60,7 @@ export default function AiRecommendResultPage() {
             gender,
             budget,
             recommended_feed_ids: data.items?.map((item: RecommendedItem) => item.id) ?? [],
+            recommended_items: data.items ?? [],
             reason: data.reason,
           });
         }
@@ -64,9 +72,9 @@ export default function AiRecommendResultPage() {
     };
 
     fetchRecommendations();
-  }, [situation, preference, gender, budget]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const getFeed = (id: string) => FEED_ITEMS.find((f) => f.id === id);
   const currentItem = items[activeIndex];
 
   const handleRetry = () => {
@@ -86,7 +94,12 @@ export default function AiRecommendResultPage() {
           </div>
 
           {isLoading ? (
-            <div className={styles.loading}>추천 선물을 찾는 중...</div>
+            <div className={styles.loading}>취향 저격 아이템 찾는 중...</div>
+          ) : items.length === 0 ? (
+            <div className={styles.loading}>
+              <p>추천 결과를 가져오지 못했어요.</p>
+              <Button variant="border-sm" onClick={handleRetry}>다시 시도하기</Button>
+            </div>
           ) : (
             <div className={styles.result_contents}>
               <div className={styles.swiper_row}>
@@ -102,28 +115,22 @@ export default function AiRecommendResultPage() {
                   onSwiper={(swiper) => { swiperRef.current = swiper; }}
                   onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                   className="mySwiper"
-                  style={{ overflow: 'visible' }}
+                  style={{ overflow: "visible" }}
                 >
-                  {items.map((item) => {
-                    const feed = getFeed(item.id);
-                    return (
-                      <SwiperSlide 
-                      key={item.id}
-                      className="swiper_slide"
-                      >
-                        <Card
-                          variant="product"
-                          as="button"
-                          onClick={() => router.push(`/feed/${item.id}`)}
-                          badge="RECOMMEND"
-                          imageSrc={feed?.src ?? "/imgs/product_image.png"}
-                          imageAlt={item.title}
-                          title={item.title}
-                          price={feed?.price ?? ""}
-                        />
-                      </SwiperSlide>
-                    );
-                  })}
+                  {items.map((item) => (
+                    <SwiperSlide key={item.id}>
+                      <Card
+                        variant="product"
+                        as="button"
+                        onClick={() => window.open(item.link, "_blank")}
+                        badge="recommend"
+                        imageSrc={item.image}
+                        imageAlt={item.title}
+                        title={item.title}
+                        price={item.price}
+                      />
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
 
                 <Button
@@ -139,12 +146,12 @@ export default function AiRecommendResultPage() {
                   </Button>
                   <Button
                     variant="background-black-sm"
-                    onClick={() => currentItem && router.push(`/feed/${currentItem.id}`)}
+                    onClick={() => currentItem && window.open(currentItem.link, "_blank")}
                   >
                     선물 자세히보기
                   </Button>
                 </div>
-                <Button variant="icon-group" />
+                <Button variant="share-only" />
               </div>
             </div>
           )}

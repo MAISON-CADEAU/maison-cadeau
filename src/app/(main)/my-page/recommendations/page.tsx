@@ -7,13 +7,21 @@ import { Footer } from "@/components/layout/footer";
 import { Card } from "@/components/common/card";
 import { ChevronLeftIcon } from "@/components/common/icons";
 import { createClient } from "@/lib/supabase/client";
-import { FEED_ITEMS } from "@/app/(main)/feed/feed.data";
 import { format } from "date-fns";
 import styles from "./page.module.scss";
 
+interface RecommendedItem {
+  id: string;
+  title: string;
+  image: string;
+  price: string;
+  link: string;
+  mallName: string;
+}
+
 interface HistoryGroup {
   date: string;
-  items: { id: string; title: string; src: string }[];
+  items: RecommendedItem[];
 }
 
 export default function RecommendationsPage() {
@@ -41,13 +49,8 @@ export default function RecommendationsPage() {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const grouped: HistoryGroup[] = data.map((row: any) => ({
           date: format(new Date(row.created_at), "yy.MM.dd"),
-          items: (row.recommended_feed_ids as string[])
-            .map((id) => {
-              const feed = FEED_ITEMS.find((f) => f.id === id);
-              return feed ? { id: feed.id, title: feed.title, src: feed.src } : null;
-            })
-            .filter(Boolean) as { id: string; title: string; src: string }[],
-        }));
+          items: (row.recommended_items as RecommendedItem[]) ?? [],
+        })).filter((g: HistoryGroup) => g.items.length > 0);
         setGroups(grouped);
       }
       setIsLoading(false);
@@ -88,12 +91,12 @@ export default function RecommendationsPage() {
                         key={item.id}
                         as="button"
                         variant="product-flat"
-                        onClick={() => router.push(`/feed/${item.id}`)}
-                        badge="RECOMMEND"
-                        imageSrc={item.src}
+                        onClick={() => window.open(item.link, "_blank")}
+                        badge="recommend"
+                        imageSrc={item.image}
                         imageAlt={item.title}
                         title={item.title}
-                        price=""
+                        price={item.price}
                       />
                     ))}
                   </div>

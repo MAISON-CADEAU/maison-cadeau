@@ -124,6 +124,7 @@
 .product_info {
   display: grid;
   gap: 4px;
+  width: 260px;
 }
 
 .product_title {
@@ -132,6 +133,9 @@
   font-weight: $font-weight-semibold;
   line-height: $line-height-body;
   color: $color-text;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product_description,
