@@ -26,7 +26,7 @@ const bannerMessages = [
   "Limited time offer: Buy 2 Get 1 Free",
 ];
 
-export const Header = ({ theme = "dark", isLoggedIn = false, profileImageSrc = "/imgs/avatar-default.png" }: IHeaderProps) => {
+export const Header = ({ theme = "dark", isLoggedIn = false }: IHeaderProps) => {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
@@ -164,7 +164,7 @@ export const Header = ({ theme = "dark", isLoggedIn = false, profileImageSrc = "
                   {showUserMenu && (
                     <>
                       <div className={styles.user_menu_overlay} onClick={() => setShowUserMenu(false)} />
-                      <div className={`${styles.user_menu} ${isDarkTheme ? styles.user_menu_dark : styles.user_menu_light}`}>
+                      <div className={`${styles.user_menu} ${styles.user_menu_light}`}>
                         <span className={styles.user_menu_name}>{userName}</span>
                         <hr className={styles.user_menu_divider} />
                         <Link href="/my-page" className={styles.user_menu_item} onClick={() => setShowUserMenu(false)}>

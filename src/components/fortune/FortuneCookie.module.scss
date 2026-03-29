@@ -45,6 +45,22 @@
   margin: 0;
 }
 
+.fortune_sub {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-subtext-2;
+  text-align: center;
+  line-height: 1.5;
+  margin: $spacing-8 0 0;
+}
+
+.already_label {
+  font-family: $font-pretendard;
+  font-size: $font-size-body-12;
+  color: $color-subtext-2;
+  text-align: center;
+}
+
 /* 버튼 고정 높이 영역 — 버튼 사라져도 공간 유지 */
 .button_area {
   height: 62px;

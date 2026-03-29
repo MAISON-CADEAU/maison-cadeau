@@ -32,8 +32,20 @@ export const InquiryForm = () => {
   });
 
   const onSubmit = async (data: InquiryFormData) => {
-    console.log(data, selectedFile);
-    // TODO: API 연동
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("email", data.email);
+    formData.append("content", data.content);
+    if (selectedFile) formData.append("file", selectedFile);
+
+    const res = await fetch("/api/inquiry", { method: "POST", body: formData });
+    if (res.ok) {
+      alert("문의가 성공적으로 전송되었습니다.");
+      router.back();
+    } else {
+      const { error } = await res.json();
+      alert(error ?? "전송에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
