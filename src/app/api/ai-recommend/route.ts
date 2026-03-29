@@ -18,7 +18,7 @@ const BUDGET_PRICE_RANGE: Record<string, PriceRange> = {
   "금액 상관없어요":         { min: null,    max: null    },
 };
 
-// Gemini REST API (v1) 직접 호출 - SDK v1beta 문제 우회
+// Groq API 호출 (llama-3.3-70b, 무료 티어)
 async function generateKeywordsWithAI(
   situation: string | null,
   preference: string[] | string | null,
@@ -36,47 +36,56 @@ async function generateKeywordsWithAI(
     : "제한 없음";
 
   const prompt = `당신은 한국 네이버 쇼핑 검색 전문가입니다.
-아래 조건에 맞는 선물을 네이버 쇼핑에서 검색할 수 있는 구체적인 검색 키워드 4개를 생성해주세요.
+아래 조건에 맞는 선물을 네이버 쇼핑에서 검색할 수 있는 키워드 4개를 생성해주세요.
 
 [조건]
 - 선물 상황: ${situation ?? "특별한 상황 없음"}
 - 받는 사람 취향: ${prefs.length > 0 ? prefs.join(", ") : "특별한 취향 없음"}
 - 받는 사람 성별: ${gender ?? "무관"}
-- 예산: ${budget ?? "제한 없음"} (실제 가격 기준 ${priceLabel})
+- 예산: ${budget ?? "제한 없음"} (실제 판매가 기준 ${priceLabel})
 
 [키워드 생성 규칙]
-1. 네이버 쇼핑에서 실제로 검색 가능한 구체적인 단일 상품명으로 작성 (예: "에어팟 프로 2세대", "다이슨 에어랩")
-2. 반드시 예산 범위(${priceLabel}) 안에서 구매 가능한 실제 제품이어야 함
-3. 키워드 4개는 서로 다른 카테고리의 선물이어야 함
-4. 취향과 성별을 최우선으로 반영할 것
-5. 복합 단어보다 명확한 상품명 위주로 작성 (예: "블루투스 이어폰" O, "블루투스 이어폰 스마트기기" X)
-6. 한국어로 작성
+1. 반드시 실제 한국 네이버 쇼핑에서 판매 중인 상품 기준으로 작성
+2. 예산(${priceLabel}) 안에서 실제로 구매 가능한 상품이어야 함 — 이 규칙이 가장 중요
+3. 브랜드명 또는 카테고리 단어 1~3개 조합 (예: "카시오 시계", "바디로션 선물세트", "무선 이어폰")
+4. 형용사 수식어 최소화 ("빈티지 로즈골드 시계" X → "카시오 빈티지 시계" O)
+5. 키워드 4개는 서로 다른 카테고리여야 함
+6. 취향과 성별을 반영할 것
+7. 한국어로 작성
+
+[예산별 키워드 예시]
+- 1~3만원: "향초 선물세트", "핸드크림 선물세트", "텀블러", "양말 선물세트"
+- 3~5만원: "무선 이어폰", "디퓨저 선물세트", "스킨케어 선물세트", "캐시미어 머플러"
+- 10~20만원: "카시오 시계", "블루투스 스피커", "가죽 지갑", "향수 선물세트"
+- 20~30만원: "다이슨 헤어드라이어", "에어팟", "명품 지갑", "스마트워치"
+- 30~50만원: "애플워치", "삼성 갤럭시버즈 프로", "다이슨 에어랩", "루이비통 카드지갑"
 
 [응답 형식 - JSON만 출력, 다른 텍스트 없이]
 {"keywords": ["키워드1", "키워드2", "키워드3", "키워드4"], "reason": "추천 이유 한 문장 (50자 이내)"}`;
 
-  const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 512 },
-      }),
-    }
-  );
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "llama-3.3-70b-versatile",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7,
+      max_tokens: 512,
+    }),
+  });
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`Gemini REST API 오류 ${res.status}: ${err}`);
+    throw new Error(`Groq API 오류 ${res.status}: ${err}`);
   }
 
   const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+  const text = data.choices?.[0]?.message?.content?.trim() ?? "";
   const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error("Gemini 응답 파싱 실패: " + text);
+  if (!jsonMatch) throw new Error("Groq 응답 파싱 실패: " + text);
 
   const parsed = JSON.parse(jsonMatch[0]);
   return {
@@ -85,7 +94,7 @@ async function generateKeywordsWithAI(
   };
 }
 
-// Gemini 실패 시 규칙 기반 fallback (단일 키워드로 수정)
+// Groq 실패 시 규칙 기반 fallback
 function generateKeywordsFallback(
   situation: string | null,
   preference: string[] | string | null,
@@ -161,60 +170,67 @@ async function searchNaverShopping(
 ): Promise<{ title: string; image: string; price: string; link: string; mallName: string } | null> {
   const { min, max } = priceRange;
 
-  // min >= 100,000: 내림차순(dsc)으로 고가 상품부터 탐색
-  // max만 있거나 소액: 오름차순(asc)으로 저가부터 탐색
-  // 제한 없음: 유사도순(sim)
   let sort = "sim";
-  if (min && min >= 100000) sort = "dsc";
-  else if (max) sort = "asc";
+  if (max) sort = "asc";
+  else if (min) sort = "dsc";
 
-  const params = new URLSearchParams({ query: keyword, display: "100", sort });
-
-  const res = await fetch(`https://openapi.naver.com/v1/search/shop.json?${params}`, {
-    headers: {
-      "X-Naver-Client-Id": process.env.NAVER_CLIENT_ID!,
-      "X-Naver-Client-Secret": process.env.NAVER_CLIENT_SECRET!,
-    },
-  });
-
-  if (!res.ok) {
-    const errText = await res.text();
-    console.error(`[Naver API] ${res.status} - "${keyword}" - ${errText}`);
-    return null;
-  }
-
-  const data = await res.json();
-  const allItems = data.items ?? [];
-
-  // lprice는 최저가 판매자 기준이라 실제 소비자가보다 20~30% 낮을 수 있음
-  // → 최솟값에 70% 허용치 적용 (예: 30만원 이상 → 21만원 이상으로 필터)
   const filterMin = min ? Math.floor(min * 0.7) : null;
-  const filtered = allItems.filter((it: { lprice: string }) => {
-    const price = Number(it.lprice);
-    if (filterMin && price < filterMin) return false;
-    if (max && price > max) return false;
-    return true;
-  });
+  const rangeLabel = `${filterMin ? filterMin.toLocaleString("ko-KR") + "원" : "0원"} ~ ${max ? max.toLocaleString("ko-KR") + "원" : "제한없음"}`;
 
-  const rangeLabel = `${filterMin ? filterMin.toLocaleString("ko-KR") + "원(lprice기준)" : "0원"} ~ ${max ? max.toLocaleString("ko-KR") + "원" : "제한없음"}`;
-  console.log(`[Naver] "${keyword}" → 전체 ${allItems.length}개 중 예산(${rangeLabel}) 내 ${filtered.length}개`);
+  // 매칭 상품 없으면 start 파라미터로 페이지네이션 (최대 3페이지 = 300개)
+  for (let page = 0; page < 3; page++) {
+    const params = new URLSearchParams({
+      query: keyword,
+      display: "100",
+      start: String(page * 100 + 1),
+      sort,
+    });
+    if (min) params.set("s_price", String(filterMin!));
+    if (max) params.set("d_price", String(max));
 
-  const item = filtered[0];
-  if (!item) {
-    console.warn(`[Naver] "${keyword}" → 예산 범위 내 상품 없음`);
-    return null;
+    const res = await fetch(`https://openapi.naver.com/v1/search/shop.json?${params}`, {
+      headers: {
+        "X-Naver-Client-Id": process.env.NAVER_CLIENT_ID!,
+        "X-Naver-Client-Secret": process.env.NAVER_CLIENT_SECRET!,
+      },
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error(`[Naver] ${res.status} - "${keyword}" - ${errText}`);
+      return null;
+    }
+
+    const data = await res.json();
+    const allItems: { lprice: string; title: string; image: string; link: string; mallName: string }[] = data.items ?? [];
+
+    if (allItems.length === 0) break; // 더 이상 결과 없음
+
+    const filtered = allItems.filter((it) => {
+      const price = Number(it.lprice);
+      if (filterMin && price < filterMin) return false;
+      if (max && price > max) return false;
+      return true;
+    });
+
+    console.log(`[Naver] "${keyword}" p${page + 1} → ${allItems.length}개 중 예산(${rangeLabel}) 내 ${filtered.length}개`);
+
+    const item = filtered[0];
+    if (item) {
+      const rawPrice = Number(item.lprice);
+      console.log(`[Naver] 선택: "${stripHtml(item.title)}" - ${rawPrice.toLocaleString("ko-KR")}원`);
+      return {
+        title: stripHtml(item.title),
+        image: item.image,
+        price: rawPrice.toLocaleString("ko-KR") + "원",
+        link: item.link,
+        mallName: item.mallName,
+      };
+    }
   }
 
-  const rawPrice = Number(item.lprice);
-  console.log(`[Naver] 선택: "${stripHtml(item.title)}" - ${rawPrice.toLocaleString("ko-KR")}원`);
-
-  return {
-    title: stripHtml(item.title),
-    image: item.image,
-    price: rawPrice.toLocaleString("ko-KR") + "원",
-    link: item.link,
-    mallName: item.mallName,
-  };
+  console.warn(`[Naver] "${keyword}" → 3페이지(300개) 탐색 후에도 예산 범위 내 상품 없음`);
+  return null;
 }
 
 export async function POST(request: NextRequest) {
@@ -231,9 +247,9 @@ export async function POST(request: NextRequest) {
       const result = await generateKeywordsWithAI(situation, preference, gender, budget, priceRange);
       keywords = result.keywords;
       reason = result.reason;
-      console.log(`[Gemini] 키워드: ${JSON.stringify(keywords)}`);
+      console.log(`[Groq] 키워드: ${JSON.stringify(keywords)}`);
     } catch (aiError) {
-      console.warn("[Gemini] 실패, fallback 사용:", aiError);
+      console.warn("[Groq] 실패, fallback 사용:", aiError);
       const fallback = generateKeywordsFallback(situation, preference, gender, priceRange);
       keywords = fallback.keywords;
       reason = fallback.reason;
